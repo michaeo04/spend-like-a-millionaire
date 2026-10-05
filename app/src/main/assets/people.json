@@ -1,0 +1,10 @@
+[
+  {
+    "id": "p_musk",
+    "name": { "en": "Elon Musk", "vi": "Elon Musk" },
+    "netWorthUsd": 942000000000,
+    "source": "Bloomberg",
+    "asOf": "2026-09",
+    "avatar": { "color": "#5B8DEF" }
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {"id":"coffee","category":"food","priceCents":450,"name":{"en":"Coffee","vi":"Ly cà phê"},"icon":"☕"},
+  {"id":"burger","category":"food","priceCents":599,"name":{"en":"Burger","vi":"Bánh burger"},"icon":"🍔"},
+  {"id":"pizza","category":"food","priceCents":1800,"name":{"en":"Large pizza","vi":"Pizza cỡ lớn"},"icon":"🍕"},
+  {"id":"sushi_dinner","category":"food","priceCents":9000,"name":{"en":"Sushi dinner for two","vi":"Bữa sushi cho hai người"},"icon":"🍣"},
+  {"id":"fine_dining","category":"food","priceCents":50000,"name":{"en":"Fine-dining tasting menu","vi":"Bữa tối nhà hàng cao cấp"},"icon":"🍽️"},
+
+  {"id":"sneakers","category":"shopping","priceCents":12000,"name":{"en":"Sneakers","vi":"Đôi giày thể thao"},"icon":"👟"},
+  {"id":"designer_bag","category":"shopping","priceCents":450000,"name":{"en":"Designer handbag","vi":"Túi xách hàng hiệu"},"icon":"👜"},
+  {"id":"diamond_ring","category":"shopping","priceCents":1000000,"name":{"en":"Diamond ring","vi":"Nhẫn kim cương"},"icon":"💍"},
+  {"id":"luxury_watch","category":"shopping","priceCents":2500000,"name":{"en":"Luxury watch","vi":"Đồng hồ xa xỉ"},"icon":"⌚"},
+  {"id":"gold_bar","category":"shopping","priceCents":7000000,"name":{"en":"1 kg gold bar","vi":"Thỏi vàng 1 kg"},"icon":"🪙"},
+
+  {"id":"smartphone","category":"tech","priceCents":80000,"name":{"en":"Smartphone","vi":"Điện thoại thông minh"},"icon":"📱"},
+  {"id":"console","category":"tech","priceCents":50000,"name":{"en":"Game console","vi":"Máy chơi game"},"icon":"🎮"},
+  {"id":"laptop","category":"tech","priceCents":150000,"name":{"en":"Laptop","vi":"Máy tính xách tay"},"icon":"💻"},
+  {"id":"drone","category":"tech","priceCents":120000,"name":{"en":"Camera drone","vi":"Flycam"},"icon":"🛸"},
+  {"id":"supercomputer_rack","category":"tech","priceCents":300000000,"name":{"en":"AI server rack","vi":"Tủ máy chủ AI"},"icon":"🖥️"},
+
+  {"id":"bicycle","category":"transport","priceCents":50000,"name":{"en":"Bicycle","vi":"Xe đạp"},"icon":"🚲"},
+  {"id":"scooter","category":"transport","priceCents":300000,"name":{"en":"Motor scooter","vi":"Xe máy"},"icon":"🛵"},
+  {"id":"family_car","category":"transport","priceCents":3500000,"name":{"en":"Family car","vi":"Xe ô tô gia đình"},"icon":"🚗"},
+  {"id":"supercar","category":"transport","priceCents":25000000,"name":{"en":"Supercar","vi":"Siêu xe"},"icon":"🏎️"},
+  {"id":"helicopter","category":"transport","priceCents":300000000,"name":{"en":"Helicopter","vi":"Trực thăng"},"icon":"🚁"},
+  {"id":"private_jet","category":"transport","priceCents":7000000000,"name":{"en":"Private jet","vi":"Máy bay riêng"},"icon":"🛩️"},
+  {"id":"superyacht","category":"transport","priceCents":30000000000,"name":{"en":"Superyacht","vi":"Siêu du thuyền"},"icon":"🛥️"},
+  {"id":"jumbo_jet","category":"transport","priceCents":37000000000,"name":{"en":"Jumbo jet airliner","vi":"Máy bay chở khách cỡ lớn"},"icon":"✈️"},
+
+  {"id":"apartment","category":"home","priceCents":25000000,"name":{"en":"City apartment","vi":"Căn hộ thành phố"},"icon":"🏢"},
+  {"id":"house","category":"home","priceCents":40000000,"name":{"en":"Family house","vi":"Nhà phố"},"icon":"🏠"},
+  {"id":"private_island","category":"home","priceCents":2000000000,"name":{"en":"Private island","vi":"Hòn đảo riêng"},"icon":"🏝️"},
+  {"id":"mansion","category":"home","priceCents":4500000000,"name":{"en":"Beverly-style mansion","vi":"Biệt thự triệu đô"},"icon":"🏰"},
+  {"id":"skyscraper","category":"home","priceCents":120000000000,"name":{"en":"Skyscraper","vi":"Tòa nhà chọc trời"},"icon":"🏙️"},
+
+  {"id":"weekend_trip","category":"travel","priceCents":100000,"name":{"en":"Weekend trip","vi":"Chuyến đi cuối tuần"},"icon":"🧳"},
+  {"id":"first_class_world","category":"travel","priceCents":3000000,"name":{"en":"First-class round the world","vi":"Vòng quanh thế giới hạng nhất"},"icon":"🌍"},
+  {"id":"space_ticket","category":"travel","priceCents":45000000,"name":{"en":"Space tourism ticket","vi":"Vé du lịch vũ trụ"},"icon":"🌌"},
+
+  {"id":"concert_ticket","category":"fun","priceCents":15000,"name":{"en":"Concert ticket","vi":"Vé xem hòa nhạc"},"icon":"🎫"},
+  {"id":"tv_ad","category":"fun","priceCents":700000000,"name":{"en":"Prime-time TV ad","vi":"Quảng cáo truyền hình giờ vàng"},"icon":"📺"},
+  {"id":"blockbuster","category":"fun","priceCents":20000000000,"name":{"en":"Blockbuster movie","vi":"Bộ phim bom tấn"},"icon":"🎬"},
+  {"id":"rocket_launch","category":"fun","priceCents":6700000000,"name":{"en":"Rocket launch","vi":"Một lần phóng tên lửa"},"icon":"🚀"},
+
+  {"id":"burj_khalifa","category":"mega","priceCents":150000000000,"name":{"en":"World's tallest tower","vi":"Tòa tháp cao nhất thế giới"},"icon":"🗼","estimate":true},
+  {"id":"aircraft_carrier","category":"mega","priceCents":1300000000000,"name":{"en":"Nuclear aircraft carrier","vi":"Tàu sân bay hạt nhân"},"icon":"🚢"},
+  {"id":"space_station","category":"mega","priceCents":15000000000000,"name":{"en":"Space station","vi":"Trạm vũ trụ"},"icon":"🛰️","estimate":true}
+]

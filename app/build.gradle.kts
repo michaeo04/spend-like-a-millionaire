@@ -47,11 +47,6 @@ android {
         unitTests.isReturnDefaultValues = true
     }
 
-    sourceSets {
-        // Unit tests read bundled JSON straight from disk.
-        getByName("test").resources.srcDir("src/main/assets")
-    }
-
     lint {
         abortOnError = true
         warningsAsErrors = false
