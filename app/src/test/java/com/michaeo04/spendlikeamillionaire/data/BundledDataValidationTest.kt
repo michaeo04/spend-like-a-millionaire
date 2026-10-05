@@ -53,6 +53,17 @@ class BundledDataValidationTest {
     }
 
     @Test
+    fun catalogCoversTheWholePriceLadder() {
+        val prices = parseCatalog(asset("catalog.json")).map { it.priceCents }
+        assertTrue("need at least 300 items, have ${prices.size}", prices.size >= 300)
+        assertTrue("cheapest item must be at most \$2", prices.min() <= 200)
+        assertTrue("need 20+ items under \$20", prices.count { it < 2_000 } >= 20)
+        assertTrue("need 15+ items of \$1B or more", prices.count { it >= 100_000_000_000L } >= 15)
+        val richest = parsePeople(asset("people.json")).maxOf { it.netWorthUsd }
+        assertTrue("top item should be a meaningful share of the richest fortune", prices.max() / 100 >= richest / 4)
+    }
+
+    @Test
     fun peopleAreValid() {
         val raw = array("people.json")
         assertTrue(raw.isNotEmpty())
