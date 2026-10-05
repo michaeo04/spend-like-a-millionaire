@@ -31,6 +31,24 @@
     <string name="cd_increase">Increase quantity of %1$s</string>
     <string name="cd_quantity">Quantity of %1$s</string>
 
+    <!-- Cart / receipt -->
+    <string name="cart_title">Your receipt</string>
+    <string name="cart_empty">Nothing in your cart yet.\nGo spend some money!</string>
+    <string name="cart_total">Total spent</string>
+    <string name="cart_remaining">Left over</string>
+    <string name="cart_percent">Of the fortune</string>
+    <string name="cart_line">%1$s × %2$s</string>
+    <string name="share_receipt">Share receipt</string>
+    <string name="clear_cart">Clear cart</string>
+    <string name="clear_cart_title">Clear your cart?</string>
+    <string name="clear_cart_body">Everything you added will be removed.</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="cd_remove_line">Remove %1$s</string>
+    <string name="receipt_title">RECEIPT</string>
+    <string name="receipt_more">+ %1$d more items</string>
+    <string name="receipt_footer">Spend Like a Millionaire · parody, not affiliated</string>
+
     <!-- Navigation -->
     <string name="view_cart">View cart</string>
     <string name="view_cart_count">View cart (%1$d)</string>

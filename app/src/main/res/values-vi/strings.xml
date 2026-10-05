@@ -31,6 +31,24 @@
     <string name="cd_increase">Tăng số lượng %1$s</string>
     <string name="cd_quantity">Số lượng %1$s</string>
 
+    <!-- Cart / receipt -->
+    <string name="cart_title">Hóa đơn của bạn</string>
+    <string name="cart_empty">Giỏ hàng đang trống.\nHãy đi tiêu tiền thôi!</string>
+    <string name="cart_total">Tổng đã tiêu</string>
+    <string name="cart_remaining">Còn lại</string>
+    <string name="cart_percent">Trên tổng tài sản</string>
+    <string name="cart_line">%1$s × %2$s</string>
+    <string name="share_receipt">Chia sẻ hóa đơn</string>
+    <string name="clear_cart">Xóa giỏ hàng</string>
+    <string name="clear_cart_title">Xóa giỏ hàng?</string>
+    <string name="clear_cart_body">Mọi món bạn đã thêm sẽ bị xóa.</string>
+    <string name="action_clear">Xóa</string>
+    <string name="action_cancel">Hủy</string>
+    <string name="cd_remove_line">Xóa %1$s</string>
+    <string name="receipt_title">HÓA ĐƠN</string>
+    <string name="receipt_more">+ %1$d món khác</string>
+    <string name="receipt_footer">Spend Like a Millionaire · giải trí, không liên kết với ai</string>
+
     <!-- Navigation -->
     <string name="view_cart">Xem giỏ hàng</string>
     <string name="view_cart_count">Xem giỏ hàng (%1$d)</string>

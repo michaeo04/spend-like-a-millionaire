@@ -18,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.michaeo04.spendlikeamillionaire.AppContainer
 import com.michaeo04.spendlikeamillionaire.domain.Settings
+import com.michaeo04.spendlikeamillionaire.ui.cart.CartRoute
 import com.michaeo04.spendlikeamillionaire.ui.shop.ShopRoute
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
@@ -60,7 +61,7 @@ fun AppNav(container: AppContainer) {
                 onOpenSettings = { nav.navigate(Route.Settings) },
             )
         }
-        composable<Route.Cart> { Placeholder("Cart") { nav.navigate(Route.Settings) } }
+        composable<Route.Cart> { CartRoute(container, onBack = { nav.popBackStack() }) }
         composable<Route.Settings> { Placeholder("Settings") { nav.popBackStack() } }
     }
 }
