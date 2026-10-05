@@ -47,6 +47,11 @@ android {
         unitTests.isReturnDefaultValues = true
     }
 
+    sourceSets {
+        // Real Firebase bridge only when google-services.json exists; otherwise a no-op bridge.
+        getByName("main").kotlin.directories.add(if (hasFirebase) "src/firebase/kotlin" else "src/nofirebase/kotlin")
+    }
+
     lint {
         abortOnError = true
         warningsAsErrors = false
