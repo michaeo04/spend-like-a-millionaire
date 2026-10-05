@@ -84,10 +84,13 @@ class OnboardingViewModel(
 
     fun back() = _state.update { it.copy(step = maxOf(it.step - 1, 0)) }
 
-    /** Saves the choices; [onDone] runs after they are persisted. */
+    private var finishing = false
+
+    /** Saves the choices; [onDone] runs once, after they are persisted (double taps are ignored). */
     fun finish(onDone: () -> Unit) {
         val s = _state.value
-        if (!s.canFinish) return
+        if (!s.canFinish || finishing) return
+        finishing = true
         viewModelScope.launch {
             settingsStore.update { Settings(onboarded = true, personId = s.personId, currency = s.currency, language = s.language) }
             onDone()

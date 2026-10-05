@@ -17,6 +17,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.focus.onFocusChanged
+import kotlinx.coroutines.delay
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,6 +42,7 @@ fun ItemRow(
     ui: ItemUi,
     formatter: MoneyFormatter,
     onQuantity: (Long) -> Unit,
+    onDelta: (Long) -> Unit,
     onBuyMax: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -66,7 +71,7 @@ fun ItemRow(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 IconButton(
-                    onClick = { onQuantity(ui.quantity - 1) },
+                    onClick = { onDelta(-1) },
                     enabled = ui.quantity > 0,
                 ) {
                     Icon(Icons.Default.Remove, contentDescription = stringResource(R.string.cd_decrease, name))
@@ -78,7 +83,7 @@ fun ItemRow(
                     modifier = Modifier.weight(1f),
                 )
                 IconButton(
-                    onClick = { onQuantity(ui.quantity + 1) },
+                    onClick = { onDelta(1) },
                     enabled = ui.quantity < ui.maxQuantity,
                 ) {
                     Icon(Icons.Default.Add, contentDescription = stringResource(R.string.cd_increase, name))
@@ -98,8 +103,20 @@ private fun QuantityField(
     onChange: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    // Re-keyed on the committed quantity so a clamped value replaces what the user typed.
-    var text by remember(quantity) { mutableStateOf(if (quantity == 0L) "" else quantity.toString()) }
+    fun format(value: Long) = if (value == 0L) "" else value.toString()
+    var text by remember { mutableStateOf(format(quantity)) }
+    var focused by remember { mutableStateOf(false) }
+    val committed by rememberUpdatedState(quantity)
+
+    // While typing, never overwrite the user's keystrokes; once they stop (or leave the field) show
+    // the committed value, which may be lower than what was typed because of the balance clamp.
+    LaunchedEffect(quantity) { if (!focused) text = format(quantity) }
+    LaunchedEffect(focused) { if (!focused) text = format(committed) }
+    LaunchedEffect(text) {
+        delay(500)
+        if (text != format(committed)) text = format(committed)
+    }
+
     OutlinedTextField(
         value = text,
         onValueChange = { raw ->
@@ -111,6 +128,8 @@ private fun QuantityField(
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         textStyle = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Center),
-        modifier = modifier.semantics { contentDescription = label },
+        modifier = modifier
+            .onFocusChanged { focused = it.isFocused }
+            .semantics { contentDescription = label },
     )
 }

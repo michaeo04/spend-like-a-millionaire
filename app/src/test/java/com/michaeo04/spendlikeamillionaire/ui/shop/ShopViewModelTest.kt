@@ -101,6 +101,27 @@ class ShopViewModelTest {
     }
 
     @Test
+    fun changeQuantityAppliesDeltasOnTopOfTheCommittedQuantity() = runTest {
+        val store = FakeCartStore()
+        val vm = vm(cartStore = store)
+        vm.changeQuantity("cheap", 1)
+        vm.changeQuantity("cheap", 1) // two quick taps on "+" must add up
+        assertEquals(2L, store.state.value.lines["cheap"])
+        vm.changeQuantity("cheap", -1)
+        assertEquals(1L, store.state.value.lines["cheap"])
+        vm.changeQuantity("cheap", -5)
+        assertTrue(store.state.value.lines.isEmpty())
+    }
+
+    @Test
+    fun changeQuantityNeverExceedsWhatIsAffordable() = runTest {
+        val store = FakeCartStore()
+        val vm = vm(cartStore = store)
+        vm.changeQuantity("pricey", 5) // only 1 affordable (90_000 of 100_000)
+        assertEquals(1L, store.state.value.lines["pricey"])
+    }
+
+    @Test
     fun buyMaxSpendsExactlyTheAffordableMaximum() = runTest {
         val store = FakeCartStore()
         val vm = vm(cartStore = store)

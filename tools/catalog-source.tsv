@@ -7,7 +7,7 @@ water_bottle|food|1.5|Bottle of water|Chai nước|💧
 soda|food|2|Soda|Lon nước ngọt|🥤
 ice_cream|food|3|Ice cream cone|Cây kem|🍦
 donut|food|2.5|Donut|Bánh donut|🍩
-bread_loaf|food|3|Loaf of bread|Ổ bánh mì|🍞
+bread_loaf|food|3|Loaf of bread|Ổ bánh mì gối|🍞
 banh_mi|food|2|Banh mi sandwich|Ổ bánh mì thịt|🥖
 croissant|food|3.5|Croissant|Bánh sừng bò|🥐
 banana_bunch|food|2|Bunch of bananas|Nải chuối|🍌
@@ -186,7 +186,7 @@ ski_chalet|home|12000000|Alpine ski chalet|Biệt thự trượt tuyết|🏔️
 apartment_building|home|20000000|Apartment building|Tòa nhà căn hộ|🏬
 private_island|home|20000000|Private island|Hòn đảo riêng|🏝️
 castle|home|30000000|Castle|Lâu đài|🏯
-mansion|home|45000000|Beverly-style mansion|Biệt thự triệu đô|🏰
+mansion|home|45000000|Beverly-style mansion|Dinh thự siêu sang|🏰
 ranch|home|100000000|Huge ranch|Trang trại khổng lồ|🐎
 solar_farm|home|100000000|Solar farm|Trang trại điện mặt trời|☀️
 hotel|home|150000000|Luxury hotel|Khách sạn sang trọng|🏨

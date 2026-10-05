@@ -1,6 +1,6 @@
 package com.michaeo04.spendlikeamillionaire.ui.onboarding
 
-import androidx.compose.foundation.clickable
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -79,6 +79,7 @@ fun OnboardingScreen(
     onBack: () -> Unit,
     onFinish: () -> Unit,
 ) {
+    BackHandler(enabled = state.step > 0, onBack = onBack)
     Column(Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding().padding(20.dp)) {
         LinearProgressIndicator(
             progress = { (state.step + 1f) / (ONBOARDING_LAST_STEP + 1) },
@@ -193,7 +194,7 @@ private fun PersonStep(state: OnboardingUiState, onSelect: (String) -> Unit) {
     val formatter = remember(state.currency, state.rates, state.language) {
         MoneyFormatter(state.currency, state.rates[state.currency], state.language)
     }
-    LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    LazyColumn(Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         items(state.people, key = { it.id }) { person ->
             val selected = person.id == state.personId
             Card(
@@ -204,7 +205,11 @@ private fun PersonStep(state: OnboardingUiState, onSelect: (String) -> Unit) {
                         MaterialTheme.colorScheme.surfaceVariant
                     },
                 ),
-                modifier = Modifier.fillMaxWidth().clickable { onSelect(person.id) },
+                modifier = Modifier.fillMaxWidth().selectable(
+                    selected = selected,
+                    role = Role.RadioButton,
+                    onClick = { onSelect(person.id) },
+                ),
             ) {
                 Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
                     Avatar(person.name.get(state.language), person.avatarColor, size = 44.dp)

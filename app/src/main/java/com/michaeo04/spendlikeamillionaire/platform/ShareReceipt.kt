@@ -1,5 +1,6 @@
 package com.michaeo04.spendlikeamillionaire.platform
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -13,6 +14,8 @@ import androidx.core.content.FileProvider
 import com.michaeo04.spendlikeamillionaire.ui.cart.ReceiptModel
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
+
 
 /** Renders the receipt to a PNG in the cache dir and opens the system share sheet. */
 object ShareReceipt {
@@ -20,7 +23,8 @@ object ShareReceipt {
     private const val MARGIN = 72f
     private const val LINE_HEIGHT = 76f
 
-    fun share(context: Context, model: ReceiptModel) {
+    /** Returns false (instead of crashing) when the image cannot be written or no app can share it. */
+    fun share(context: Context, model: ReceiptModel): Boolean = try {
         val bitmap = render(model)
         val dir = File(context.cacheDir, "receipts").apply { mkdirs() }
         val file = File(dir, "receipt.png")
@@ -32,6 +36,13 @@ object ShareReceipt {
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
         context.startActivity(Intent.createChooser(send, model.title))
+        true
+    } catch (e: IOException) {
+        false
+    } catch (e: ActivityNotFoundException) {
+        false
+    } catch (e: IllegalArgumentException) {
+        false
     }
 
     internal fun render(model: ReceiptModel): Bitmap {

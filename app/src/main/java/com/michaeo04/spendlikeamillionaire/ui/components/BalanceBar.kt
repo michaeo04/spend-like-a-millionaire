@@ -81,8 +81,7 @@ fun BalanceBar(
                 formatter.money((balanceCents - spentCents).coerceAtLeast(0)),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
+                maxLines = 2,
             )
             LinearProgressIndicator(
                 progress = { (percentSpent / 100.0).toFloat().coerceIn(0f, 1f) },

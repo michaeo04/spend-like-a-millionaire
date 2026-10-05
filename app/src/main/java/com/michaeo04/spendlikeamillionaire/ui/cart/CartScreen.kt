@@ -1,5 +1,6 @@
 package com.michaeo04.spendlikeamillionaire.ui.cart
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -113,7 +114,11 @@ fun CartScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         Button(
-                            onClick = { ShareReceipt.share(context, buildReceipt(state, receiptStrings)) },
+                            onClick = {
+                                if (!ShareReceipt.share(context, buildReceipt(state, receiptStrings))) {
+                                    Toast.makeText(context, R.string.share_failed, Toast.LENGTH_SHORT).show()
+                                }
+                            },
                             modifier = Modifier.fillMaxWidth(),
                         ) {
                             Icon(Icons.Default.Share, contentDescription = null)

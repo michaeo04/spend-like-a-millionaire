@@ -65,6 +65,23 @@ class OverlayPeopleRepositoryTest {
     }
 
     @Test
+    fun peopleAreSnapshottedOncePerProcess() {
+        // Remote Config can activate new values mid-session; screens must never disagree.
+        var calls = 0
+        val changing = object : NetWorthOverrides {
+            override suspend fun current(): Map<String, Override> {
+                calls++
+                return mapOf("a" to Override(if (calls == 1) 111 else 999, "X", "2026-11"))
+            }
+        }
+        val repo = OverlayPeopleRepository(base, changing)
+        val first = runBlocking { repo.people() }
+        val second = runBlocking { repo.people() }
+        assertEquals(111L, first.first { it.id == "a" }.netWorthUsd)
+        assertEquals(111L, second.first { it.id == "a" }.netWorthUsd)
+    }
+
+    @Test
     fun noOverridesLeavesBaseUntouched() {
         val result = runBlocking { OverlayPeopleRepository(base, NoOverrides).people() }
         assertTrue(result.map { it.netWorthUsd } == listOf(100L, 200L))

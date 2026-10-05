@@ -53,6 +53,15 @@ class BundledDataValidationTest {
     }
 
     @Test
+    fun catalogNamesAreUniquePerLanguage() {
+        val items = parseCatalog(asset("catalog.json"))
+        for ((label, names) in listOf("en" to items.map { it.name.en }, "vi" to items.map { it.name.vi })) {
+            val duplicates = names.groupBy { it.lowercase() }.filterValues { it.size > 1 }.keys
+            assertTrue("duplicate $label names: $duplicates", duplicates.isEmpty())
+        }
+    }
+
+    @Test
     fun catalogCoversTheWholePriceLadder() {
         val prices = parseCatalog(asset("catalog.json")).map { it.priceCents }
         assertTrue("need at least 300 items, have ${prices.size}", prices.size >= 300)

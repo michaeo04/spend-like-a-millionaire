@@ -1,6 +1,8 @@
 package com.michaeo04.spendlikeamillionaire.data
 
 import com.michaeo04.spendlikeamillionaire.domain.Person
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
@@ -58,12 +60,23 @@ fun parseOverrides(text: String): Map<String, Override> {
     return out
 }
 
-/** Bundled people with valid remote overrides applied on top; any failure keeps the bundled data. */
+/**
+ * Bundled people with valid remote overrides applied on top; any failure keeps the bundled data.
+ * The result is computed once per process so every screen sees the same net worth even if Remote
+ * Config activates new values mid-session (they apply from the next launch).
+ */
 class OverlayPeopleRepository(
     private val base: PeopleRepository,
     private val overrides: NetWorthOverrides,
 ) : PeopleRepository {
-    override suspend fun people(): List<Person> {
+    private val lock = Mutex()
+
+    @Volatile private var snapshot: List<Person>? = null
+
+    override suspend fun people(): List<Person> =
+        snapshot ?: lock.withLock { snapshot ?: compute().also { snapshot = it } }
+
+    private suspend fun compute(): List<Person> {
         val bundled = base.people()
         val remote = try {
             overrides.current()

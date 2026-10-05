@@ -128,7 +128,14 @@ class ShopViewModel(
 
     fun setSort(sort: SortOrder) = filters.update { it.copy(sort = sort) }
 
-    fun setQuantity(itemId: String, quantity: Long) {
+    fun setQuantity(itemId: String, quantity: Long) = updateQuantity(itemId) { quantity }
+
+    /** Adds [delta] to the committed quantity, so quick repeated taps on +/- always add up. */
+    fun changeQuantity(itemId: String, delta: Long) = updateQuantity(itemId) { current ->
+        if (delta > 0 && current > Long.MAX_VALUE - delta) Long.MAX_VALUE else current + delta
+    }
+
+    private fun updateQuantity(itemId: String, requested: (current: Long) -> Long) {
         viewModelScope.launch {
             writeLock.withLock {
                 val data = loaded.value ?: return@withLock
@@ -136,7 +143,7 @@ class ShopViewModel(
                 val person = currentPerson(data) ?: return@withLock
                 val cart = cartStore.cart.first()
                 val next = CartMath.setQuantity(
-                    cart, item, quantity, Money.usdToCents(person.netWorthUsd), data.byId,
+                    cart, item, requested(cart.lines[itemId] ?: 0L), Money.usdToCents(person.netWorthUsd), data.byId,
                 )
                 if (next != cart) cartStore.save(next)
             }

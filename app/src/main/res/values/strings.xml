@@ -39,6 +39,7 @@
     <string name="cart_percent">Of the fortune</string>
     <string name="cart_line">%1$s × %2$s</string>
     <string name="share_receipt">Share receipt</string>
+    <string name="share_failed">Couldn\'t share the receipt</string>
     <string name="clear_cart">Clear cart</string>
     <string name="clear_cart_title">Clear your cart?</string>
     <string name="clear_cart_body">Everything you added will be removed.</string>
