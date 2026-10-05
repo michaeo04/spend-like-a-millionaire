@@ -1,26 +1,22 @@
 package com.michaeo04.spendlikeamillionaire.ui.nav
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.michaeo04.spendlikeamillionaire.AppContainer
 import com.michaeo04.spendlikeamillionaire.domain.Settings
+import com.michaeo04.spendlikeamillionaire.platform.AppLanguage
 import com.michaeo04.spendlikeamillionaire.ui.cart.CartRoute
+import com.michaeo04.spendlikeamillionaire.ui.onboarding.OnboardingRoute
+import com.michaeo04.spendlikeamillionaire.ui.settings.SettingsRoute
 import com.michaeo04.spendlikeamillionaire.ui.shop.ShopRoute
-import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -42,17 +38,18 @@ fun AppNav(container: AppContainer) {
         Box(Modifier.fillMaxSize())
         return
     }
+    val deviceLanguage = LocalConfiguration.current.locales[0].language
     val nav = rememberNavController()
     NavHost(navController = nav, startDestination = startRoute(loaded)) {
         composable<Route.Onboarding> {
-            val scope = androidx.compose.runtime.rememberCoroutineScope()
-            // TEMP until Task 7 replaces this screen with the real onboarding.
-            Placeholder("Onboarding") {
-                scope.launch {
-                    container.settingsStore.update { it.copy(onboarded = true, personId = "p_musk") }
-                    nav.navigate(Route.Shop)
-                }
-            }
+            OnboardingRoute(
+                container = container,
+                deviceLanguage = deviceLanguage,
+                onLanguageChosen = AppLanguage::apply,
+                onDone = {
+                    nav.navigate(Route.Shop) { popUpTo(Route.Onboarding) { inclusive = true } }
+                },
+            )
         }
         composable<Route.Shop> {
             ShopRoute(
@@ -62,17 +59,12 @@ fun AppNav(container: AppContainer) {
             )
         }
         composable<Route.Cart> { CartRoute(container, onBack = { nav.popBackStack() }) }
-        composable<Route.Settings> { Placeholder("Settings") { nav.popBackStack() } }
-    }
-}
-
-@Composable
-private fun Placeholder(title: String, onNext: () -> Unit) {
-    Column(
-        Modifier.fillMaxSize().padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Text(title, style = MaterialTheme.typography.headlineMedium)
-        Button(onClick = onNext) { Text("Next") }
+        composable<Route.Settings> {
+            SettingsRoute(
+                container = container,
+                onLanguageChosen = AppLanguage::apply,
+                onBack = { nav.popBackStack() },
+            )
+        }
     }
 }

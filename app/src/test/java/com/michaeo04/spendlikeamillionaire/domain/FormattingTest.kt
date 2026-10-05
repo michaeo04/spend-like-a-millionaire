@@ -67,6 +67,26 @@ class FormattingTest {
     }
 
     @Test
+    fun hugeVietnameseAmountsUseMillionBillionUnits() {
+        // 942e9 USD * 25,400 = 2.39268e16 VND = 23.93 "triệu tỷ" (1e15)
+        val s = Formatting.money(94_200_000_000_000L, "VND", 25_400.0, vi)
+        assertTrue(s, s.contains("23,93 triệu tỷ"))
+    }
+
+    @Test
+    fun hugeEnglishAmountsUseQuadrillionSuffix() {
+        assertEquals("$1Qa", Formatting.money(100_000_000_000_000_000L, "USD", 1.0, en))
+    }
+
+    @Test
+    fun compactNumbersAreGroupedByLocale() {
+        // Long.MAX cents = 9.22e16 USD * 25,400 = 2.3427e21 VND = 2,342.74 "tỷ tỷ" (1e18)
+        val s = Formatting.money(Long.MAX_VALUE, "VND", 25_400.0, vi)
+        assertTrue(s, s.contains("2.342,74 tỷ tỷ"))
+        assertEquals("$92.23Qa", Formatting.money(Long.MAX_VALUE, "USD", 1.0, en))
+    }
+
+    @Test
     fun moneyWithoutRateFallsBackToUsd() {
         assertEquals("$4.50", Formatting.money(450, "VND", null, en))
     }
@@ -80,6 +100,14 @@ class FormattingTest {
     fun moneyZeroDecimalCurrency() {
         val s = Formatting.money(100, "VND", 25400.0, vi)
         assertTrue(s, s.contains("25.400"))
+    }
+
+    @Test
+    fun zeroDecimalCurrenciesShowNoFractionDigits() {
+        val vnd = Formatting.money(450, "VND", 25_400.0, vi) // 4.50 USD = 114,300 VND
+        assertTrue(vnd, vnd.contains("114.300") && !vnd.contains(",00"))
+        val jpy = Formatting.money(450, "JPY", 150.0, en)
+        assertTrue(jpy, !jpy.contains(".00"))
     }
 
     @Test

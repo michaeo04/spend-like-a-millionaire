@@ -37,6 +37,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -77,6 +78,7 @@ fun CartScreen(
     onRemove: (String) -> Unit,
 ) {
     val context = LocalContext.current
+    val resources = LocalResources.current
     val formatter = remember(state.currency, state.rate, state.language) {
         MoneyFormatter(state.currency, state.rate, state.language)
     }
@@ -89,7 +91,7 @@ fun CartScreen(
         remainingLabel = stringResource(R.string.cart_remaining),
         percentLabel = stringResource(R.string.cart_percent),
         footer = stringResource(R.string.receipt_footer),
-        more = { n -> context.getString(R.string.receipt_more, n) },
+        more = { n -> resources.getString(R.string.receipt_more, n) },
     )
 
     Scaffold(

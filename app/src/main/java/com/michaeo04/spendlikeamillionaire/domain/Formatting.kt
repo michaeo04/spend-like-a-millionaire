@@ -10,9 +10,16 @@ import java.util.Locale
 
 /** Display formatting. Pure JVM so it is unit-testable without Android. */
 object Formatting {
-    private val MILLION = BigDecimal("1000000")
-    private val BILLION = BigDecimal("1000000000")
-    private val TRILLION = BigDecimal("1000000000000")
+    private class Unit(val size: BigDecimal, val en: String, val vi: String)
+
+    // Largest first. Vietnamese counts in "triệu" (1e6), "tỷ" (1e9), "nghìn tỷ" (1e12), ...
+    private val UNITS = listOf(
+        Unit(BigDecimal("1000000000000000000"), "Qi", " tỷ tỷ"),
+        Unit(BigDecimal("1000000000000000"), "Qa", " triệu tỷ"),
+        Unit(BigDecimal("1000000000000"), "T", " nghìn tỷ"),
+        Unit(BigDecimal("1000000000"), "B", " tỷ"),
+        Unit(BigDecimal("1000000"), "M", " triệu"),
+    )
 
     fun percent(p: Double, locale: Locale): String {
         if (p.isNaN() || p <= 0.0) return "0%"
@@ -35,24 +42,27 @@ object Formatting {
     fun money(usdCents: Long, currency: String, rate: Double?, locale: Locale): String {
         val (cur, effectiveRate) = resolve(currency, rate)
         val major = BigDecimal.valueOf(usdCents).movePointLeft(2).multiply(BigDecimal.valueOf(effectiveRate))
-        val abs = major.abs()
-        if (abs >= MILLION) {
-            val vi = locale.language == "vi"
-            val (unit, enSuffix, viSuffix) = when {
-                abs >= TRILLION -> Triple(TRILLION, "T", " nghìn tỷ")
-                abs >= BILLION -> Triple(BILLION, "B", " tỷ")
-                else -> Triple(MILLION, "M", " triệu")
-            }
-            val number = localize(
-                major.divide(unit, 2, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString(),
-                locale,
-            )
+        val unit = UNITS.firstOrNull { major.abs() >= it.size }
+        if (unit != null) {
+            val number = compactNumber(major.divide(unit.size, 2, RoundingMode.HALF_UP), locale)
             val symbol = cur.getSymbol(locale)
-            return if (vi) "$number$viSuffix $symbol" else "$symbol$number$enSuffix"
+            return if (locale.language == "vi") "$number${unit.vi} $symbol" else "$symbol$number${unit.en}"
         }
         val format = NumberFormat.getCurrencyInstance(locale)
         format.currency = cur
+        // setCurrency alone keeps the locale's own fraction digits (e.g. ",00" for VND).
+        val digits = cur.defaultFractionDigits.coerceAtLeast(0)
+        format.minimumFractionDigits = digits
+        format.maximumFractionDigits = digits
         return format.format(major)
+    }
+
+    private fun compactNumber(value: BigDecimal, locale: Locale): String {
+        val format = NumberFormat.getNumberInstance(locale)
+        format.minimumFractionDigits = 0
+        format.maximumFractionDigits = 2
+        format.roundingMode = RoundingMode.HALF_UP
+        return format.format(value)
     }
 
     private fun resolve(code: String, rate: Double?): Pair<Currency, Double> {

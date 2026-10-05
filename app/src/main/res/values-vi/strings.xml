@@ -49,6 +49,30 @@
     <string name="receipt_more">+ %1$d món khác</string>
     <string name="receipt_footer">Spend Like a Millionaire · giải trí, không liên kết với ai</string>
 
+    <!-- Onboarding -->
+    <string name="onb_language_title">Chọn ngôn ngữ</string>
+    <string name="onb_currency_title">Chọn đơn vị tiền tệ</string>
+    <string name="onb_currency_hint">Giá được quy đổi theo tỷ giá xấp xỉ.</string>
+    <string name="onb_person_title">Bạn muốn tiêu tài sản của ai?</string>
+    <string name="onb_next">Tiếp</string>
+    <string name="onb_back">Quay lại</string>
+    <string name="onb_finish">Bắt đầu tiêu tiền</string>
+    <string name="onb_step">Bước %1$d / %2$d</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Cài đặt</string>
+    <string name="settings_language">Ngôn ngữ</string>
+    <string name="settings_currency">Tiền tệ</string>
+    <string name="settings_person">Tài sản để tiêu</string>
+    <string name="settings_about">Giới thiệu</string>
+    <string name="settings_disclaimer">Spend Like a Millionaire là ứng dụng giải trí, mang tính châm biếm. Ứng dụng không liên kết, không được bảo trợ hay xác nhận bởi bất kỳ cá nhân, công ty, đội bóng hay nhóm nhạc nào được nhắc đến. Tài sản và giá cả chỉ là ước tính từ nguồn công khai.</string>
+    <string name="settings_privacy">Chính sách quyền riêng tư</string>
+    <string name="settings_version">Phiên bản %1$s</string>
+    <string name="switch_person_title">Đổi người?</string>
+    <string name="switch_person_body">Giỏ hàng của bạn (%1$s) lớn hơn tài sản của %2$s nên sẽ bị xóa.</string>
+    <string name="action_switch">Đổi</string>
+    <string name="action_close">Đóng</string>
+
     <!-- Navigation -->
     <string name="view_cart">Xem giỏ hàng</string>
     <string name="view_cart_count">Xem giỏ hàng (%1$d)</string>
