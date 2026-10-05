@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spend Like a Millionaire</string>
+
+    <!-- Shop -->
+    <string name="shop_search_hint">Search items</string>
+    <string name="shop_empty">No items match your search</string>
+    <string name="sort_low_high">Price ↑</string>
+    <string name="sort_high_low">Price ↓</string>
+    <string name="category_all">All</string>
+    <string name="category_food">Food</string>
+    <string name="category_shopping">Shopping</string>
+    <string name="category_tech">Tech</string>
+    <string name="category_transport">Vehicles</string>
+    <string name="category_home">Property</string>
+    <string name="category_travel">Travel</string>
+    <string name="category_fun">Fun</string>
+    <string name="category_sports_music">Sports &amp; music</string>
+    <string name="category_mega">Mega</string>
+
+    <!-- Balance bar -->
+    <string name="balance_remaining">Remaining</string>
+    <string name="balance_of_total">of %1$s</string>
+    <string name="balance_spent_percent">%1$s spent</string>
+    <string name="balance_source">%1$s · %2$s</string>
+
+    <!-- Item row -->
+    <string name="item_buy_max">MAX</string>
+    <string name="item_estimate_hint">Estimated value</string>
+    <string name="cd_decrease">Decrease quantity of %1$s</string>
+    <string name="cd_increase">Increase quantity of %1$s</string>
+    <string name="cd_quantity">Quantity of %1$s</string>
+
+    <!-- Cart / receipt -->
+    <string name="cart_title">Your receipt</string>
+    <string name="cart_empty">Nothing in your cart yet.\nGo spend some money!</string>
+    <string name="cart_total">Total spent</string>
+    <string name="cart_remaining">Left over</string>
+    <string name="cart_percent">Of the fortune</string>
+    <string name="cart_line">%1$s × %2$s</string>
+    <string name="share_receipt">Share receipt</string>
+    <string name="clear_cart">Clear cart</string>
+    <string name="clear_cart_title">Clear your cart?</string>
+    <string name="clear_cart_body">Everything you added will be removed.</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="cd_remove_line">Remove %1$s</string>
+    <string name="receipt_title">RECEIPT</string>
+    <string name="receipt_more">+ %1$d more items</string>
+    <string name="receipt_footer">Spend Like a Millionaire · parody, not affiliated</string>
+
+    <!-- Onboarding -->
+    <string name="onb_language_title">Choose your language</string>
+    <string name="onb_currency_title">Pick your currency</string>
+    <string name="onb_currency_hint">Prices are converted using approximate exchange rates.</string>
+    <string name="onb_person_title">Whose fortune will you spend?</string>
+    <string name="onb_next">Next</string>
+    <string name="onb_back">Back</string>
+    <string name="onb_finish">Start spending</string>
+    <string name="onb_step">Step %1$d of %2$d</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_currency">Currency</string>
+    <string name="settings_person">Fortune to spend</string>
+    <string name="settings_about">About</string>
+    <string name="settings_disclaimer">Spend Like a Millionaire is a parody and entertainment app. It is not affiliated with, endorsed by, or sponsored by any person, company, team or band mentioned. Net worths and prices are rough public estimates.</string>
+    <string name="settings_privacy">Privacy policy</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="switch_person_title">Switch fortune?</string>
+    <string name="switch_person_body">Your cart (%1$s) is larger than %2$s\'s fortune, so it will be cleared.</string>
+    <string name="action_switch">Switch</string>
+    <string name="action_close">Close</string>
+
+    <!-- Navigation -->
+    <string name="view_cart">View cart</string>
+    <string name="view_cart_count">View cart (%1$d)</string>
+    <string name="cd_settings">Settings</string>
+    <string name="cd_back">Back</string>
+</resources>

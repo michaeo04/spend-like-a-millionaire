@@ -1,0 +1,17 @@
+[
+  { "id": "p_musk", "name": { "en": "Elon Musk", "vi": "Elon Musk" }, "netWorthUsd": 981000000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#5B8DEF" } },
+  { "id": "p_bezos", "name": { "en": "Jeff Bezos", "vi": "Jeff Bezos" }, "netWorthUsd": 371200000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#F28C38" } },
+  { "id": "p_page", "name": { "en": "Larry Page", "vi": "Larry Page" }, "netWorthUsd": 281800000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#34A853" } },
+  { "id": "p_dell", "name": { "en": "Michael Dell", "vi": "Michael Dell" }, "netWorthUsd": 273900000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#3F6FD8" } },
+  { "id": "p_brin", "name": { "en": "Sergey Brin", "vi": "Sergey Brin" }, "netWorthUsd": 259300000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#E4572E" } },
+  { "id": "p_zuckerberg", "name": { "en": "Mark Zuckerberg", "vi": "Mark Zuckerberg" }, "netWorthUsd": 249600000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#2E86DE" } },
+  { "id": "p_huang", "name": { "en": "Jensen Huang", "vi": "Jensen Huang" }, "netWorthUsd": 202500000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#6CB33F" } },
+  { "id": "p_ellison", "name": { "en": "Larry Ellison", "vi": "Larry Ellison" }, "netWorthUsd": 184200000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#C0392B" } },
+  { "id": "p_ballmer", "name": { "en": "Steve Ballmer", "vi": "Steve Ballmer" }, "netWorthUsd": 160600000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#8E44AD" } },
+  { "id": "p_buffett", "name": { "en": "Warren Buffett", "vi": "Warren Buffett" }, "netWorthUsd": 143000000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#16A085" } },
+  { "id": "p_ortega", "name": { "en": "Amancio Ortega", "vi": "Amancio Ortega" }, "netWorthUsd": 140200000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#D35400" } },
+  { "id": "p_arnault", "name": { "en": "Bernard Arnault & family", "vi": "Bernard Arnault & gia đình" }, "netWorthUsd": 116700000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#7F6A93" } },
+  { "id": "p_slim", "name": { "en": "Carlos Slim Helu & family", "vi": "Carlos Slim Helu & gia đình" }, "netWorthUsd": 114500000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#2C7A7B" } },
+  { "id": "p_gates", "name": { "en": "Bill Gates", "vi": "Bill Gates" }, "netWorthUsd": 114300000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#2980B9" } },
+  { "id": "p_bloomberg", "name": { "en": "Michael Bloomberg", "vi": "Michael Bloomberg" }, "netWorthUsd": 94900000000, "source": "Forbes", "asOf": "2026-10", "avatar": { "color": "#B9770E" } }
+]

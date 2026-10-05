@@ -1,25 +1,76 @@
 # Spend Like a Millionaire
 
-An offline Android app (Kotlin + Jetpack Compose) that lets you spend a celebrity-sized fortune
-on everything from a coffee to a football stadium, to feel how big "billionaire money" really is.
+An offline Android app (Kotlin + Jetpack Compose) that lets you spend a billionaire's fortune on
+everything from a candy bar to a space station, to feel how big "billionaire money" really is.
 
-> Working title. Status: **requirements / design phase** — no app code yet.
+> Status: v0.1 feature-complete (AdMob is intentionally built last, just before launch).
 
-## Planned features
+## Features
 
-- Pick whose fortune to spend (a short list of public billionaires), with the source of the net worth shown.
-- Huge catalog of items, from a few dollars to multi-billion-dollar assets; sort and filter by price.
-- Cart with quantities, running balance and "% of fortune spent".
-- Choose display currency, language and person during a short onboarding.
+- Pick whose fortune to spend (15 public billionaires), with the source and month of the net worth.
+- 300+ items from about $1.50 to $500B, sortable by price, filterable by category, searchable
+  (accent-insensitive, so "ca phe" finds "Cà phê").
+- Quantity stepper, typed quantity and **MAX**; cart with running total and **% of the fortune spent**.
 - Shareable receipt image.
-- Fully offline; small values (e.g. net worths) updatable via Firebase Remote Config.
+- Short onboarding (language, currency, person); English and Vietnamese; 17 display currencies.
+- Fully offline. Net worths can be refreshed through Firebase Remote Config without an app update.
 
 ## Disclaimer
 
 This is a parody / entertainment app. It is not affiliated with, endorsed by, or sponsored by any
 person, company, team or band mentioned. Net worths and item prices are rough public estimates.
-All artwork is original or openly licensed; no real people's likenesses or third-party logos are used.
+Avatars and icons are original or emoji; no real people's likenesses or third-party logos are used.
 
-## Tech
+## Build and test
 
-Kotlin, Jetpack Compose (Material 3), Gradle. Build: `./gradlew assembleDebug`.
+Requirements: JDK 17 and the Android SDK (platform 37, build-tools 36). Set `ANDROID_HOME` or
+create `local.properties` with `sdk.dir=...`.
+
+```
+./gradlew assembleDebug            # debug APK
+./gradlew testDebugUnitTest        # unit tests (JVM)
+./gradlew lintDebug                # lint
+./gradlew bundleRelease            # release AAB (R8); needs signing config, see docs/release-checklist.md
+```
+
+End-to-end test (needs an emulator or device; **uninstall the app first** so it starts fresh):
+
+```
+adb uninstall com.michaeo04.spendlikeamillionaire
+./gradlew connectedDebugAndroidTest
+```
+
+## Editing the catalog
+
+The source of truth is `tools/catalog-source.tsv`. After editing, regenerate the JSON the app reads:
+
+```
+python tools/build_catalog.py
+```
+
+The build validates ids, categories, prices and the "estimate" flag, and a unit test
+(`BundledDataValidationTest`) re-checks the generated assets on every test run.
+People and exchange rates live directly in `app/src/main/assets/people.json` and `fx.json`.
+
+## Firebase (optional)
+
+`app/google-services.json` is git-ignored. Without it the app builds and runs with a no-op bridge
+(no Crashlytics/Analytics/Remote Config). With it, Crashlytics, Analytics and Remote Config are
+enabled automatically. Remote Config key `net_worth_overrides`:
+
+```json
+{ "p_musk": { "usd": 981000000000, "source": "Forbes", "asOf": "2026-10" } }
+```
+
+Invalid entries (non-positive or absurd values, unknown ids, malformed dates) are ignored and the
+bundled value is used. Fetched values apply from the next launch.
+
+## Docs
+
+- Design: `docs/superpowers/specs/2026-10-05-spend-like-a-millionaire-design.md`
+- Implementation plan: `docs/superpowers/plans/2026-10-05-spend-like-a-millionaire.md`
+- Release: `docs/release-checklist.md`, `docs/store-listing.md`, `docs/privacy-policy.md`
+
+## License
+
+MIT, see `LICENSE`.

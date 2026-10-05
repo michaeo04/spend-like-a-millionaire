@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spend Like a Millionaire</string>
+
+    <!-- Shop -->
+    <string name="shop_search_hint">Tìm món đồ</string>
+    <string name="shop_empty">Không có món nào khớp với tìm kiếm</string>
+    <string name="sort_low_high">Giá ↑</string>
+    <string name="sort_high_low">Giá ↓</string>
+    <string name="category_all">Tất cả</string>
+    <string name="category_food">Đồ ăn</string>
+    <string name="category_shopping">Mua sắm</string>
+    <string name="category_tech">Công nghệ</string>
+    <string name="category_transport">Phương tiện</string>
+    <string name="category_home">Bất động sản</string>
+    <string name="category_travel">Du lịch</string>
+    <string name="category_fun">Giải trí</string>
+    <string name="category_sports_music">Thể thao &amp; âm nhạc</string>
+    <string name="category_mega">Siêu lớn</string>
+
+    <!-- Balance bar -->
+    <string name="balance_remaining">Còn lại</string>
+    <string name="balance_of_total">trong tổng %1$s</string>
+    <string name="balance_spent_percent">Đã tiêu %1$s</string>
+    <string name="balance_source">%1$s · %2$s</string>
+
+    <!-- Item row -->
+    <string name="item_buy_max">TỐI ĐA</string>
+    <string name="item_estimate_hint">Giá trị ước tính</string>
+    <string name="cd_decrease">Giảm số lượng %1$s</string>
+    <string name="cd_increase">Tăng số lượng %1$s</string>
+    <string name="cd_quantity">Số lượng %1$s</string>
+
+    <!-- Cart / receipt -->
+    <string name="cart_title">Hóa đơn của bạn</string>
+    <string name="cart_empty">Giỏ hàng đang trống.\nHãy đi tiêu tiền thôi!</string>
+    <string name="cart_total">Tổng đã tiêu</string>
+    <string name="cart_remaining">Còn lại</string>
+    <string name="cart_percent">Trên tổng tài sản</string>
+    <string name="cart_line">%1$s × %2$s</string>
+    <string name="share_receipt">Chia sẻ hóa đơn</string>
+    <string name="clear_cart">Xóa giỏ hàng</string>
+    <string name="clear_cart_title">Xóa giỏ hàng?</string>
+    <string name="clear_cart_body">Mọi món bạn đã thêm sẽ bị xóa.</string>
+    <string name="action_clear">Xóa</string>
+    <string name="action_cancel">Hủy</string>
+    <string name="cd_remove_line">Xóa %1$s</string>
+    <string name="receipt_title">HÓA ĐƠN</string>
+    <string name="receipt_more">+ %1$d món khác</string>
+    <string name="receipt_footer">Spend Like a Millionaire · giải trí, không liên kết với ai</string>
+
+    <!-- Onboarding -->
+    <string name="onb_language_title">Chọn ngôn ngữ</string>
+    <string name="onb_currency_title">Chọn đơn vị tiền tệ</string>
+    <string name="onb_currency_hint">Giá được quy đổi theo tỷ giá xấp xỉ.</string>
+    <string name="onb_person_title">Bạn muốn tiêu tài sản của ai?</string>
+    <string name="onb_next">Tiếp</string>
+    <string name="onb_back">Quay lại</string>
+    <string name="onb_finish">Bắt đầu tiêu tiền</string>
+    <string name="onb_step">Bước %1$d / %2$d</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Cài đặt</string>
+    <string name="settings_language">Ngôn ngữ</string>
+    <string name="settings_currency">Tiền tệ</string>
+    <string name="settings_person">Tài sản để tiêu</string>
+    <string name="settings_about">Giới thiệu</string>
+    <string name="settings_disclaimer">Spend Like a Millionaire là ứng dụng giải trí, mang tính châm biếm. Ứng dụng không liên kết, không được bảo trợ hay xác nhận bởi bất kỳ cá nhân, công ty, đội bóng hay nhóm nhạc nào được nhắc đến. Tài sản và giá cả chỉ là ước tính từ nguồn công khai.</string>
+    <string name="settings_privacy">Chính sách quyền riêng tư</string>
+    <string name="settings_version">Phiên bản %1$s</string>
+    <string name="switch_person_title">Đổi người?</string>
+    <string name="switch_person_body">Giỏ hàng của bạn (%1$s) lớn hơn tài sản của %2$s nên sẽ bị xóa.</string>
+    <string name="action_switch">Đổi</string>
+    <string name="action_close">Đóng</string>
+
+    <!-- Navigation -->
+    <string name="view_cart">Xem giỏ hàng</string>
+    <string name="view_cart_count">Xem giỏ hàng (%1$d)</string>
+    <string name="cd_settings">Cài đặt</string>
+    <string name="cd_back">Quay lại</string>
+</resources>
