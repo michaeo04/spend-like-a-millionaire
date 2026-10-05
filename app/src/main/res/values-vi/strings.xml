@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spend Like a Millionaire</string>
+
+    <!-- Shop -->
+    <string name="shop_search_hint">Tìm món đồ</string>
+    <string name="shop_empty">Không có món nào khớp với tìm kiếm</string>
+    <string name="sort_low_high">Giá ↑</string>
+    <string name="sort_high_low">Giá ↓</string>
+    <string name="category_all">Tất cả</string>
+    <string name="category_food">Đồ ăn</string>
+    <string name="category_shopping">Mua sắm</string>
+    <string name="category_tech">Công nghệ</string>
+    <string name="category_transport">Phương tiện</string>
+    <string name="category_home">Bất động sản</string>
+    <string name="category_travel">Du lịch</string>
+    <string name="category_fun">Giải trí</string>
+    <string name="category_sports_music">Thể thao &amp; âm nhạc</string>
+    <string name="category_mega">Siêu lớn</string>
+
+    <!-- Balance bar -->
+    <string name="balance_remaining">Còn lại</string>
+    <string name="balance_of_total">trong tổng %1$s</string>
+    <string name="balance_spent_percent">Đã tiêu %1$s</string>
+    <string name="balance_source">%1$s · %2$s</string>
+
+    <!-- Item row -->
+    <string name="item_buy_max">TỐI ĐA</string>
+    <string name="item_estimate_hint">Giá trị ước tính</string>
+    <string name="cd_decrease">Giảm số lượng %1$s</string>
+    <string name="cd_increase">Tăng số lượng %1$s</string>
+    <string name="cd_quantity">Số lượng %1$s</string>
+
+    <!-- Navigation -->
+    <string name="view_cart">Xem giỏ hàng</string>
+    <string name="view_cart_count">Xem giỏ hàng (%1$d)</string>
+    <string name="cd_settings">Cài đặt</string>
+    <string name="cd_back">Quay lại</string>
+</resources>

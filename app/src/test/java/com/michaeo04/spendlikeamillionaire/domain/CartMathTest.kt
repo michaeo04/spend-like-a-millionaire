@@ -60,6 +60,18 @@ class CartMathTest {
     }
 
     @Test
+    fun totalSaturatesInsteadOfOverflowingOnCorruptQuantities() {
+        val corrupt = Cart(mapOf("a" to Long.MAX_VALUE, "b" to Long.MAX_VALUE))
+        assertEquals(Long.MAX_VALUE, CartMath.total(corrupt, catalog))
+    }
+
+    @Test
+    fun lineCostSaturates() {
+        assertEquals(Long.MAX_VALUE, CartMath.lineCost(a, Long.MAX_VALUE))
+        assertEquals(90_000L, CartMath.lineCost(a, 3))
+    }
+
+    @Test
     fun sanitizeDropsUnknownIds() {
         val cart = Cart(mapOf("a" to 1L, "removed_in_new_version" to 4L))
         assertEquals(mapOf("a" to 1L), CartMath.sanitize(cart, catalog, 1_000_000).lines)

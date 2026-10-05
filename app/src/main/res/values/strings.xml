@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Spend Like a Millionaire</string>
-    <string name="hello">Spend Like a Millionaire</string>
+
+    <!-- Shop -->
+    <string name="shop_search_hint">Search items</string>
+    <string name="shop_empty">No items match your search</string>
+    <string name="sort_low_high">Price ↑</string>
+    <string name="sort_high_low">Price ↓</string>
+    <string name="category_all">All</string>
+    <string name="category_food">Food</string>
+    <string name="category_shopping">Shopping</string>
+    <string name="category_tech">Tech</string>
+    <string name="category_transport">Vehicles</string>
+    <string name="category_home">Property</string>
+    <string name="category_travel">Travel</string>
+    <string name="category_fun">Fun</string>
+    <string name="category_sports_music">Sports &amp; music</string>
+    <string name="category_mega">Mega</string>
+
+    <!-- Balance bar -->
+    <string name="balance_remaining">Remaining</string>
+    <string name="balance_of_total">of %1$s</string>
+    <string name="balance_spent_percent">%1$s spent</string>
+    <string name="balance_source">%1$s · %2$s</string>
+
+    <!-- Item row -->
+    <string name="item_buy_max">MAX</string>
+    <string name="item_estimate_hint">Estimated value</string>
+    <string name="cd_decrease">Decrease quantity of %1$s</string>
+    <string name="cd_increase">Increase quantity of %1$s</string>
+    <string name="cd_quantity">Quantity of %1$s</string>
+
+    <!-- Navigation -->
+    <string name="view_cart">View cart</string>
+    <string name="view_cart_count">View cart (%1$d)</string>
+    <string name="cd_settings">Settings</string>
+    <string name="cd_back">Back</string>
 </resources>

@@ -18,6 +18,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.michaeo04.spendlikeamillionaire.AppContainer
 import com.michaeo04.spendlikeamillionaire.domain.Settings
+import com.michaeo04.spendlikeamillionaire.ui.shop.ShopRoute
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -41,8 +43,23 @@ fun AppNav(container: AppContainer) {
     }
     val nav = rememberNavController()
     NavHost(navController = nav, startDestination = startRoute(loaded)) {
-        composable<Route.Onboarding> { Placeholder("Onboarding") { nav.navigate(Route.Shop) } }
-        composable<Route.Shop> { Placeholder("Shop") { nav.navigate(Route.Cart) } }
+        composable<Route.Onboarding> {
+            val scope = androidx.compose.runtime.rememberCoroutineScope()
+            // TEMP until Task 7 replaces this screen with the real onboarding.
+            Placeholder("Onboarding") {
+                scope.launch {
+                    container.settingsStore.update { it.copy(onboarded = true, personId = "p_musk") }
+                    nav.navigate(Route.Shop)
+                }
+            }
+        }
+        composable<Route.Shop> {
+            ShopRoute(
+                container = container,
+                onOpenCart = { nav.navigate(Route.Cart) },
+                onOpenSettings = { nav.navigate(Route.Settings) },
+            )
+        }
         composable<Route.Cart> { Placeholder("Cart") { nav.navigate(Route.Settings) } }
         composable<Route.Settings> { Placeholder("Settings") { nav.popBackStack() } }
     }

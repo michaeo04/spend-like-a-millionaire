@@ -4,13 +4,22 @@ package com.michaeo04.spendlikeamillionaire.domain
 data class Cart(val lines: Map<String, Long> = emptyMap())
 
 object CartMath {
-    /** Sum of price * quantity for known items with a positive quantity. */
+    /** price * quantity, saturating at [Long.MAX_VALUE] so corrupt stored data can never crash. */
+    fun lineCost(item: Item, quantity: Long): Long =
+        try {
+            Money.lineTotal(item.priceCents, quantity)
+        } catch (e: ArithmeticException) {
+            Long.MAX_VALUE
+        }
+
+    /** Saturating sum of price * quantity for known items with a positive quantity. */
     fun total(cart: Cart, items: Map<String, Item>): Long {
         var sum = 0L
         for ((id, qty) in cart.lines) {
             val item = items[id] ?: continue
             if (qty <= 0) continue
-            sum += Money.lineTotal(item.priceCents, qty)
+            val cost = lineCost(item, qty)
+            sum = if (sum > Long.MAX_VALUE - cost) Long.MAX_VALUE else sum + cost
         }
         return sum
     }

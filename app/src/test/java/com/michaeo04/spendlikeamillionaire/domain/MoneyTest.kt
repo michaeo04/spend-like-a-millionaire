@@ -42,6 +42,13 @@ class MoneyTest {
     }
 
     @Test
+    fun usdToCentsMultipliesBy100AndSaturatesInsteadOfOverflowing() {
+        assertEquals(94_200_000_000_000L, Money.usdToCents(942_000_000_000L))
+        assertEquals(Long.MAX_VALUE, Money.usdToCents(Long.MAX_VALUE))
+        assertEquals(0L, Money.usdToCents(-5))
+    }
+
+    @Test
     fun percentSpentIsZeroWhenTotalIsNotPositive() {
         assertEquals(0.0, Money.percentSpent(0, 0), 0.0)
         assertEquals(0.0, Money.percentSpent(10, -1), 0.0)
