@@ -8,7 +8,7 @@
 
 - App Android offline (Kotlin + Jetpack Compose), một module `app`, không có backend.
 - Onboarding 4 bước (chào, ngôn ngữ EN/VI, tiền tệ, chọn người), shop dạng lưới ảnh, giỏ hàng, % đã tiêu, chia sẻ hóa đơn, màn Settings và ghi công ảnh.
-- 32 người (17 tỷ phú, 15 người nổi tiếng, 30 người có ảnh chân dung), 312 món đồ (294+ có ảnh thật từ Wikimedia Commons, tên và brand thật).
+- 32 người (17 tỷ phú, 15 người nổi tiếng, 30 người có ảnh chân dung), 312 món đồ (267 món có ảnh thật từ Wikimedia Commons, còn lại dùng emoji; tên và brand thật).
 - Firebase là **tùy chọn**: không có `google-services.json` app vẫn build và chạy đầy đủ. Có file thì tự bật Crashlytics, Analytics, Remote Config.
 - Chất lượng: 135 unit test, 1 test E2E (emulator), lint sạch, CI GitHub Actions xanh, bản release R8 đã chạy thử.
 - Đã review độc lập 3 lần và sửa hết lỗi. Nhánh `main` là bản cuối; các nhánh khác đã xóa.
