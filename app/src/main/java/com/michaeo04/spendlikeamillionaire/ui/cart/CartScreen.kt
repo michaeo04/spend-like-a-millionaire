@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -51,6 +54,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.michaeo04.spendlikeamillionaire.AppContainer
 import com.michaeo04.spendlikeamillionaire.R
 import com.michaeo04.spendlikeamillionaire.platform.ShareReceipt
+import com.michaeo04.spendlikeamillionaire.ui.components.ItemImage
 import com.michaeo04.spendlikeamillionaire.ui.components.MoneyFormatter
 import java.text.NumberFormat
 
@@ -157,7 +161,12 @@ fun CartScreen(
                 val name = line.item.name.get(state.language)
                 Card(Modifier.fillMaxWidth()) {
                     Row(Modifier.padding(start = 12.dp, top = 8.dp, bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text(line.item.icon, fontSize = 28.sp, modifier = Modifier.padding(end = 12.dp))
+                        ItemImage(
+                            icon = line.item.icon,
+                            image = line.item.image,
+                            modifier = Modifier.padding(end = 12.dp).size(52.dp).clip(RoundedCornerShape(10.dp)),
+                            emojiSize = 28.sp,
+                        )
                         Column(Modifier.weight(1f)) {
                             Text(name, style = MaterialTheme.typography.titleSmall)
                             Text(

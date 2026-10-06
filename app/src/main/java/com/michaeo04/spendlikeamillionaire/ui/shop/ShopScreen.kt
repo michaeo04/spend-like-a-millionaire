@@ -10,9 +10,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items as rowItems
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -26,7 +29,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -39,7 +45,8 @@ import com.michaeo04.spendlikeamillionaire.AppContainer
 import com.michaeo04.spendlikeamillionaire.R
 import com.michaeo04.spendlikeamillionaire.domain.Category
 import com.michaeo04.spendlikeamillionaire.ui.components.BalanceBar
-import com.michaeo04.spendlikeamillionaire.ui.components.ItemRow
+import com.michaeo04.spendlikeamillionaire.ui.components.ItemCard
+import com.michaeo04.spendlikeamillionaire.ui.components.QuantityDialog
 import com.michaeo04.spendlikeamillionaire.ui.components.MoneyFormatter
 import com.michaeo04.spendlikeamillionaire.ui.components.labelRes
 
@@ -63,7 +70,6 @@ fun ShopRoute(container: AppContainer, onOpenCart: () -> Unit, onOpenSettings: (
         onSort = vm::setSort,
         onQuantity = vm::setQuantity,
         onDelta = vm::changeQuantity,
-        onBuyMax = vm::buyMax,
         onOpenCart = onOpenCart,
         onOpenSettings = onOpenSettings,
     )
@@ -77,13 +83,13 @@ fun ShopScreen(
     onSort: (SortOrder) -> Unit,
     onQuantity: (String, Long) -> Unit,
     onDelta: (String, Long) -> Unit,
-    onBuyMax: (String) -> Unit,
     onOpenCart: () -> Unit,
     onOpenSettings: () -> Unit,
 ) {
     val formatter = remember(state.currency, state.rate, state.language) {
         MoneyFormatter(state.currency, state.rate, state.language)
     }
+    var editingId by rememberSaveable { mutableStateOf<String?>(null) }
     Scaffold(
         modifier = Modifier.imePadding(),
         topBar = {
@@ -121,20 +127,22 @@ fun ShopScreen(
             }
             return@Scaffold
         }
-        LazyColumn(
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(minSize = 156.dp),
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(
                 start = 12.dp, end = 12.dp,
                 top = padding.calculateTopPadding() + 8.dp,
                 bottom = padding.calculateBottomPadding() + 8.dp,
             ),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            item(key = "filters") {
+            item(key = "filters", span = { GridItemSpan(maxLineSpan) }) {
                 Filters(state, onQuery, onCategory, onSort)
             }
             if (state.items.isEmpty()) {
-                item(key = "empty") {
+                item(key = "empty", span = { GridItemSpan(maxLineSpan) }) {
                     Text(
                         stringResource(R.string.shop_empty),
                         modifier = Modifier.fillMaxWidth().padding(32.dp),
@@ -142,15 +150,24 @@ fun ShopScreen(
                 }
             }
             items(state.items, key = { it.item.id }) { ui ->
-                ItemRow(
+                ItemCard(
                     ui = ui,
                     formatter = formatter,
-                    onQuantity = { onQuantity(ui.item.id, it) },
                     onDelta = { onDelta(ui.item.id, it) },
-                    onBuyMax = { onBuyMax(ui.item.id) },
+                    onEditQuantity = { editingId = ui.item.id },
                 )
             }
         }
+    }
+
+    // Look the item up again so the dialog always shows the latest max after other changes.
+    state.items.firstOrNull { it.item.id == editingId }?.let { editing ->
+        QuantityDialog(
+            ui = editing,
+            formatter = formatter,
+            onConfirm = { onQuantity(editing.item.id, it); editingId = null },
+            onDismiss = { editingId = null },
+        )
     }
 }
 
@@ -190,7 +207,7 @@ private fun Filters(
                     label = { Text(stringResource(R.string.category_all)) },
                 )
             }
-            items(Category.entries.toList()) { category ->
+            rowItems(Category.entries.toList()) { category ->
                 FilterChip(
                     selected = state.category == category,
                     onClick = { onCategory(category) },

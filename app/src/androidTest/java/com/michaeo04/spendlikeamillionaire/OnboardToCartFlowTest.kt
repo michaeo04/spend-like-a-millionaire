@@ -1,7 +1,9 @@
 package com.michaeo04.spendlikeamillionaire
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -26,7 +28,9 @@ class OnboardToCartFlowTest {
 
     @Test
     fun onboardingThenBuyThenReceipt() {
-        // Step 1 language, step 2 currency (defaults are fine)
+        // Welcome, then language, then currency (defaults are fine)
+        waitForText("Get started")
+        compose.onNodeWithText("Get started").performClick()
         waitForText("Choose your language")
         compose.onNodeWithText("Next").performClick()
         waitForText("Pick your currency")
@@ -38,16 +42,18 @@ class OnboardToCartFlowTest {
         compose.onNodeWithText("Elon Musk").performClick()
         compose.onNodeWithText("Start spending").performClick()
 
-        // Shop: buy the maximum of the first (cheapest) item
+        // Shop: add one of the cheapest item with the + button
         waitForText("Remaining")
-        waitForText("MAX")
-        compose.onAllNodesWithText("MAX")[0].performClick()
+        compose.waitUntil(10_000) {
+            compose.onAllNodesWithContentDescription("Increase quantity of Snickers bar").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.onNodeWithContentDescription("Increase quantity of Snickers bar").performClick()
         waitForText("View cart (1)")
 
         // Receipt shows the cheapest item
         compose.onNodeWithText("View cart (1)").performClick()
         waitForText("Your receipt")
-        waitForText("Candy bar")
+        waitForText("Snickers bar")
         waitForText("Share receipt")
     }
 }

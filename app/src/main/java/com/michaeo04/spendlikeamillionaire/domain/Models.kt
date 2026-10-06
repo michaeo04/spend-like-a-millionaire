@@ -29,7 +29,18 @@ data class Item(
     val name: LocalizedText,
     val icon: String,
     val estimate: Boolean,
+    /** Asset path of the photo (e.g. "images/coffee.webp"); null falls back to the emoji icon. */
+    val image: String? = null,
 )
+
+enum class PersonGroup(val id: String) {
+    BILLIONAIRE("billionaire"),
+    CELEBRITY("celebrity");
+
+    companion object {
+        fun fromId(id: String): PersonGroup? = entries.firstOrNull { it.id == id }
+    }
+}
 
 data class Person(
     val id: String,
@@ -38,4 +49,7 @@ data class Person(
     val source: String,
     val asOf: String,
     val avatarColor: String,
+    val group: PersonGroup = PersonGroup.BILLIONAIRE,
+    /** Asset path of a portrait (e.g. "images/people/p_musk.webp"); null shows the initial-letter avatar. */
+    val image: String? = null,
 )

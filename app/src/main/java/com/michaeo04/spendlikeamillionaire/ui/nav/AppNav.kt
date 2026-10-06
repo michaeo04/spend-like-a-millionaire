@@ -16,6 +16,7 @@ import com.michaeo04.spendlikeamillionaire.domain.Settings
 import com.michaeo04.spendlikeamillionaire.platform.AppLanguage
 import com.michaeo04.spendlikeamillionaire.ui.cart.CartRoute
 import com.michaeo04.spendlikeamillionaire.ui.onboarding.OnboardingRoute
+import com.michaeo04.spendlikeamillionaire.ui.settings.CreditsRoute
 import com.michaeo04.spendlikeamillionaire.ui.settings.SettingsRoute
 import com.michaeo04.spendlikeamillionaire.ui.shop.ShopRoute
 import kotlinx.serialization.Serializable
@@ -26,6 +27,7 @@ sealed interface Route {
     @Serializable data object Shop : Route
     @Serializable data object Cart : Route
     @Serializable data object Settings : Route
+    @Serializable data object Credits : Route
 }
 
 /** Onboarding until the user finished it and still has a valid person (it may vanish in an update). */
@@ -73,8 +75,10 @@ fun AppNav(container: AppContainer) {
             SettingsRoute(
                 container = container,
                 onLanguageChosen = AppLanguage::apply,
+                onOpenCredits = { nav.navigate(Route.Credits) },
                 onBack = { nav.popBackStack() },
             )
         }
+        composable<Route.Credits> { CreditsRoute(container, onBack = { nav.popBackStack() }) }
     }
 }

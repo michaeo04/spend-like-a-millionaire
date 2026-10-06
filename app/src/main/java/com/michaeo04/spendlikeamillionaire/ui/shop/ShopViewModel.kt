@@ -150,9 +150,6 @@ class ShopViewModel(
         }
     }
 
-    /** Raises the item to the most the remaining balance affords. */
-    fun buyMax(itemId: String) = setQuantity(itemId, Long.MAX_VALUE)
-
     private suspend fun currentPerson(data: Loaded): Person? {
         val id = settingsStore.settings.first().personId
         return data.people.firstOrNull { it.id == id }

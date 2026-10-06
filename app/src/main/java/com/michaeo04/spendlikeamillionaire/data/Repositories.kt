@@ -32,6 +32,15 @@ private fun Context.readAsset(name: String): () -> String = {
     assets.open(name).bufferedReader().use { it.readText() }
 }
 
+interface CreditsRepository {
+    suspend fun credits(): List<ImageCredit>
+}
+
+class AssetCreditsRepository(context: Context) : CreditsRepository {
+    private val asset = CachedAsset(context.readAsset("image_credits.json"), ::parseCredits)
+    override suspend fun credits(): List<ImageCredit> = asset.get()
+}
+
 class AssetCatalogRepository(context: Context) : CatalogRepository {
     private val asset = CachedAsset(context.readAsset("catalog.json"), ::parseCatalog)
     override suspend fun items(): List<Item> = asset.get()

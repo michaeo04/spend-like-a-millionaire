@@ -1,67 +1,76 @@
 #!/usr/bin/env python3
-"""Builds app/src/main/assets/catalog.json from tools/catalog-source.tsv.
+"""Builds app/src/main/assets/catalog.json (and image_credits.json) from tools/catalog-source.tsv.
 
 Usage (from the repo root):  python tools/build_catalog.py
-Fails loudly on duplicate ids, unknown categories, bad prices, or estimate flags outside
-sports_music/mega, so the app's data validation test never sees broken content.
+Fails loudly on duplicate ids, unknown categories or bad prices, so the app's data validation
+test never sees broken content.
+Item photos come from tools/images-manifest.json (written by tools/fetch_images.py).
 """
 import json
 import sys
-from decimal import Decimal
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-SOURCE = ROOT / "tools" / "catalog-source.tsv"
-TARGET = ROOT / "app" / "src" / "main" / "assets" / "catalog.json"
-CATEGORIES = {"food", "shopping", "tech", "transport", "home", "travel", "fun", "sports_music", "mega"}
-ESTIMATE_CATEGORIES = {"sports_music", "mega"}
+from catalog_source import ROOT, load_people_rows, load_rows
+
+ASSETS = ROOT / "app" / "src" / "main" / "assets"
+MANIFEST = ROOT / "tools" / "images-manifest.json"
 
 
 def main() -> int:
-    items, seen, errors = [], set(), []
-    for number, raw in enumerate(SOURCE.read_text(encoding="utf-8").splitlines(), start=1):
-        line = raw.strip()
-        if not line or line.startswith("#"):
-            continue
-        parts = line.split("|")
-        if len(parts) not in (6, 7):
-            errors.append(f"line {number}: expected 6 or 7 fields, got {len(parts)}")
-            continue
-        item_id, category, price, name_en, name_vi, icon = parts[:6]
-        flag = parts[6] if len(parts) == 7 else ""
-        if item_id in seen:
-            errors.append(f"line {number}: duplicate id {item_id}")
-        seen.add(item_id)
-        if category not in CATEGORIES:
-            errors.append(f"line {number}: unknown category {category}")
-        try:
-            cents = int((Decimal(price) * 100).to_integral_value())
-        except Exception:
-            errors.append(f"line {number}: bad price {price}")
-            continue
-        if cents <= 0:
-            errors.append(f"line {number}: price must be positive")
-        estimate = flag == "e"
-        if estimate and category not in ESTIMATE_CATEGORIES:
-            errors.append(f"line {number}: estimate flag only allowed in {sorted(ESTIMATE_CATEGORIES)}")
-        entry = {
-            "id": item_id,
-            "category": category,
-            "priceCents": cents,
-            "name": {"en": name_en, "vi": name_vi},
-            "icon": icon,
-        }
-        if estimate:
-            entry["estimate"] = True
-        items.append(entry)
-
+    rows, errors = load_rows()
     if errors:
         print("\n".join(errors), file=sys.stderr)
         return 1
 
-    lines = [json.dumps(entry, ensure_ascii=False, separators=(",", ":")) for entry in items]
-    TARGET.write_text("[\n  " + ",\n  ".join(lines) + "\n]\n", encoding="utf-8")
-    print(f"wrote {len(items)} items to {TARGET.relative_to(ROOT)}")
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {}
+    items, credits = [], []
+    for row in rows:
+        entry = {
+            "id": row["id"],
+            "category": row["category"],
+            "priceCents": row["cents"],
+            "name": {"en": row["name_en"], "vi": row["name_vi"]},
+            "icon": row["icon"],
+        }
+        if row["estimate"]:
+            entry["estimate"] = True
+        info = manifest.get(row["id"])
+        image_path = ASSETS / "images" / f"{row['id']}.webp"
+        if info and image_path.exists():
+            entry["image"] = f"images/{row['id']}.webp"
+            credits.append({
+                "id": row["id"],
+                "title": info["title"],
+                "author": info["author"],
+                "license": info["license"],
+                "url": info["page"],
+            })
+        items.append(entry)
+
+    people_rows, people_errors = load_people_rows()
+    if people_errors:
+        print("\n".join(people_errors), file=sys.stderr)
+        return 1
+    for row in people_rows:
+        info = manifest.get(row["id"])
+        if info and (ASSETS / "images" / "people" / f"{row['id']}.webp").exists():
+            credits.append({
+                "id": row["id"],
+                "title": info["title"],
+                "author": info["author"],
+                "license": info["license"],
+                "url": info["page"],
+            })
+
+    (ASSETS / "catalog.json").write_text(
+        "[\n  " + ",\n  ".join(json.dumps(e, ensure_ascii=False, separators=(",", ":")) for e in items) + "\n]\n",
+        encoding="utf-8",
+    )
+    (ASSETS / "image_credits.json").write_text(
+        "[\n  " + ",\n  ".join(json.dumps(c, ensure_ascii=False, separators=(",", ":")) for c in credits) + "\n]\n",
+        encoding="utf-8",
+    )
+    print(f"wrote {len(items)} items ({len(credits)} with photos)")
     return 0
 
 

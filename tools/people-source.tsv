@@ -1,0 +1,38 @@
+# id|group|name_en|name_vi|net_worth_usd|source|as_of|avatar_color|image_query
+#   group: billionaire | celebrity.  Net worths are public estimates (source + month shown in the app).
+#   Billionaires: Forbes real-time list scraped 2026-10-05 (Vuong/Thao: Forbes via Lao Dong, Sep 2026).
+#   Celebrities: Forbes "World's Celebrity Billionaires 2026" (net worths as of 2026-03-01);
+#   Ronaldo: Forbes profile 2026-10; Messi: Forbes 2026-06.
+# Edit, then run: python tools/build_people.py   (photos: python tools/fetch_images.py)
+p_musk|billionaire|Elon Musk|Elon Musk|981000000000|Forbes|2026-10|#5B8DEF|Elon Musk
+p_bezos|billionaire|Jeff Bezos|Jeff Bezos|371200000000|Forbes|2026-10|#F28C38|Jeff Bezos
+p_page|billionaire|Larry Page|Larry Page|281800000000|Forbes|2026-10|#34A853|Larry Page
+p_dell|billionaire|Michael Dell|Michael Dell|273900000000|Forbes|2026-10|#3F6FD8|Michael Dell
+p_brin|billionaire|Sergey Brin|Sergey Brin|259300000000|Forbes|2026-10|#E4572E|Sergey Brin
+p_zuckerberg|billionaire|Mark Zuckerberg|Mark Zuckerberg|249600000000|Forbes|2026-10|#2E86DE|Mark Zuckerberg
+p_huang|billionaire|Jensen Huang|Jensen Huang|202500000000|Forbes|2026-10|#6CB33F|Jensen Huang
+p_ellison|billionaire|Larry Ellison|Larry Ellison|184200000000|Forbes|2026-10|#C0392B|Larry Ellison
+p_ballmer|billionaire|Steve Ballmer|Steve Ballmer|160600000000|Forbes|2026-10|#8E44AD|Steve Ballmer
+p_buffett|billionaire|Warren Buffett|Warren Buffett|143000000000|Forbes|2026-10|#16A085|Warren Buffett
+p_ortega|billionaire|Amancio Ortega|Amancio Ortega|140200000000|Forbes|2026-10|#D35400|Amancio Ortega
+p_arnault|billionaire|Bernard Arnault & family|Bernard Arnault & gia đình|116700000000|Forbes|2026-10|#7F6A93|Bernard Arnault
+p_slim|billionaire|Carlos Slim Helu & family|Carlos Slim Helu & gia đình|114500000000|Forbes|2026-10|#2C7A7B|Carlos Slim
+p_gates|billionaire|Bill Gates|Bill Gates|114300000000|Forbes|2026-10|#2980B9|Bill Gates
+p_bloomberg|billionaire|Michael Bloomberg|Michael Bloomberg|94900000000|Forbes|2026-10|#B9770E|Michael Bloomberg
+p_vuong|billionaire|Phạm Nhật Vượng|Phạm Nhật Vượng|36200000000|Forbes|2026-09|#C0392B|Pham Nhat Vuong
+p_thao|billionaire|Nguyễn Thị Phương Thảo|Nguyễn Thị Phương Thảo|4200000000|Forbes|2026-09|#E67E22|Nguyen Thi Phuong Thao
+p_spielberg|celebrity|Steven Spielberg|Steven Spielberg|7100000000|Forbes|2026-03|#1F618D|Steven Spielberg
+p_lucas|celebrity|George Lucas|George Lucas|5200000000|Forbes|2026-03|#117A65|George Lucas
+p_jordan|celebrity|Michael Jordan|Michael Jordan|4300000000|Forbes|2026-03|#B03A2E|Michael Jordan
+p_oprah|celebrity|Oprah Winfrey|Oprah Winfrey|3200000000|Forbes|2026-03|#7D3C98|Oprah Winfrey
+p_jayz|celebrity|Jay-Z|Jay-Z|2800000000|Forbes|2026-03|#2E4053|Jay-Z
+p_swift|celebrity|Taylor Swift|Taylor Swift|2000000000|Forbes|2026-03|#AF7AC5|Taylor Swift
+p_lebron|celebrity|LeBron James|LeBron James|1400000000|Forbes|2026-03|#7D6608|LeBron James
+p_ronaldo|celebrity|Cristiano Ronaldo|Cristiano Ronaldo|1200000000|Forbes|2026-10|#CB4335|Cristiano Ronaldo
+p_messi|celebrity|Lionel Messi|Lionel Messi|1100000000|Forbes|2026-06|#2874A6|Lionel Messi
+p_woods|celebrity|Tiger Woods|Tiger Woods|1500000000|Forbes|2026-03|#1D8348|Tiger Woods
+p_federer|celebrity|Roger Federer|Roger Federer|1100000000|Forbes|2026-03|#CA6F1E|Roger Federer
+p_cameron|celebrity|James Cameron|James Cameron|1100000000|Forbes|2026-03|#148F77|James Cameron
+p_schwarzenegger|celebrity|Arnold Schwarzenegger|Arnold Schwarzenegger|1200000000|Forbes|2026-03|#884EA0|Arnold Schwarzenegger
+p_beyonce|celebrity|Beyoncé|Beyoncé|1000000000|Forbes|2026-03|#D4AC0D|Beyoncé
+p_rihanna|celebrity|Rihanna|Rihanna|1000000000|Forbes|2026-03|#CD6155|Rihanna

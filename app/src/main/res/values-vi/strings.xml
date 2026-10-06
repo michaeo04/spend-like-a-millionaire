@@ -26,10 +26,13 @@
 
     <!-- Item row -->
     <string name="item_buy_max">TỐI ĐA</string>
+    <string name="action_ok">OK</string>
+    <string name="qty_max_hint">Bạn mua được tối đa %1$s</string>
     <string name="item_estimate_hint">Giá trị ước tính</string>
     <string name="cd_decrease">Giảm số lượng %1$s</string>
     <string name="cd_increase">Tăng số lượng %1$s</string>
     <string name="cd_quantity">Số lượng %1$s</string>
+    <string name="cd_edit_quantity">Nhập số lượng</string>
 
     <!-- Cart / receipt -->
     <string name="cart_title">Hóa đơn của bạn</string>
@@ -51,10 +54,16 @@
     <string name="receipt_footer">Spend Like a Millionaire · giải trí, không liên kết với ai</string>
 
     <!-- Onboarding -->
+    <string name="onb_welcome_subtitle">Chọn một tỷ phú hoặc người nổi tiếng, nhận toàn bộ tài sản của họ và xem bạn tiêu được đến đâu.</string>
+    <string name="onb_get_started">Bắt đầu</string>
+    <string name="onb_fun_fact">= %1$s chiếc Big Mac 🍔</string>
     <string name="onb_language_title">Chọn ngôn ngữ</string>
     <string name="onb_currency_title">Chọn đơn vị tiền tệ</string>
     <string name="onb_currency_hint">Giá được quy đổi theo tỷ giá xấp xỉ.</string>
     <string name="onb_person_title">Bạn muốn tiêu tài sản của ai?</string>
+    <string name="onb_group_all">Tất cả</string>
+    <string name="onb_group_billionaires">Tỷ phú</string>
+    <string name="onb_group_celebrities">Người nổi tiếng</string>
     <string name="onb_next">Tiếp</string>
     <string name="onb_back">Quay lại</string>
     <string name="onb_finish">Bắt đầu tiêu tiền</string>
@@ -68,6 +77,10 @@
     <string name="settings_about">Giới thiệu</string>
     <string name="settings_disclaimer">Spend Like a Millionaire là ứng dụng giải trí, mang tính châm biếm. Ứng dụng không liên kết, không được bảo trợ hay xác nhận bởi bất kỳ cá nhân, công ty, đội bóng hay nhóm nhạc nào được nhắc đến. Tài sản và giá cả chỉ là ước tính từ nguồn công khai.</string>
     <string name="settings_privacy">Chính sách quyền riêng tư</string>
+    <string name="settings_credits">Ghi công hình ảnh</string>
+    <string name="credits_title">Ghi công hình ảnh</string>
+    <string name="credits_intro">Ảnh sản phẩm và chân dung lấy từ Wikimedia Commons theo các giấy phép mở (CC0, phạm vi công cộng, CC BY, CC BY-SA). Tên, thương hiệu và hình ảnh thuộc về chủ sở hữu, chỉ dùng để nhận diện trong ứng dụng giải trí này. Ảnh đã được cắt vuông và đổi kích thước; ảnh giữ nguyên giấy phép gốc (ảnh CC BY-SA vẫn là CC BY-SA). Chạm vào từng mục để mở trang nguồn.</string>
+    <string name="credits_photo_by">Ảnh: %1$s · %2$s</string>
     <string name="settings_version">Phiên bản %1$s</string>
     <string name="switch_person_title">Đổi người?</string>
     <string name="switch_person_body">Giỏ hàng của bạn (%1$s) lớn hơn tài sản của %2$s nên sẽ bị xóa.</string>

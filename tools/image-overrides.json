@@ -1,0 +1,326 @@
+{
+ "soda": {
+  "skip": true
+ },
+ "banh_mi": {
+  "query": "bánh mì Vietnamese sandwich baguette"
+ },
+ "milk": {
+  "skip": true
+ },
+ "hot_dog": {
+  "query": "hot dog with mustard bun"
+ },
+ "popcorn": {
+  "skip": true
+ },
+ "salad": {
+  "query": "green salad bowl vegetables"
+ },
+ "chocolate_box": {
+  "skip": true
+ },
+ "sushi_dinner": {
+  "query": "sushi nigiri platter"
+ },
+ "private_chef_year": {
+  "skip": true
+ },
+ "bakery": {
+  "query": "bakery bread display shop"
+ },
+ "restaurant": {
+  "query": "restaurant dining room interior"
+ },
+ "vineyard": {
+  "query": "vineyard rows grapevines Napa"
+ },
+ "cafe_chain": {
+  "query": "coffee shop interior cafe"
+ },
+ "book": {
+  "skip": true
+ },
+ "phone_case": {
+  "skip": true
+ },
+ "socks": {
+  "skip": true
+ },
+ "tshirt": {
+  "skip": true
+ },
+ "scarf": {
+  "skip": true
+ },
+ "backpack": {
+  "skip": true
+ },
+ "sunglasses": {
+  "skip": true
+ },
+ "gold_ring": {
+  "query": "gold ring jewelry"
+ },
+ "wedding_dress": {
+  "skip": true
+ },
+ "cashmere_coat": {
+  "query": "wool coat mannequin"
+ },
+ "pearl_necklace": {
+  "query": "pearl necklace jewellery"
+ },
+ "collector_watch": {
+  "query": "Patek Philippe wristwatch"
+ },
+ "pink_diamond": {
+  "query": "pink diamond gemstone"
+ },
+ "power_bank": {
+  "query": "portable charger power bank"
+ },
+ "monitor": {
+  "query": "computer monitor desk"
+ },
+ "console": {
+  "skip": true
+ },
+ "tablet": {
+  "skip": true
+ },
+ "mobile_app": {
+  "query": "smartphone apps home screen"
+ },
+ "startup_seed": {
+  "skip": true
+ },
+ "satellite": {
+  "skip": true
+ },
+ "ai_data_center": {
+  "skip": true
+ },
+ "satellite_constellation": {
+  "skip": true
+ },
+ "chip_fab": {
+  "skip": true
+ },
+ "memory_card": {
+  "query": "SD memory card"
+ },
+ "skateboard": {
+  "skip": true
+ },
+ "bicycle": {
+  "skip": true
+ },
+ "used_car": {
+  "query": "Toyota Corolla sedan"
+ },
+ "hot_air_balloon": {
+  "query": "hot air balloon sky"
+ },
+ "airline": {
+  "query": "regional jet airliner airport"
+ },
+ "lamp": {
+  "skip": true
+ },
+ "mattress": {
+  "skip": true
+ },
+ "garden": {
+  "query": "flower garden landscaped"
+ },
+ "helmet": {
+  "skip": true
+ },
+ "apartment": {
+  "query": "apartment living room interior"
+ },
+ "house": {
+  "query": "suburban house garden lawn"
+ },
+ "ski_chalet": {
+  "skip": true
+ },
+ "apartment_building": {
+  "query": "apartment building facade"
+ },
+ "wedding_catering": {
+  "skip": true
+ },
+ "headphones": {
+  "query": "over-ear headphones"
+ },
+ "ranch": {
+  "skip": true
+ },
+ "skyscraper": {
+  "query": "skyscraper Shanghai Tower"
+ },
+ "shopping_mall": {
+  "query": "shopping mall interior atrium"
+ },
+ "theme_park_resort": {
+  "query": "theme park roller coaster resort"
+ },
+ "pillow": {
+  "query": "white pillow bed"
+ },
+ "weekend_trip": {
+  "skip": true
+ },
+ "japan_trip": {
+  "query": "Mount Fuji Chureito Pagoda"
+ },
+ "ski_trip": {
+  "query": "ski slope snow mountain ski lift"
+ },
+ "honeymoon": {
+  "query": "Bora Bora overwater bungalows"
+ },
+ "hotel_suite_year": {
+  "skip": true
+ },
+ "orbital_stay": {
+  "query": "International Space Station in orbit 2018"
+ },
+ "comic": {
+  "skip": true
+ },
+ "bowling": {
+  "query": "bowling pins ball lane"
+ },
+ "yoga_class": {
+  "skip": true
+ },
+ "streaming_year": {
+  "skip": true
+ },
+ "guitar": {
+  "query": "Fender Stratocaster electric guitar"
+ },
+ "birthday_party": {
+  "query": "birthday party balloons cake"
+ },
+ "home_studio": {
+  "query": "home recording studio microphone"
+ },
+ "golf_membership": {
+  "query": "golf course green flagstick"
+ },
+ "indie_game": {
+  "skip": true
+ },
+ "music_video": {
+  "query": "video camera film set"
+ },
+ "theatre": {
+  "query": "theatre auditorium red seats stage"
+ },
+ "golf_course": {
+  "query": "golf course fairway green"
+ },
+ "tv_series": {
+  "query": "television studio camera"
+ },
+ "blockbuster": {
+  "skip": true
+ },
+ "kite": {
+  "skip": true
+ },
+ "football": {
+  "query": "football ball on grass"
+ },
+ "basketball": {
+  "query": "basketball ball"
+ },
+ "tennis_racket": {
+  "skip": true
+ },
+ "season_ticket": {
+  "query": "football stadium exterior"
+ },
+ "stadium_box": {
+  "query": "stadium skybox suite"
+ },
+ "kpop_tour": {
+  "skip": true
+ },
+ "esports_org": {
+  "query": "esports tournament arena"
+ },
+ "wembley_class": {
+  "skip": true
+ },
+ "kpop_agency": {
+  "query": "music studio mixing console"
+ },
+ "man_united": {
+  "skip": true
+ },
+ "world_cup_host": {
+  "skip": true
+ },
+ "schools_1000": {
+  "query": "school building classroom"
+ },
+ "feed_a_city": {
+  "skip": true
+ },
+ "canal_expansion": {
+  "query": "Panama Canal locks ship"
+ },
+ "ai_lab_year": {
+  "query": "supercomputer server racks"
+ },
+ "vaccinate_billion": {
+  "query": "vaccine vial syringe"
+ },
+ "end_hunger_year": {
+  "skip": true
+ },
+ "social_network": {
+  "query": "smartphone social media apps"
+ },
+ "space_station": {
+  "skip": true
+ },
+ "moon_program": {
+  "query": "Saturn V rocket"
+ },
+ "new_city": {
+  "query": "futuristic city skyline"
+ },
+ "transfer_record": {
+  "skip": true
+ },
+ "p_ronaldo": {
+  "query": "Cristiano Ronaldo Portugal 2018 FIFA World Cup"
+ },
+ "p_messi": {
+  "file": "File:Lionel-Messi-Argentina-2022-FIFA-World-Cup (cropped-upscale).jpg"
+ },
+ "p_jayz": {
+  "file": "File:Jay-Z-02-mika.jpg"
+ },
+ "p_cameron": {
+  "query": "James Cameron filmmaker"
+ },
+ "p_schwarzenegger": {
+  "query": "Arnold Schwarzenegger 2016"
+ },
+ "p_ortega": {
+  "skip": true
+ },
+ "p_vuong": {
+  "file": "File:Phamnhatvuong2024.jpg"
+ },
+ "p_thao": {
+  "skip": true
+ }
+}

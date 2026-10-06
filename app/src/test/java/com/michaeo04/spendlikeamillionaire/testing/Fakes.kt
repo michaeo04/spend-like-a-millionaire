@@ -9,6 +9,7 @@ import com.michaeo04.spendlikeamillionaire.domain.Category
 import com.michaeo04.spendlikeamillionaire.domain.Item
 import com.michaeo04.spendlikeamillionaire.domain.LocalizedText
 import com.michaeo04.spendlikeamillionaire.domain.Person
+import com.michaeo04.spendlikeamillionaire.domain.PersonGroup
 import com.michaeo04.spendlikeamillionaire.domain.Settings
 import com.michaeo04.spendlikeamillionaire.domain.SettingsStore
 import kotlinx.coroutines.flow.Flow
@@ -23,8 +24,12 @@ fun testItem(
     estimate: Boolean = false,
 ) = Item(id, category, priceCents, LocalizedText(en, vi), "x", estimate)
 
-fun testPerson(id: String = "p1", netWorthUsd: Long = 1_000, en: String = id) =
-    Person(id, LocalizedText(en, en), netWorthUsd, "Test", "2026-09", "#5B8DEF")
+fun testPerson(
+    id: String = "p1",
+    netWorthUsd: Long = 1_000,
+    en: String = id,
+    group: PersonGroup = PersonGroup.BILLIONAIRE,
+) = Person(id, LocalizedText(en, en), netWorthUsd, "Test", "2026-09", "#5B8DEF", group)
 
 class FakeCatalog(private val items: List<Item>) : CatalogRepository {
     override suspend fun items() = items
