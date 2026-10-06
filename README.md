@@ -92,6 +92,7 @@ bundled value is used. Fetched values apply from the next launch.
 
 ## Docs
 
+- **Project status and launch checklist: `docs/PROJECT_STATUS.md`** (start here when returning)
 - Release: `docs/release-checklist.md`, `docs/store-listing.md`, `docs/privacy-policy.md`
 
 ## License
