@@ -3,7 +3,9 @@ package com.michaeo04.spendlikeamillionaire
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
 import com.michaeo04.spendlikeamillionaire.data.AssetCatalogRepository
+import com.michaeo04.spendlikeamillionaire.data.AssetCreditsRepository
 import com.michaeo04.spendlikeamillionaire.data.AssetFxRepository
+import com.michaeo04.spendlikeamillionaire.data.CreditsRepository
 import com.michaeo04.spendlikeamillionaire.data.AssetPeopleRepository
 import com.michaeo04.spendlikeamillionaire.data.CatalogRepository
 import com.michaeo04.spendlikeamillionaire.data.DataStoreCartStore
@@ -30,6 +32,7 @@ class AppContainer(context: Context) {
     val catalog: CatalogRepository = AssetCatalogRepository(app)
     val people: PeopleRepository = OverlayPeopleRepository(AssetPeopleRepository(app), netWorthOverrides)
     val fx: FxRepository = AssetFxRepository(app)
+    val credits: CreditsRepository = AssetCreditsRepository(app)
     val settingsStore: SettingsStore = DataStoreSettingsStore(app.appDataStore)
     val cartStore: CartStore = DataStoreCartStore(app.appDataStore)
     val ads: AdsGateway = NoOpAdsGateway()

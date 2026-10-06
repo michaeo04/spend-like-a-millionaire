@@ -1,324 +1,326 @@
-# id|category|price_usd|name_en|name_vi|icon|flag(e = named valuation / rough estimate)
-# Prices are rounded public estimates in USD. Edit this file, then run: python tools/build_catalog.py
+# id|category|price_usd|name_en|name_vi|icon|flag|image_query
+#   flag: e = named valuation / rough estimate (only sports_music and mega)
+#   image_query: optional Wikimedia Commons search text (defaults to name_en without parentheses)
+# Prices are rounded public estimates in USD. Edit, then run: python tools/build_catalog.py
+# Brand names appear only as plain product names (nominative use); no logos are bundled.
 # ---------------- food ----------------
-candy_bar|food|1.5|Candy bar|Thanh kẹo|🍫
-chewing_gum|food|2|Pack of gum|Gói kẹo cao su|🍬
-water_bottle|food|1.5|Bottle of water|Chai nước|💧
-soda|food|2|Soda|Lon nước ngọt|🥤
-ice_cream|food|3|Ice cream cone|Cây kem|🍦
-donut|food|2.5|Donut|Bánh donut|🍩
-bread_loaf|food|3|Loaf of bread|Ổ bánh mì gối|🍞
-banh_mi|food|2|Banh mi sandwich|Ổ bánh mì thịt|🥖
-croissant|food|3.5|Croissant|Bánh sừng bò|🥐
-banana_bunch|food|2|Bunch of bananas|Nải chuối|🍌
-milk|food|4|Carton of milk|Hộp sữa|🥛
-egg_carton|food|5|Dozen eggs|Vỉ trứng|🥚
-apple_bag|food|5|Bag of apples|Túi táo|🍎
-coffee|food|4.5|Coffee|Ly cà phê|☕
-pho|food|4|Bowl of pho|Tô phở|🍲
-fries|food|3.5|Fries|Khoai tây chiên|🍟
-taco|food|3.5|Taco|Bánh taco|🌮
-hot_dog|food|4|Hot dog|Bánh mì xúc xích|🌭
-bubble_tea|food|5.5|Bubble tea|Trà sữa trân châu|🧋
-smoothie|food|6|Smoothie|Sinh tố|🥤
-burger|food|5.99|Burger|Bánh burger|🍔
-popcorn|food|7|Popcorn|Bắp rang|🍿
-sandwich|food|7|Sandwich|Bánh sandwich|🥪
-dumplings|food|8|Dumplings|Bánh bao há cảo|🥟
-salad|food|9|Salad|Đĩa salad|🥗
-ramen|food|12|Bowl of ramen|Tô mì ramen|🍜
-rice_bag|food|15|Bag of rice|Bao gạo|🍚
-pizza|food|18|Large pizza|Pizza cỡ lớn|🍕
-pasta_dinner|food|18|Pasta dinner|Bữa mì Ý|🍝
-chocolate_box|food|25|Box of chocolates|Hộp sô-cô-la|🍫
-birthday_cake|food|45|Birthday cake|Bánh sinh nhật|🎂
-champagne|food|60|Bottle of champagne|Chai sâm panh|🍾
-steak_dinner|food|65|Steak dinner|Bữa bít tết|🥩
-lobster|food|70|Lobster dinner|Bữa tôm hùm|🦞
-sushi_dinner|food|90|Sushi dinner for two|Bữa sushi cho hai người|🍣
-family_feast|food|120|Family feast|Bữa tiệc gia đình|🍗
-wagyu|food|250|Wagyu steak|Bít tết bò wagyu|🥩
-fine_wine|food|300|Fine wine bottle|Chai rượu vang hảo hạng|🍷
-caviar_tin|food|450|Tin of caviar|Hộp trứng cá muối|🫙
-fine_dining|food|500|Fine-dining tasting menu|Bữa tối nhà hàng cao cấp|🍽️
-truffle|food|1500|White truffle|Nấm truffle trắng|🍄
-groceries_year|food|6000|A year of groceries|Tiền thực phẩm một năm|🛒
-rare_whisky|food|10000|Rare whisky bottle|Chai whisky quý hiếm|🥃
-wedding_catering|food|25000|Wedding catering|Tiệc cưới trọn gói|🥂
-food_truck|food|90000|Food truck|Xe đồ ăn lưu động|🚚
-private_chef_year|food|150000|Private chef for a year|Đầu bếp riêng một năm|👨‍🍳
-bakery|food|250000|Neighborhood bakery|Tiệm bánh nhỏ|🥐
-restaurant|food|1500000|Fully equipped restaurant|Nhà hàng đầy đủ trang thiết bị|🍴
-vineyard|food|8000000|Small vineyard|Vườn nho nhỏ|🍇
-cafe_chain|food|40000000|Chain of 100 cafés|Chuỗi 100 quán cà phê|☕
+candy_bar|food|1.8|Snickers bar|Thanh kẹo Snickers|🍫||Snickers chocolate bar
+chewing_gum|food|2.5|Wrigley's Extra gum pack|Gói kẹo cao su Extra|🍬||chewing gum pack
+water_bottle|food|2.5|Evian water bottle|Chai nước Evian|💧||Evian water bottle
+soda|food|1.8|Coca-Cola can|Lon Coca-Cola|🥤||Coca-Cola can
+ice_cream|food|3|Soft-serve ice cream cone|Cây kem ốc quế|🍦||ice cream cone
+donut|food|2.5|Krispy Kreme glazed donut|Bánh Krispy Kreme|🍩||Krispy Kreme doughnut
+bread_loaf|food|6|Sourdough loaf|Ổ bánh mì chua|🍞||sourdough bread loaf
+banh_mi|food|2|Bánh mì thịt (Saigon street stall)|Bánh mì thịt vỉa hè Sài Gòn|🥖||banh mi sandwich
+croissant|food|3.5|Butter croissant from a Paris bakery|Bánh sừng bò bơ kiểu Paris|🥐||croissant
+banana_bunch|food|2|Bunch of bananas|Nải chuối|🍌||bananas bunch
+milk|food|4|Carton of whole milk|Hộp sữa tươi|🥛||milk carton
+egg_carton|food|5|Dozen free-range eggs|Vỉ 12 trứng gà thả vườn|🥚||eggs carton
+apple_bag|food|5|Bag of Gala apples|Túi táo Gala|🍎||Gala apples
+coffee|food|5.25|Starbucks Caffè Latte (grande)|Starbucks Caffè Latte (cỡ vừa)|☕||Starbucks coffee cup
+pho|food|4|Bowl of phở bò|Tô phở bò|🍲||pho bowl
+fries|food|4|McDonald's large fries|Khoai tây chiên cỡ lớn McDonald's|🍟||McDonald's french fries
+taco|food|3.5|Street taco al pastor|Bánh taco al pastor|🌮||taco al pastor
+hot_dog|food|5|Nathan's Famous hot dog|Hot dog Nathan's Famous|🌭||hot dog
+bubble_tea|food|5.5|Gong cha milk tea with pearls|Trà sữa trân châu Gong cha|🧋||bubble tea
+smoothie|food|6.5|Jamba fruit smoothie|Sinh tố trái cây Jamba|🥤||fruit smoothie
+burger|food|5.99|McDonald's Big Mac|Big Mac của McDonald's|🍔||Big Mac
+popcorn|food|7|Cinema popcorn bucket|Xô bắp rang ở rạp|🍿||popcorn
+sandwich|food|9|Subway footlong sandwich|Bánh mì Subway 30 cm|🥪||Subway sandwich
+dumplings|food|12|Din Tai Fung xiaolongbao (10 pcs)|Xiao long bao Din Tai Fung (10 cái)|🥟||xiaolongbao
+salad|food|14|Sweetgreen salad bowl|Tô salad Sweetgreen|🥗||salad bowl
+ramen|food|14|Ichiran tonkotsu ramen|Mì ramen tonkotsu Ichiran|🍜||tonkotsu ramen
+rice_bag|food|15|5 kg bag of jasmine rice|Bao gạo thơm 5 kg|🍚||jasmine rice
+pizza|food|18|Domino's large pepperoni pizza|Pizza pepperoni cỡ lớn Domino's|🍕||pepperoni pizza
+pasta_dinner|food|22|Spaghetti carbonara dinner|Bữa mì Ý carbonara|🍝||spaghetti carbonara
+chocolate_box|food|25|Godiva gift box of chocolates|Hộp quà sô-cô-la Godiva|🍫||box of chocolates
+birthday_cake|food|45|Custom birthday cake|Bánh sinh nhật đặt riêng|🎂||birthday cake
+champagne|food|60|Moët & Chandon Impérial|Champagne Moët & Chandon Impérial|🍾||Moët & Chandon champagne bottle
+steak_dinner|food|65|Prime ribeye steak dinner|Bữa bít tết ribeye thượng hạng|🥩||ribeye steak
+lobster|food|70|Maine lobster dinner|Bữa tôm hùm Maine|🦞||lobster dinner
+sushi_dinner|food|90|Omakase sushi dinner for two|Bữa sushi omakase cho hai người|🍣||omakase sushi
+family_feast|food|120|Roast turkey feast for the family|Bữa tiệc gà tây nướng cho cả nhà|🍗||roast turkey dinner
+wagyu|food|250|A5 Japanese wagyu steak|Bít tết bò wagyu A5 Nhật Bản|🥩||wagyu beef
+fine_wine|food|300|Bordeaux Grand Cru bottle|Chai vang Bordeaux Grand Cru|🍷||Bordeaux wine bottle
+caviar_tin|food|500|Petrossian caviar tin (125 g)|Hộp trứng cá muối Petrossian (125 g)|🫙||caviar tin
+fine_dining|food|500|3-Michelin-star tasting menu|Thực đơn nếm thử nhà hàng 3 sao Michelin|🍽️||tasting menu plated dish
+truffle|food|1500|White Alba truffle (100 g)|Nấm truffle trắng Alba (100 g)|🍄||white truffle
+groceries_year|food|12000|A year of groceries for a family of four|Tiền thực phẩm một năm cho gia đình 4 người|🛒||grocery shopping cart
+rare_whisky|food|8000|Macallan 30-year-old whisky|Rượu whisky Macallan 30 năm|🥃||Macallan whisky bottle
+wedding_catering|food|25000|Catering for a 150-guest wedding|Tiệc cưới 150 khách|🥂||wedding reception catering buffet
+food_truck|food|90000|Fully equipped food truck|Xe đồ ăn lưu động đầy đủ trang bị|🚚||food truck
+private_chef_year|food|150000|Private chef for a year|Đầu bếp riêng một năm|👨‍🍳||chef cooking kitchen
+bakery|food|250000|Neighborhood bakery|Tiệm bánh nhỏ|🥐||bakery shop
+restaurant|food|1500000|Fully equipped restaurant|Nhà hàng đầy đủ trang thiết bị|🍴||restaurant interior
+vineyard|food|8000000|20-acre Napa Valley vineyard|Vườn nho 20 mẫu ở Napa Valley|🍇||Napa Valley vineyard
+cafe_chain|food|40000000|Chain of 100 coffee shops|Chuỗi 100 quán cà phê|☕||coffee shop
+tea_box|food|6|Twinings tea box|Hộp trà Twinings|🍵||Twinings tea box
+honey_jar|food|9|Jar of Manuka honey|Hũ mật ong Manuka|🍯||honey jar
+cheese_wheel|food|40|Wheel of Camembert|Bánh phô mai Camembert|🧀||Camembert cheese
 # ---------------- shopping ----------------
-toothbrush|shopping|4|Toothbrush|Bàn chải đánh răng|🪥
-pen|shopping|3|Pen|Cây bút|🖊️
-notebook|shopping|5|Notebook|Cuốn sổ|📓
-book|shopping|15|Paperback book|Cuốn sách|📚
-umbrella|shopping|20|Umbrella|Cây dù|☂️
-phone_case|shopping|15|Phone case|Ốp điện thoại|📱
-socks|shopping|10|Pair of socks|Đôi tất|🧦
-teddy_bear|shopping|25|Teddy bear|Gấu bông|🧸
-hat|shopping|25|Hat|Cái mũ|🧢
-tshirt|shopping|20|T-shirt|Áo thun|👕
-flowers|shopping|35|Bouquet of flowers|Bó hoa|💐
-scarf|shopping|40|Scarf|Khăn quàng|🧣
-jeans|shopping|60|Jeans|Quần jeans|👖
-backpack|shopping|90|Backpack|Ba lô|🎒
-sneakers|shopping|120|Sneakers|Đôi giày thể thao|👟
-perfume|shopping|130|Perfume|Nước hoa|🧴
-sunglasses|shopping|150|Sunglasses|Kính râm|🕶️
-gold_ring|shopping|800|Gold ring|Nhẫn vàng|💍
-suit|shopping|900|Tailored suit|Bộ vest may đo|👔
-leather_jacket|shopping|1200|Leather jacket|Áo khoác da|🧥
-wedding_dress|shopping|3500|Wedding dress|Váy cưới|👰
-designer_bag|shopping|4500|Designer handbag|Túi xách hàng hiệu|👜
-gold_chain|shopping|6000|Gold chain|Dây chuyền vàng|📿
-cashmere_coat|shopping|8000|Cashmere coat|Áo khoác cashmere|🧥
-diamond_ring|shopping|10000|Diamond ring|Nhẫn kim cương|💍
-pearl_necklace|shopping|15000|Pearl necklace|Chuỗi ngọc trai|📿
-luxury_watch|shopping|25000|Luxury watch|Đồng hồ xa xỉ|⌚
-designer_wardrobe|shopping|50000|Designer wardrobe|Tủ đồ hàng hiệu|👗
-gold_bar|shopping|120000|1 kg gold bar|Thỏi vàng 1 kg|🪙
-grand_piano|shopping|150000|Concert grand piano|Đàn piano concert|🎹
-collector_watch|shopping|150000|Collector's watch|Đồng hồ sưu tầm|⌚
-painting|shopping|250000|Original painting|Bức tranh gốc|🖼️
-sculpture|shopping|3000000|Modern sculpture|Tác phẩm điêu khắc hiện đại|🗿
-wine_cellar|shopping|2000000|Vintage wine cellar|Hầm rượu vang cổ|🍷
-antique_violin|shopping|15000000|Rare antique violin|Cây vĩ cầm cổ quý hiếm|🎻
-trex_skeleton|shopping|44000000|T. rex skeleton|Bộ xương khủng long T. rex|🦖
-pink_diamond|shopping|50000000|Rare pink diamond|Viên kim cương hồng quý hiếm|💎
-old_master|shopping|450000000|Old-master masterpiece|Kiệt tác hội họa cổ điển|🖼️
+toothbrush|shopping|4|Oral-B toothbrush|Bàn chải Oral-B|🪥||toothbrush
+pen|shopping|3|BIC Cristal ballpoint pen|Bút bi BIC Cristal|🖊️||BIC Cristal pen
+notebook|shopping|20|Moleskine classic notebook|Sổ tay Moleskine|📓||Moleskine notebook
+book|shopping|15|Paperback bestseller|Cuốn sách bán chạy|📚||paperback book
+umbrella|shopping|20|Compact folding umbrella|Ô gấp gọn|☂️||folding umbrella
+phone_case|shopping|40|OtterBox phone case|Ốp điện thoại OtterBox|📱||phone case
+socks|shopping|10|Pair of Nike crew socks|Đôi tất Nike|🧦||sports socks
+teddy_bear|shopping|25|Build-A-Bear teddy bear|Gấu bông Build-A-Bear|🧸||teddy bear
+hat|shopping|40|New Era baseball cap|Mũ lưỡi trai New Era|🧢||baseball cap
+tshirt|shopping|20|Uniqlo cotton T-shirt|Áo thun cotton Uniqlo|👕||plain t-shirt
+flowers|shopping|35|Bouquet of roses|Bó hoa hồng|💐||rose bouquet
+scarf|shopping|40|Wool scarf|Khăn len|🧣||wool scarf
+jeans|shopping|60|Levi's 501 jeans|Quần jeans Levi's 501|👖||Levi's jeans
+backpack|shopping|90|The North Face backpack|Ba lô The North Face|🎒||backpack
+sneakers|shopping|115|Nike Air Force 1|Giày Nike Air Force 1|👟||Nike Air Force 1
+perfume|shopping|150|Chanel N°5 (50 ml)|Nước hoa Chanel N°5 (50 ml)|🧴||Chanel No. 5 perfume
+sunglasses|shopping|150|Ray-Ban Wayfarer|Kính Ray-Ban Wayfarer|🕶️||Ray-Ban Wayfarer
+gold_ring|shopping|800|18k gold ring|Nhẫn vàng 18k|💍||gold ring
+suit|shopping|900|Tailored wool suit|Bộ vest len may đo|👔||suit jacket
+leather_jacket|shopping|1200|Schott leather biker jacket|Áo khoác da biker Schott|🧥||leather jacket
+wedding_dress|shopping|3500|Designer wedding dress|Váy cưới thiết kế|👰||wedding dress
+designer_bag|shopping|12000|Hermès Birkin 30 handbag|Túi Hermès Birkin 30|👜||Hermès Birkin bag
+gold_chain|shopping|6000|Cuban link gold chain|Dây chuyền vàng Cuban|📿||gold chain necklace
+cashmere_coat|shopping|8000|Max Mara cashmere coat|Áo khoác cashmere Max Mara|🧥||camel coat
+diamond_ring|shopping|10000|Tiffany 2-carat diamond ring|Nhẫn kim cương 2 carat Tiffany|💍||diamond engagement ring
+pearl_necklace|shopping|15000|Mikimoto pearl necklace|Chuỗi ngọc trai Mikimoto|📿||pearl necklace
+luxury_watch|shopping|14000|Rolex Submariner|Đồng hồ Rolex Submariner|⌚||Rolex Submariner
+designer_wardrobe|shopping|50000|A full designer wardrobe|Tủ đồ hàng hiệu trọn bộ|👗||walk-in closet clothes
+gold_bar|shopping|120000|1 kg gold bar|Thỏi vàng 1 kg|🪙||gold bar
+grand_piano|shopping|200000|Steinway & Sons concert grand piano|Đàn piano Steinway & Sons concert|🎹||Steinway grand piano
+collector_watch|shopping|150000|Patek Philippe Nautilus|Đồng hồ Patek Philippe Nautilus|⌚||Patek Philippe Nautilus
+painting|shopping|250000|Original oil painting from a gallery|Tranh sơn dầu gốc ở phòng tranh|🖼️||oil painting
+sculpture|shopping|3000000|Modern bronze sculpture|Tác phẩm điêu khắc đồng hiện đại|🗿||bronze sculpture
+wine_cellar|shopping|2000000|Vintage wine cellar|Hầm rượu vang cổ|🍷||wine cellar
+antique_violin|shopping|15000000|Stradivarius violin|Cây vĩ cầm Stradivarius|🎻||Stradivarius violin
+trex_skeleton|shopping|44000000|T. rex skeleton ("Apex")|Bộ xương T. rex ("Apex")|🦖||Tyrannosaurus rex skeleton
+pink_diamond|shopping|50000000|Rare pink diamond|Viên kim cương hồng quý hiếm|💎||pink diamond
+old_master|shopping|450000000|Salvator Mundi-class old-master painting|Kiệt tác cổ điển cỡ Salvator Mundi|🖼️||Salvator Mundi painting
+hair_ties|shopping|8|Pack of scrunchies|Gói dây buộc tóc|🎀||scrunchie
+casual_watch|shopping|20|Casio F-91W watch|Đồng hồ Casio F-91W|⌚||Casio F-91W
 # ---------------- tech ----------------
-usb_cable|tech|8|USB cable|Dây cáp USB|🔌
-power_bank|tech|35|Power bank|Pin dự phòng|🔋
-mouse|tech|40|Computer mouse|Chuột máy tính|🖱️
-keyboard|tech|90|Mechanical keyboard|Bàn phím cơ|⌨️
-router|tech|120|Wi-Fi router|Bộ phát Wi-Fi|📶
-earbuds|tech|180|Wireless earbuds|Tai nghe không dây|🎧
-printer|tech|180|Printer|Máy in|🖨️
-speaker|tech|250|Smart speaker|Loa thông minh|🔊
-headphones|tech|350|Studio headphones|Tai nghe chụp tai|🎧
-monitor|tech|400|Monitor|Màn hình máy tính|🖥️
-smartwatch|tech|400|Smartwatch|Đồng hồ thông minh|⌚
-console|tech|500|Game console|Máy chơi game|🎮
-vr_headset|tech|500|VR headset|Kính thực tế ảo|🥽
-tablet|tech|600|Tablet|Máy tính bảng|📲
-robot_vacuum|tech|600|Robot vacuum|Robot hút bụi|🤖
-smartphone|tech|800|Smartphone|Điện thoại thông minh|📱
-electric_scooter|tech|900|Electric scooter|Xe điện scooter|🛴
-printer_3d|tech|1000|3D printer|Máy in 3D|🖨️
-tv|tech|1200|Big-screen TV|Ti vi màn hình lớn|📺
-drone|tech|1200|Camera drone|Flycam|🛸
-laptop|tech|1500|Laptop|Máy tính xách tay|💻
-gpu|tech|2000|Top graphics card|Card đồ họa cao cấp|🎛️
-camera|tech|2500|Pro camera|Máy ảnh chuyên nghiệp|📷
-gaming_pc|tech|3500|Gaming PC|Máy tính chơi game|🖥️
-smart_home|tech|15000|Smart-home system|Hệ thống nhà thông minh|🏠
-solar_panels|tech|18000|Home solar panels|Pin mặt trời cho nhà|☀️
-home_theater|tech|20000|Home theater|Rạp chiếu phim tại nhà|📽️
-humanoid_robot|tech|30000|Humanoid robot|Robot hình người|🤖
-mobile_app|tech|50000|Build a mobile app|Làm một ứng dụng di động|📲
-startup_seed|tech|5000000|Seed a tech startup|Đầu tư cho startup công nghệ|💡
-quantum_computer|tech|15000000|Quantum computer|Máy tính lượng tử|⚛️
-server_rack|tech|3000000|AI server rack|Tủ máy chủ AI|🖥️
-data_center_small|tech|50000000|Small data center|Trung tâm dữ liệu nhỏ|🏢
-satellite|tech|300000000|Communications satellite|Vệ tinh viễn thông|🛰️
-supercomputer|tech|600000000|Exascale supercomputer|Siêu máy tính exascale|🖥️
-ai_data_center|tech|1000000000|Large AI data center|Trung tâm dữ liệu AI cỡ lớn|🏭
-satellite_constellation|tech|10000000000|Satellite constellation|Chòm vệ tinh|🛰️
-chip_fab|tech|20000000000|Chip factory|Nhà máy sản xuất chip|🏭
+usb_cable|tech|8|Anker USB-C cable|Cáp USB-C Anker|🔌||USB-C cable
+power_bank|tech|35|Anker 20,000 mAh power bank|Pin dự phòng Anker 20.000 mAh|🔋||power bank
+mouse|tech|100|Logitech MX Master 3S mouse|Chuột Logitech MX Master 3S|🖱️||Logitech MX Master mouse
+keyboard|tech|100|Keychron mechanical keyboard|Bàn phím cơ Keychron|⌨️||mechanical keyboard
+router|tech|120|TP-Link Wi-Fi 6 router|Bộ phát Wi-Fi 6 TP-Link|📶||Wi-Fi router
+earbuds|tech|249|Apple AirPods Pro|Tai nghe Apple AirPods Pro|🎧||AirPods Pro
+printer|tech|180|HP LaserJet printer|Máy in HP LaserJet|🖨️||HP LaserJet printer
+speaker|tech|250|Sonos Era 100 speaker|Loa Sonos Era 100|🔊||Sonos speaker
+headphones|tech|450|Sony WH-1000XM6 headphones|Tai nghe chống ồn Sony WH-1000XM6|🎧||Sony WH-1000XM5 headphones
+monitor|tech|500|Dell UltraSharp 27" monitor|Màn hình Dell UltraSharp 27"|🖥️||Dell UltraSharp monitor
+smartwatch|tech|429|Apple Watch|Đồng hồ Apple Watch|⌚||Apple Watch
+console|tech|500|Sony PlayStation 5|Máy chơi game PlayStation 5|🎮||PlayStation 5 console
+vr_headset|tech|500|Meta Quest 3|Kính VR Meta Quest 3|🥽||Meta Quest 3
+tablet|tech|600|Apple iPad Air|Máy tính bảng iPad Air|📲||iPad Air
+robot_vacuum|tech|600|Roomba robot vacuum|Robot hút bụi Roomba|🤖||Roomba robot vacuum
+smartphone|tech|1099|Apple iPhone Pro|Điện thoại iPhone Pro|📱||iPhone Pro
+electric_scooter|tech|900|Segway Ninebot electric scooter|Xe điện scooter Segway Ninebot|🛴||Segway Ninebot scooter
+printer_3d|tech|1200|Bambu Lab 3D printer|Máy in 3D Bambu Lab|🖨️||3D printer
+tv|tech|1800|Samsung 65" OLED TV|Ti vi OLED Samsung 65"|📺||Samsung OLED TV
+drone|tech|1500|DJI Mavic drone|Flycam DJI Mavic|🛸||DJI Mavic drone
+laptop|tech|1999|Apple MacBook Pro 14"|Laptop MacBook Pro 14"|💻||MacBook Pro
+gpu|tech|2000|NVIDIA GeForce RTX 5090|Card đồ họa NVIDIA GeForce RTX 5090|🎛️||NVIDIA GeForce graphics card
+camera|tech|3900|Canon EOS R5 camera|Máy ảnh Canon EOS R5|📷||Canon EOS R5
+gaming_pc|tech|3500|Alienware gaming PC|Máy tính chơi game Alienware|🖥️||Alienware gaming desktop
+smart_home|tech|15000|Full smart-home system|Hệ thống nhà thông minh trọn gói|🏠||smart home control panel
+solar_panels|tech|18000|Home rooftop solar panels|Pin mặt trời mái nhà|☀️||rooftop solar panels
+home_theater|tech|20000|Dolby Atmos home theater|Rạp chiếu phim tại nhà Dolby Atmos|📽️||home theater room
+humanoid_robot|tech|30000|Humanoid robot (Optimus-class)|Robot hình người (cỡ Optimus)|🤖||humanoid robot
+mobile_app|tech|50000|Build a mobile app|Làm một ứng dụng di động|📲||smartphone app development
+startup_seed|tech|5000000|Seed a tech startup|Đầu tư cho startup công nghệ|💡||startup office team
+quantum_computer|tech|15000000|IBM Quantum System One-class computer|Máy tính lượng tử cỡ IBM Quantum System One|⚛️||IBM Quantum System One
+server_rack|tech|3000000|NVIDIA GB200 NVL72 AI rack|Tủ máy chủ AI NVIDIA GB200 NVL72|🖥️||server rack data center
+data_center_small|tech|50000000|Small data center|Trung tâm dữ liệu nhỏ|🏢||data center servers
+satellite|tech|300000000|Communications satellite|Vệ tinh viễn thông|🛰️||communications satellite
+supercomputer|tech|600000000|Frontier exascale supercomputer|Siêu máy tính exascale Frontier|🖥️||Frontier supercomputer
+ai_data_center|tech|1000000000|Hyperscale AI data center|Trung tâm dữ liệu AI cỡ lớn|🏭||hyperscale data center
+satellite_constellation|tech|10000000000|Starlink-class satellite constellation|Chòm vệ tinh cỡ Starlink|🛰️||Starlink satellites
+chip_fab|tech|20000000000|TSMC-class chip factory|Nhà máy sản xuất chip cỡ TSMC|🏭||semiconductor fab cleanroom
+memory_card|tech|20|SanDisk 128 GB memory card|Thẻ nhớ SanDisk 128 GB|💾||SanDisk memory card
+webcam|tech|70|Logitech C920 webcam|Webcam Logitech C920|📹||Logitech webcam
 # ---------------- transport ----------------
-bus_ticket|transport|2|Bus ticket|Vé xe buýt|🚌
-car_wash|transport|15|Car wash|Rửa xe|🚿
-taxi_ride|transport|25|Taxi ride|Chuyến taxi|🚕
-fuel_tank|transport|60|Tank of fuel|Bình xăng đầy|⛽
-train_ticket|transport|60|Train ticket|Vé tàu|🚆
-skateboard|transport|120|Skateboard|Ván trượt|🛹
-bicycle|transport|500|Bicycle|Xe đạp|🚲
-e_bike|transport|1800|Electric bike|Xe đạp điện|🚲
-scooter|transport|3000|Motor scooter|Xe máy|🛵
-used_car|transport|9000|Used car|Xe ô tô cũ|🚗
-motorcycle|transport|15000|Motorcycle|Xe mô tô|🏍️
-family_car|transport|35000|Family car|Xe ô tô gia đình|🚙
-electric_car|transport|45000|Electric car|Xe ô tô điện|🚘
-pickup|transport|55000|Pickup truck|Xe bán tải|🛻
-suv|transport|60000|SUV|Xe SUV|🚙
-sailboat|transport|80000|Sailboat|Thuyền buồm|⛵
-hot_air_balloon|transport|50000|Hot-air balloon|Khinh khí cầu|🎈
-limo|transport|120000|Stretch limousine|Xe limousine|🚘
-supercar|transport|250000|Supercar|Siêu xe|🏎️
-speedboat|transport|250000|Speedboat|Xuồng cao tốc|🚤
-city_bus|transport|400000|City bus|Xe buýt thành phố|🚌
-small_plane|transport|600000|Small plane|Máy bay nhỏ|🛩️
-yacht|transport|3000000|Motor yacht|Du thuyền|🛥️
-helicopter|transport|3000000|Helicopter|Trực thăng|🚁
-personal_sub|transport|3000000|Personal submarine|Tàu ngầm cá nhân|🌊
-hypercar|transport|3000000|Hypercar|Siêu xe hypercar|🏎️
-cargo_ship|transport|60000000|Container ship|Tàu container|🚢
-private_jet|transport|70000000|Private jet|Máy bay riêng|🛩️
-supertanker|transport|120000000|Oil supertanker|Tàu chở dầu siêu lớn|🛢️
-superyacht|transport|300000000|Superyacht|Siêu du thuyền|🛥️
-jumbo_jet|transport|370000000|Jumbo jet airliner|Máy bay chở khách cỡ lớn|✈️
-cruise_ship|transport|1000000000|Cruise ship|Du thuyền cỡ lớn|🛳️
-airline|transport|2500000000|A small airline|Một hãng hàng không nhỏ|✈️
-subway_line|transport|3000000000|Subway line (10 km)|Tuyến tàu điện ngầm 10 km|🚇
-airport|transport|10000000000|Regional airport|Một sân bay khu vực|🛫
-high_speed_rail|transport|20000000000|High-speed rail line|Tuyến đường sắt cao tốc|🚄
+bus_ticket|transport|2|City bus ticket|Vé xe buýt|🚌||city bus
+car_wash|transport|15|Car wash|Rửa xe|🚿||car wash
+taxi_ride|transport|25|Taxi ride across town|Chuyến taxi xuyên thành phố|🚕||taxi cab
+fuel_tank|transport|60|Tank of fuel|Bình xăng đầy|⛽||gas station pump
+train_ticket|transport|60|Intercity train ticket|Vé tàu liên tỉnh|🚆||passenger train
+skateboard|transport|120|Skateboard|Ván trượt|🛹||skateboard
+bicycle|transport|1200|Trek road bike|Xe đạp đua Trek|🚲||Trek road bike
+e_bike|transport|3000|Specialized Turbo e-bike|Xe đạp điện Specialized Turbo|🚲||electric bicycle
+scooter|transport|4500|Vespa Primavera scooter|Xe tay ga Vespa Primavera|🛵||Vespa scooter
+used_car|transport|12000|Used Toyota Corolla|Toyota Corolla cũ|🚗||Toyota Corolla
+motorcycle|transport|15000|Harley-Davidson Sportster|Mô tô Harley-Davidson Sportster|🏍️||Harley-Davidson Sportster
+family_car|transport|32000|Toyota RAV4|Toyota RAV4|🚙||Toyota RAV4
+electric_car|transport|40000|Tesla Model 3|Tesla Model 3|🚘||Tesla Model 3
+pickup|transport|55000|Ford F-150|Ford F-150|🛻||Ford F-150
+suv|transport|65000|BMW X5|BMW X5|🚙||BMW X5
+sailboat|transport|80000|Beneteau sailboat|Thuyền buồm Beneteau|⛵||sailboat
+hot_air_balloon|transport|50000|Hot-air balloon|Khinh khí cầu|🎈||hot air balloon
+limo|transport|120000|Stretch limousine|Xe limousine kéo dài|🚘||stretch limousine
+supercar|transport|250000|Lamborghini Huracán|Siêu xe Lamborghini Huracán|🏎️||Lamborghini Huracán
+speedboat|transport|250000|Sunseeker speedboat|Xuồng cao tốc Sunseeker|🚤||speedboat
+city_bus|transport|400000|Mercedes-Benz city bus|Xe buýt Mercedes-Benz|🚌||Mercedes-Benz city bus
+small_plane|transport|450000|Cessna 172 Skyhawk|Máy bay Cessna 172 Skyhawk|🛩️||Cessna 172
+yacht|transport|3000000|Azimut motor yacht|Du thuyền Azimut|🛥️||motor yacht
+helicopter|transport|6000000|Airbus H135 helicopter|Trực thăng Airbus H135|🚁||Airbus H135 helicopter
+personal_sub|transport|3000000|Personal submarine|Tàu ngầm cá nhân|🌊||personal submarine
+hypercar|transport|3000000|Bugatti Chiron|Siêu xe Bugatti Chiron|🏎️||Bugatti Chiron
+cargo_ship|transport|60000000|Maersk container ship|Tàu container Maersk|🚢||container ship
+private_jet|transport|78000000|Gulfstream G650 private jet|Máy bay riêng Gulfstream G650|🛩️||Gulfstream G650
+supertanker|transport|120000000|Oil supertanker|Tàu chở dầu siêu lớn|🛢️||oil supertanker
+superyacht|transport|300000000|Lürssen superyacht|Siêu du thuyền Lürssen|🛥️||superyacht
+jumbo_jet|transport|400000000|Boeing 747-8 jumbo jet|Máy bay Boeing 747-8|✈️||Boeing 747-8
+cruise_ship|transport|1000000000|Royal Caribbean cruise ship|Du thuyền Royal Caribbean|🛳️||Royal Caribbean cruise ship
+airline|transport|2500000000|A small regional airline|Một hãng hàng không khu vực nhỏ|✈️||regional airline aircraft
+subway_line|transport|3000000000|Subway line (10 km)|Tuyến tàu điện ngầm 10 km|🚇||subway train station
+airport|transport|10000000000|Regional airport|Một sân bay khu vực|🛫||airport terminal
+high_speed_rail|transport|20000000000|High-speed rail line|Tuyến đường sắt cao tốc|🚄||Shinkansen high-speed train
+helmet|transport|60|Bike helmet|Mũ bảo hiểm xe đạp|⛑️||bicycle helmet
+tire_set|transport|800|Michelin tire set|Bộ lốp Michelin|🛞||Michelin tires
 # ---------------- home ----------------
-lamp|home|60|Lamp|Đèn bàn|💡
-mattress|home|800|Mattress|Nệm|🛏️
-washing_machine|home|700|Washing machine|Máy giặt|🧺
-sofa|home|1200|Sofa|Ghế sofa|🛋️
-rent_month|home|1500|Month of rent|Tiền thuê nhà một tháng|🏠
-fridge|home|1400|Fridge|Tủ lạnh|🧊
-paint_house|home|8000|Repaint a house|Sơn lại cả căn nhà|🎨
-kitchen|home|35000|Designer kitchen|Bếp thiết kế riêng|🍳
-garden|home|50000|Dream garden|Khu vườn mơ ước|🌷
-tiny_house|home|60000|Tiny house|Nhà nhỏ|🏡
-swimming_pool|home|70000|Backyard pool|Hồ bơi sân vườn|🏊
-apartment|home|250000|City apartment|Căn hộ thành phố|🏢
-house|home|400000|Family house|Nhà phố|🏠
-beach_villa|home|3000000|Beach villa|Biệt thự bãi biển|🏖️
-penthouse|home|8000000|Penthouse|Căn hộ penthouse|🌆
-ski_chalet|home|12000000|Alpine ski chalet|Biệt thự trượt tuyết|🏔️
-apartment_building|home|20000000|Apartment building|Tòa nhà căn hộ|🏬
-private_island|home|20000000|Private island|Hòn đảo riêng|🏝️
-castle|home|30000000|Castle|Lâu đài|🏯
-mansion|home|45000000|Beverly-style mansion|Dinh thự siêu sang|🏰
-ranch|home|100000000|Huge ranch|Trang trại khổng lồ|🐎
-solar_farm|home|100000000|Solar farm|Trang trại điện mặt trời|☀️
-hotel|home|150000000|Luxury hotel|Khách sạn sang trọng|🏨
-office_tower|home|300000000|Office tower|Tòa nhà văn phòng|🏢
-city_park|home|500000000|City park|Công viên thành phố|🌳
-shopping_mall|home|800000000|Shopping mall|Trung tâm thương mại|🏬
-skyscraper|home|1200000000|Skyscraper|Tòa nhà chọc trời|🏙️
-wind_farm|home|1500000000|Offshore wind farm|Trang trại điện gió ngoài khơi|🌬️
-neighborhood|home|2000000000|A neighborhood of 1,000 homes|Cả khu phố 1.000 căn nhà|🏘️
-theme_park_resort|home|3000000000|Theme-park resort|Khu nghỉ dưỡng công viên giải trí|🎡
+lamp|home|60|IKEA desk lamp|Đèn bàn IKEA|💡||desk lamp
+mattress|home|2500|Tempur-Pedic mattress|Nệm Tempur-Pedic|🛏️||mattress
+washing_machine|home|700|LG front-load washing machine|Máy giặt cửa trước LG|🧺||washing machine
+sofa|home|900|IKEA Kivik sofa|Ghế sofa IKEA Kivik|🛋️||sofa living room
+rent_month|home|1500|A month of rent in a big city|Tiền thuê nhà một tháng ở thành phố lớn|🏠||apartment building city
+fridge|home|2200|Samsung French-door fridge|Tủ lạnh Samsung cửa Pháp|🧊||refrigerator kitchen
+paint_house|home|8000|Repaint a whole house|Sơn lại cả căn nhà|🎨||house painting
+kitchen|home|60000|Bulthaup designer kitchen|Bếp thiết kế Bulthaup|🍳||modern designer kitchen
+garden|home|50000|Dream garden|Khu vườn mơ ước|🌷||landscaped garden
+tiny_house|home|60000|Tiny house|Nhà nhỏ|🏡||tiny house
+swimming_pool|home|70000|Backyard swimming pool|Hồ bơi sân vườn|🏊||backyard swimming pool
+apartment|home|250000|City apartment (2-bed)|Căn hộ thành phố 2 phòng ngủ|🏢||apartment interior
+house|home|400000|Family house in the suburbs|Nhà gia đình ở ngoại ô|🏠||suburban house
+beach_villa|home|3000000|Beachfront villa|Biệt thự ven biển|🏖️||beachfront villa
+penthouse|home|8000000|Manhattan penthouse|Căn hộ penthouse ở Manhattan|🌆||penthouse apartment
+ski_chalet|home|12000000|Swiss Alps ski chalet|Biệt thự trượt tuyết ở Alps Thụy Sĩ|🏔️||ski chalet Alps
+apartment_building|home|20000000|Apartment building|Tòa nhà căn hộ|🏬||apartment building
+private_island|home|20000000|Private island in the Bahamas|Hòn đảo riêng ở Bahamas|🏝️||private island Bahamas
+castle|home|30000000|Scottish castle|Lâu đài ở Scotland|🏯||Scottish castle
+mansion|home|45000000|Beverly Hills mansion|Dinh thự ở Beverly Hills|🏰||Beverly Hills mansion
+ranch|home|100000000|Montana ranch|Trang trại ở Montana|🐎||Montana ranch
+solar_farm|home|100000000|Solar farm|Trang trại điện mặt trời|☀️||solar farm
+hotel|home|150000000|Luxury 5-star hotel|Khách sạn 5 sao sang trọng|🏨||luxury hotel
+office_tower|home|300000000|Office tower|Tòa nhà văn phòng|🏢||office tower
+city_park|home|500000000|A big city park|Một công viên thành phố lớn|🌳||city park
+shopping_mall|home|800000000|Shopping mall|Trung tâm thương mại|🏬||shopping mall
+skyscraper|home|1200000000|Skyscraper|Tòa nhà chọc trời|🏙️||skyscraper
+wind_farm|home|1500000000|Offshore wind farm|Trang trại điện gió ngoài khơi|🌬️||offshore wind farm
+neighborhood|home|2000000000|A neighborhood of 1,000 homes|Cả khu phố 1.000 căn nhà|🏘️||suburban neighborhood aerial
+theme_park_resort|home|3000000000|Theme-park resort|Khu nghỉ dưỡng công viên giải trí|🎡||theme park resort
+pillow|home|30|Memory-foam pillow|Gối memory foam|🛏️||pillow
+plant_pot|home|15|Potted monstera plant|Chậu cây monstera|🪴||monstera plant
 # ---------------- travel ----------------
-flight_domestic|travel|150|Domestic flight|Vé máy bay nội địa|🛫
-hotel_night|travel|120|Hotel night|Một đêm khách sạn|🛎️
-camping|travel|300|Camping trip|Chuyến cắm trại|⛺
-flight_intl|travel|900|Long-haul flight|Vé máy bay đường dài|✈️
-weekend_trip|travel|1000|Weekend trip|Chuyến đi cuối tuần|🧳
-road_trip|travel|1500|Road trip|Chuyến đi xuyên quốc gia|🚗
-paris_weekend|travel|2500|Weekend in Paris|Cuối tuần ở Paris|🗼
-beach_week|travel|3000|Beach holiday week|Kỳ nghỉ biển một tuần|🏖️
-japan_trip|travel|5000|Two weeks in Japan|Hai tuần ở Nhật Bản|🗾
-ski_trip|travel|6000|Ski trip|Chuyến đi trượt tuyết|⛷️
-safari|travel|12000|African safari|Chuyến safari châu Phi|🦁
-honeymoon|travel|20000|Luxury honeymoon|Tuần trăng mật sang trọng|💑
-antarctica|travel|25000|Antarctica expedition|Chuyến thám hiểm Nam Cực|🐧
-first_class_world|travel|30000|First-class round the world|Vòng quanh thế giới hạng nhất|🌍
-jet_charter|travel|40000|Private jet charter|Thuê máy bay riêng|🛩️
-space_ticket|travel|450000|Space tourism ticket|Vé du lịch vũ trụ|🌌
-hotel_suite_year|travel|1000000|Hotel suite for a year|Phòng suite khách sạn một năm|🏨
-world_cruise|travel|80000|World cruise|Du thuyền vòng quanh thế giới|🛳️
-everest|travel|60000|Everest expedition|Chuyến chinh phục Everest|🏔️
-orbital_stay|travel|55000000|Week at a space station|Một tuần ở trạm vũ trụ|🛰️
-moon_flyby|travel|150000000|Trip around the Moon|Chuyến bay quanh Mặt Trăng|🌙
+flight_domestic|travel|150|Domestic economy flight|Vé máy bay nội địa hạng phổ thông|🛫||airplane economy class
+hotel_night|travel|120|A night at a Marriott hotel|Một đêm ở khách sạn Marriott|🛎️||hotel room
+camping|travel|300|Camping trip|Chuyến cắm trại|⛺||camping tent
+flight_intl|travel|900|Long-haul economy flight|Vé máy bay đường dài|✈️||airplane cabin
+weekend_trip|travel|1000|Weekend city break|Chuyến đi cuối tuần|🧳||city break travel
+road_trip|travel|1500|Route 66 road trip|Chuyến phượt Route 66|🚗||Route 66
+paris_weekend|travel|2500|Weekend in Paris|Cuối tuần ở Paris|🗼||Eiffel Tower
+beach_week|travel|6000|A week at a Maldives resort|Một tuần ở resort Maldives|🏖️||Maldives resort overwater villa
+japan_trip|travel|5000|Two weeks in Japan|Hai tuần ở Nhật Bản|🗾||Mount Fuji Japan
+ski_trip|travel|6000|Ski week in Aspen|Tuần trượt tuyết ở Aspen|⛷️||Aspen skiing
+safari|travel|12000|Kenya safari|Chuyến safari Kenya|🦁||Serengeti safari lion
+honeymoon|travel|20000|Honeymoon in Bora Bora|Tuần trăng mật ở Bora Bora|💑||Bora Bora
+antarctica|travel|25000|Antarctica expedition|Chuyến thám hiểm Nam Cực|🐧||Antarctica penguins
+first_class_world|travel|30000|Round the world in first class|Vòng quanh thế giới hạng nhất|🌍||first class airplane seat
+jet_charter|travel|40000|Private jet charter|Thuê máy bay riêng|🛩️||private jet interior
+space_ticket|travel|450000|Virgin Galactic space flight|Chuyến bay vũ trụ Virgin Galactic|🌌||Virgin Galactic SpaceShipTwo
+hotel_suite_year|travel|1000000|Presidential suite for a year|Phòng tổng thống một năm|🏨||presidential suite
+world_cruise|travel|80000|Around-the-world cruise|Du thuyền vòng quanh thế giới|🛳️||cruise ship ocean
+everest|travel|60000|Mount Everest expedition|Chuyến chinh phục Everest|🏔️||Mount Everest
+orbital_stay|travel|55000000|A week on the ISS (Axiom Space)|Một tuần trên trạm ISS (Axiom Space)|🛰️||International Space Station
+moon_flyby|travel|150000000|SpaceX trip around the Moon|Chuyến bay quanh Mặt Trăng của SpaceX|🌙||Moon
+passport_fee|travel|130|Passport application fee|Phí làm hộ chiếu|🛂||passport
 # ---------------- fun ----------------
-comic|fun|6|Comic book|Truyện tranh|📖
-movie_ticket|fun|12|Movie ticket|Vé xem phim|🎟️
-bowling|fun|20|Bowling night|Buổi chơi bowling|🎳
-museum_ticket|fun|20|Museum ticket|Vé bảo tàng|🏛️
-yoga_class|fun|25|Yoga class|Lớp yoga|🧘
-board_game|fun|40|Board game|Trò chơi bàn cờ|🎲
-video_game|fun|60|Video game|Trò chơi điện tử|🕹️
-karaoke|fun|80|Karaoke night|Đêm karaoke|🎤
-theme_park_day|fun|120|Theme-park day|Một ngày công viên giải trí|🎢
-concert_ticket|fun|150|Concert ticket|Vé xem hòa nhạc|🎫
-streaming_year|fun|180|A year of streaming|Gói xem phim một năm|📺
-spa_day|fun|250|Spa day|Ngày thư giãn spa|💆
-gym_year|fun|600|Gym membership for a year|Thẻ phòng tập một năm|🏋️
-guitar|fun|1200|Electric guitar|Đàn guitar điện|🎸
-kitten|fun|1200|Kitten|Chú mèo con|🐱
-puppy|fun|1500|Puppy|Chú chó con|🐶
-vip_festival|fun|1500|VIP festival pass|Vé VIP lễ hội âm nhạc|🎪
-birthday_party|fun|2500|Big birthday party|Tiệc sinh nhật lớn|🎉
-horse|fun|25000|Racehorse|Ngựa đua|🐎
-home_studio|fun|20000|Home recording studio|Phòng thu tại nhà|🎙️
-golf_membership|fun|50000|Golf club membership|Thẻ hội viên sân golf|⛳
-fireworks|fun|100000|Fireworks show|Màn pháo hoa|🎆
-aquarium|fun|200000|Giant aquarium|Bể cá khổng lồ|🐠
-album|fun|500000|Album production|Sản xuất một album|💿
-arcade|fun|500000|Arcade hall|Tiệm game|🕹️
-indie_game|fun|1000000|Indie video game|Một trò chơi độc lập|🎮
-music_video|fun|1000000|Big-budget music video|MV kinh phí lớn|🎞️
-theatre|fun|25000000|Theatre|Nhà hát|🎭
-rocket_launch|fun|67000000|Rocket launch|Một lần phóng tên lửa|🚀
-golf_course|fun|80000000|Golf course|Sân golf|⛳
-tv_series|fun|100000000|Streaming TV series season|Một mùa phim truyền hình|📽️
-tv_ad|fun|7000000|Prime-time TV ad|Quảng cáo truyền hình giờ vàng|📺
-blockbuster|fun|200000000|Blockbuster movie|Bộ phim bom tấn|🎬
-ski_resort|fun|300000000|Ski resort|Khu trượt tuyết|🎿
-amusement_park|fun|1000000000|Amusement park|Công viên giải trí|🎡
-cinema_chain|fun|1500000000|Cinema chain|Chuỗi rạp chiếu phim|🍿
+comic|fun|6|Marvel comic book|Truyện tranh Marvel|📖||Marvel comic book
+movie_ticket|fun|18|IMAX movie ticket|Vé xem phim IMAX|🎟️||IMAX cinema
+bowling|fun|20|Bowling night|Buổi chơi bowling|🎳||bowling alley
+museum_ticket|fun|22|Louvre museum ticket|Vé bảo tàng Louvre|🏛️||Louvre museum
+yoga_class|fun|25|Yoga class|Lớp yoga|🧘||yoga class
+board_game|fun|40|Monopoly board game|Trò chơi cờ tỷ phú Monopoly|🎲||Monopoly board game
+video_game|fun|70|New AAA video game|Một trò chơi AAA mới ra mắt|🕹️||video game controller
+karaoke|fun|80|Karaoke night|Đêm karaoke|🎤||karaoke
+theme_park_day|fun|150|Day at Disneyland|Một ngày ở Disneyland|🎢||Disneyland castle
+concert_ticket|fun|150|Arena concert ticket|Vé xem hòa nhạc ở nhà thi đấu|🎫||arena concert crowd
+streaming_year|fun|276|A year of Netflix Premium|Gói Netflix Premium một năm|📺||television streaming
+spa_day|fun|250|Spa day|Ngày thư giãn spa|💆||spa massage
+gym_year|fun|3500|A year at Equinox gym|Một năm tập gym ở Equinox|🏋️||gym weights
+guitar|fun|1800|Fender Stratocaster|Đàn guitar Fender Stratocaster|🎸||Fender Stratocaster
+kitten|fun|1200|Kitten|Chú mèo con|🐱||kitten
+puppy|fun|1500|Golden retriever puppy|Chú chó golden retriever con|🐶||golden retriever puppy
+vip_festival|fun|1500|Coachella VIP pass|Vé VIP lễ hội Coachella|🎪||music festival crowd
+birthday_party|fun|2500|Big birthday party|Tiệc sinh nhật lớn|🎉||birthday party
+horse|fun|25000|Thoroughbred racehorse|Ngựa đua thuần chủng|🐎||thoroughbred racehorse
+home_studio|fun|20000|Home recording studio|Phòng thu tại nhà|🎙️||recording studio
+golf_membership|fun|50000|Country club golf membership|Thẻ hội viên câu lạc bộ golf|⛳||golf course green
+fireworks|fun|100000|Fireworks show|Màn pháo hoa|🎆||fireworks
+aquarium|fun|200000|Giant home aquarium|Bể cá khổng lồ tại nhà|🐠||large aquarium
+album|fun|500000|Album production|Sản xuất một album|💿||vinyl record
+arcade|fun|500000|Arcade hall|Tiệm game|🕹️||arcade machines
+indie_game|fun|1000000|Indie video game|Một trò chơi độc lập|🎮||game development
+music_video|fun|1000000|Big-budget music video|MV kinh phí lớn|🎞️||film set camera crew
+theatre|fun|25000000|Theatre|Nhà hát|🎭||theatre auditorium
+rocket_launch|fun|67000000|SpaceX Falcon 9 launch|Một lần phóng Falcon 9 của SpaceX|🚀||Falcon 9 launch
+golf_course|fun|80000000|Golf course|Sân golf|⛳||golf course
+tv_series|fun|100000000|Big-budget streaming TV season|Một mùa phim truyền hình kinh phí lớn|📽️||television film production
+tv_ad|fun|7000000|Prime-time TV ad|Quảng cáo truyền hình giờ vàng|📺||television studio
+blockbuster|fun|200000000|Marvel-scale blockbuster movie|Bộ phim bom tấn cỡ Marvel|🎬||film set movie production
+ski_resort|fun|300000000|Ski resort|Khu trượt tuyết|🎿||ski resort
+amusement_park|fun|1000000000|Amusement park|Công viên giải trí|🎡||amusement park roller coaster
+cinema_chain|fun|1500000000|Cinema chain|Chuỗi rạp chiếu phim|🍿||cinema auditorium
+kite|fun|15|Kite|Cánh diều|🪁||kite
+jigsaw|fun|25|Ravensburger jigsaw puzzle|Bộ xếp hình Ravensburger|🧩||jigsaw puzzle
 # ---------------- sports_music ----------------
-football|sports_music|25|Football|Quả bóng đá|⚽
-basketball|sports_music|30|Basketball|Quả bóng rổ|🏀
-match_ticket|sports_music|80|Football match ticket|Vé xem bóng đá|🎟️
-jersey|sports_music|100|Team jersey|Áo đấu|👕
-tennis_racket|sports_music|200|Tennis racket|Vợt tennis|🎾
-season_ticket|sports_music|1500|Season ticket|Vé mùa giải|🎟️
-stadium_box|sports_music|250000|Stadium VIP box for a season|Phòng VIP sân vận động cả mùa|🏟️
-orchestra_year|sports_music|20000000|Symphony orchestra for a year|Dàn nhạc giao hưởng một năm|🎻
-small_club|sports_music|50000000|Lower-league football club|Câu lạc bộ bóng đá hạng dưới|⚽|e
-transfer_record|sports_music|222000000|Record football transfer fee|Phí chuyển nhượng cầu thủ kỷ lục|⚽|e
-kpop_tour|sports_music|250000000|A BTS-sized K-pop world tour|Chuyến lưu diễn thế giới cỡ BTS|🎤|e
-band_catalog|sports_music|500000000|A legendary band's music catalog|Kho nhạc của một ban nhạc huyền thoại|🎼|e
-esports_org|sports_music|400000000|Top esports organization|Một tổ chức eSports hàng đầu|🎮|e
-sports_arena|sports_music|1000000000|Indoor sports arena|Nhà thi đấu trong nhà|🏟️|e
-wembley_class|sports_music|1500000000|Wembley-class national stadium|Sân vận động quốc gia cỡ Wembley|🏟️|e
-kpop_agency|sports_music|2500000000|A K-pop entertainment agency|Một công ty giải trí K-pop|🎤|e
-old_trafford|sports_music|2500000000|Old Trafford-sized stadium (new build)|Sân vận động cỡ Old Trafford (xây mới)|🏟️|e
-f1_team|sports_music|3500000000|Formula 1 team|Một đội đua F1|🏎️|e
-nba_team|sports_music|5000000000|NBA-level basketball team|Một đội bóng rổ cấp NBA|🏀|e
-man_united|sports_music|6500000000|Manchester United (club valuation)|Manchester United (định giá câu lạc bộ)|⚽|e
-real_madrid|sports_music|6750000000|Real Madrid (club valuation)|Real Madrid (định giá câu lạc bộ)|⚽|e
-world_cup_host|sports_music|14000000000|Host a football World Cup|Đăng cai một kỳ World Cup|🏆|e
-olympics_host|sports_music|12000000000|Host an Olympic Games|Đăng cai một kỳ Olympic|🏅|e
-nfl_team|sports_music|13000000000|NFL franchise (Cowboys-level)|Một đội NFL (cỡ Cowboys)|🏈|e
+football|sports_music|30|Adidas match football|Quả bóng đá Adidas|⚽||football ball
+basketball|sports_music|30|Spalding basketball|Quả bóng rổ Spalding|🏀||basketball ball
+match_ticket|sports_music|80|Premier League match ticket|Vé xem Premier League|🎟️||football match stadium
+jersey|sports_music|100|Real Madrid home jersey|Áo đấu sân nhà Real Madrid|👕||football jersey
+tennis_racket|sports_music|200|Wilson tennis racket|Vợt tennis Wilson|🎾||tennis racket
+season_ticket|sports_music|1500|Premier League season ticket|Vé mùa giải Premier League|🎟️||football stadium crowd
+stadium_box|sports_music|250000|Stadium VIP box for a season|Phòng VIP sân vận động cả mùa|🏟️||stadium VIP box
+orchestra_year|sports_music|20000000|Symphony orchestra for a year|Dàn nhạc giao hưởng một năm|🎻||symphony orchestra
+small_club|sports_music|50000000|Lower-league football club|Câu lạc bộ bóng đá hạng dưới|⚽|e|football club stadium
+transfer_record|sports_music|222000000|Record football transfer fee|Phí chuyển nhượng cầu thủ kỷ lục|⚽|e|football transfer
+kpop_tour|sports_music|250000000|A BTS-sized K-pop world tour|Chuyến lưu diễn thế giới cỡ BTS|🎤|e|K-pop concert
+band_catalog|sports_music|500000000|A legendary band's music catalog|Kho nhạc của một ban nhạc huyền thoại|🎼|e|vinyl records collection
+esports_org|sports_music|400000000|Top esports organization|Một tổ chức eSports hàng đầu|🎮|e|esports arena
+sports_arena|sports_music|1000000000|Indoor sports arena|Nhà thi đấu trong nhà|🏟️|e|indoor sports arena
+wembley_class|sports_music|1500000000|Wembley-class national stadium|Sân vận động quốc gia cỡ Wembley|🏟️|e|Wembley Stadium
+kpop_agency|sports_music|2500000000|A K-pop entertainment agency|Một công ty giải trí K-pop|🎤|e|K-pop stage performance
+old_trafford|sports_music|2500000000|Old Trafford-sized stadium (new build)|Sân vận động cỡ Old Trafford (xây mới)|🏟️|e|Old Trafford
+f1_team|sports_music|3500000000|Formula 1 team|Một đội đua F1|🏎️|e|Formula 1 car
+nba_team|sports_music|5000000000|NBA-level basketball team|Một đội bóng rổ cấp NBA|🏀|e|NBA arena basketball game
+man_united|sports_music|6500000000|Manchester United (club valuation)|Manchester United (định giá câu lạc bộ)|⚽|e|Old Trafford stadium
+real_madrid|sports_music|6750000000|Real Madrid (club valuation)|Real Madrid (định giá câu lạc bộ)|⚽|e|Santiago Bernabéu Stadium
+world_cup_host|sports_music|14000000000|Host a football World Cup|Đăng cai một kỳ World Cup|🏆|e|FIFA World Cup trophy
+olympics_host|sports_music|12000000000|Host an Olympic Games|Đăng cai một kỳ Olympic|🏅|e|Olympic Stadium
+nfl_team|sports_music|13000000000|NFL franchise (Cowboys-level)|Một đội NFL (cỡ Cowboys)|🏈|e|AT&T Stadium Dallas
 # ---------------- mega ----------------
-clean_water|mega|30000000|Clean water for a million people|Nước sạch cho một triệu người|💧
-giant_monument|mega|430000000|Giant monument|Tượng đài khổng lồ|🗿|e
-icebreaker|mega|800000000|Polar research icebreaker|Tàu nghiên cứu phá băng cực|🧊
-schools_1000|mega|500000000|Build 1,000 schools|Xây 1.000 trường học|🏫
-plant_trees|mega|1000000000|Plant a billion trees|Trồng một tỷ cây xanh|🌳|e
-gold_mine|mega|1000000000|Gold mine|Mỏ vàng|⛏️
-world_tallest_tower|mega|1500000000|World's tallest tower|Tòa tháp cao nhất thế giới|🗼|e
-suspension_bridge|mega|1500000000|Iconic suspension bridge|Cây cầu treo biểu tượng|🌉|e
-feed_a_city|mega|2000000000|Feed a city for a year|Nuôi sống một thành phố một năm|🍞|e
-canal_expansion|mega|5000000000|Canal expansion|Mở rộng kênh đào|🚢|e
-particle_collider|mega|9000000000|Particle collider|Máy gia tốc hạt|⚛️|e
-nuclear_plant|mega|10000000000|Nuclear power plant|Nhà máy điện hạt nhân|⚛️
-space_telescope|mega|10000000000|Space telescope|Kính viễn vọng không gian|🔭|e
-carmaker|mega|10000000000|Build a car company|Lập một hãng xe|🚗|e
-ai_lab_year|mega|10000000000|Frontier AI lab for a year|Phòng thí nghiệm AI hàng đầu một năm|🤖|e
-undersea_tunnel|mega|21000000000|Undersea tunnel|Đường hầm dưới biển|🚇|e
-nasa_year|mega|25000000000|NASA's yearly budget|Ngân sách một năm của NASA|🚀|e
-giant_dam|mega|30000000000|Giant hydroelectric dam|Đập thủy điện khổng lồ|🌊|e
-vaccinate_billion|mega|20000000000|Vaccinate a billion people|Tiêm vaccine cho một tỷ người|💉|e
-end_hunger_year|mega|40000000000|End world hunger for a year|Chấm dứt nạn đói thế giới một năm|🌾|e
-social_network|mega|44000000000|Buy a major social network|Mua lại một mạng xã hội lớn|📱|e
-mars_mission|mega|100000000000|Crewed Mars mission|Sứ mệnh có người lái lên Sao Hỏa|🔴|e
-space_station|mega|150000000000|Space station|Trạm vũ trụ|🛰️|e
-moon_program|mega|250000000000|Moon landing program|Chương trình đổ bộ Mặt Trăng|🌙|e
-new_city|mega|500000000000|Build a brand-new city|Xây một thành phố hoàn toàn mới|🏙️|e
-# ---------------- extras (cheap everyday items for the low end of the price ladder) ----------------
-hair_ties|shopping|8|Pack of hair ties|Dây buộc tóc|🎀
-casual_watch|shopping|60|Casual watch|Đồng hồ đeo tay bình dân|⌚
-tea_box|food|6|Box of tea|Hộp trà|🍵
-honey_jar|food|9|Jar of honey|Hũ mật ong|🍯
-cheese_wheel|food|40|Wheel of cheese|Bánh phô mai|🧀
-memory_card|tech|20|Memory card|Thẻ nhớ|💾
-webcam|tech|70|Webcam|Webcam|📹
-helmet|transport|60|Helmet|Mũ bảo hiểm|⛑️
-tire_set|transport|600|Set of tires|Bộ lốp xe|🛞
-pillow|home|30|Pillow|Cái gối|🛏️
-plant_pot|home|15|Potted plant|Chậu cây|🪴
-kite|fun|15|Kite|Cánh diều|🪁
-jigsaw|fun|25|Jigsaw puzzle|Bộ xếp hình|🧩
-passport_fee|travel|130|Passport fee|Phí làm hộ chiếu|🛂
+clean_water|mega|30000000|Clean water for a million people|Nước sạch cho một triệu người|💧||water well village
+giant_monument|mega|430000000|Statue of Unity-sized monument|Tượng đài cỡ Statue of Unity|🗿|e|Statue of Unity
+icebreaker|mega|800000000|Polar research icebreaker|Tàu nghiên cứu phá băng cực|🧊||icebreaker ship
+schools_1000|mega|500000000|Build 1,000 schools|Xây 1.000 trường học|🏫||school building children
+plant_trees|mega|1000000000|Plant a billion trees|Trồng một tỷ cây xanh|🌳|e|tree planting seedlings
+gold_mine|mega|1000000000|Gold mine|Mỏ vàng|⛏️||gold mine
+world_tallest_tower|mega|1500000000|Burj Khalifa-class tower|Tòa tháp cỡ Burj Khalifa|🗼|e|Burj Khalifa
+suspension_bridge|mega|1500000000|Golden Gate-class suspension bridge|Cầu treo cỡ Golden Gate|🌉|e|Golden Gate Bridge
+feed_a_city|mega|2000000000|Feed a city for a year|Nuôi sống một thành phố một năm|🍞|e|food distribution
+canal_expansion|mega|5000000000|Panama Canal expansion|Mở rộng kênh đào Panama|🚢|e|Panama Canal
+particle_collider|mega|9000000000|CERN Large Hadron Collider|Máy gia tốc hạt LHC của CERN|⚛️|e|Large Hadron Collider
+nuclear_plant|mega|10000000000|Nuclear power plant|Nhà máy điện hạt nhân|⚛️||nuclear power plant
+space_telescope|mega|10000000000|James Webb Space Telescope|Kính viễn vọng không gian James Webb|🔭|e|James Webb Space Telescope
+carmaker|mega|10000000000|Build a car company (Tesla-class)|Lập một hãng xe (cỡ Tesla)|🚗|e|car factory assembly line
+ai_lab_year|mega|10000000000|Frontier AI lab for a year|Phòng thí nghiệm AI hàng đầu một năm|🤖|e|supercomputer data center
+undersea_tunnel|mega|21000000000|Channel Tunnel-class undersea tunnel|Đường hầm dưới biển cỡ Channel Tunnel|🚇|e|Channel Tunnel
+nasa_year|mega|25000000000|NASA's yearly budget|Ngân sách một năm của NASA|🚀|e|NASA Kennedy Space Center
+giant_dam|mega|30000000000|Three Gorges Dam-class dam|Đập thủy điện cỡ Tam Hiệp|🌊|e|Three Gorges Dam
+vaccinate_billion|mega|20000000000|Vaccinate a billion people|Tiêm vaccine cho một tỷ người|💉|e|vaccination
+end_hunger_year|mega|40000000000|End world hunger for a year|Chấm dứt nạn đói thế giới một năm|🌾|e|food aid distribution
+social_network|mega|44000000000|Buy a major social network (Twitter-scale)|Mua lại một mạng xã hội lớn (cỡ Twitter)|📱|e|social media smartphone
+mars_mission|mega|100000000000|Crewed Mars mission|Sứ mệnh có người lái lên Sao Hỏa|🔴|e|Mars surface
+space_station|mega|150000000000|International Space Station|Trạm vũ trụ quốc tế ISS|🛰️|e|International Space Station
+moon_program|mega|250000000000|Apollo-style Moon landing program|Chương trình đổ bộ Mặt Trăng kiểu Apollo|🌙|e|Apollo 11 Moon landing
+new_city|mega|500000000000|Build a brand-new city (NEOM-scale)|Xây một thành phố hoàn toàn mới (cỡ NEOM)|🏙️|e|futuristic city

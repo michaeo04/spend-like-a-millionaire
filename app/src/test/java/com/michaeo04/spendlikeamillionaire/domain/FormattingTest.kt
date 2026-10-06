@@ -87,6 +87,23 @@ class FormattingTest {
     }
 
     @Test
+    fun compactCountUsesLocalizedUnits() {
+        assertEquals("950", Formatting.compactCount(950, en))
+        assertEquals("1.5K", Formatting.compactCount(1_500, en))
+        assertEquals("654B", Formatting.compactCount(654_000_000_000L, en))
+        assertEquals("1.23M", Formatting.compactCount(1_234_567, en))
+        assertEquals("1,5 nghìn", Formatting.compactCount(1_500, vi))
+        assertEquals("654 tỷ", Formatting.compactCount(654_000_000_000L, vi))
+        assertEquals("9,22 tỷ tỷ", Formatting.compactCount(Long.MAX_VALUE, vi))
+    }
+
+    @Test
+    fun compactCountOfZeroOrNegativeIsZero() {
+        assertEquals("0", Formatting.compactCount(0, en))
+        assertEquals("0", Formatting.compactCount(-5, en))
+    }
+
+    @Test
     fun moneyWithoutRateFallsBackToUsd() {
         assertEquals("$4.50", Formatting.money(450, "VND", null, en))
     }

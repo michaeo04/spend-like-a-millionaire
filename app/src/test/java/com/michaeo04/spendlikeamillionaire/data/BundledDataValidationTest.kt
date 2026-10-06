@@ -53,6 +53,27 @@ class BundledDataValidationTest {
     }
 
     @Test
+    fun everyReferencedImageExistsIsSmallAndHasALicensedCredit() {
+        val items = parseCatalog(asset("catalog.json"))
+        val credits = parseCredits(asset("image_credits.json")).associateBy { it.id }
+        val withImage = items.filter { it.image != null }
+        assertTrue("most items should have a photo, have ${withImage.size}/${items.size}", withImage.size * 10 >= items.size * 8)
+        for (item in withImage) {
+            val file = File("src/main/assets/${item.image}")
+            assertTrue("${item.id}: missing ${item.image}", file.exists())
+            assertTrue("${item.id}: image too large (${file.length()} bytes)", file.length() < 80_000)
+            val credit = credits[item.id]
+            assertTrue("${item.id}: no credit entry", credit != null)
+            assertTrue("${item.id}: author missing", credit!!.author.isNotBlank())
+            assertTrue(
+                "${item.id}: license not allowed: ${credit.license}",
+                Regex("^(CC0|CC BY|CC-BY|Public domain|PD)", RegexOption.IGNORE_CASE).containsMatchIn(credit.license) &&
+                    !Regex("(NC|ND)", RegexOption.IGNORE_CASE).containsMatchIn(credit.license),
+            )
+        }
+    }
+
+    @Test
     fun catalogNamesAreUniquePerLanguage() {
         val items = parseCatalog(asset("catalog.json"))
         for ((label, names) in listOf("en" to items.map { it.name.en }, "vi" to items.map { it.name.vi })) {

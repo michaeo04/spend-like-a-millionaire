@@ -41,6 +41,15 @@ secrets) and run `./gradlew bundleRelease`. Enable Play App Signing in the Play 
 - [ ] Confirm https://michaeo04.github.io/spend-like-a-millionaire/privacy-policy loads.
       (The Settings screen links to this URL.)
 
+## 3b. Brand names and photos (review before publishing)
+
+- [ ] The catalog uses real product/brand names and photos of branded products. Names are plain
+      text and photos are open-licensed with in-app credits, but Play can still flag trademark use.
+- [ ] Do not put brand names in the app title, short description or tags; keep the parody disclaimer.
+- [ ] Store screenshots: prefer screens with generic items (onboarding, cart, a category grid) to avoid
+      showcasing third-party logos. If a reviewer objects, switch an item with `{"skip": true}`
+      in `tools/image-overrides.json` or rename it in `tools/catalog-source.tsv`.
+
 ## 4. Store listing
 
 - [ ] Fill in `docs/store-listing.md` content, upload icon, feature graphic and screenshots.

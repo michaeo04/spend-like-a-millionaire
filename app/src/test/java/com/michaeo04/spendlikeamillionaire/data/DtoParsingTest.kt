@@ -26,6 +26,28 @@ class DtoParsingTest {
     }
 
     @Test
+    fun parsesOptionalImagePath() {
+        val withImage = validItem.replace("\"icon\"", "\"image\":\"images/coffee.webp\",\"icon\"")
+        assertEquals("images/coffee.webp", parseCatalog("[$withImage]").single().image)
+        assertEquals(null, parseCatalog("[$validItem]").single().image)
+        val blank = validItem.replace("\"icon\"", "\"image\":\" \",\"icon\"")
+        assertEquals(null, parseCatalog("[$blank]").single().image)
+    }
+
+    @Test
+    fun parsesImageCreditsAndSkipsBrokenEntries() {
+        val json = """[
+            {"id":"a","title":"A.jpg","author":"Jane","license":"CC BY 4.0","url":"https://x/a"},
+            {"id":"b","title":"B.jpg"},
+            {"id":"","title":"C.jpg","author":"Z","license":"CC0","url":"https://x/c"}
+        ]"""
+        val credits = parseCredits(json)
+        assertEquals(listOf("a"), credits.map { it.id })
+        assertEquals("Jane", credits.single().author)
+        assertTrue(parseCredits("garbage").isEmpty())
+    }
+
+    @Test
     fun unknownCategoryIsSkippedNotFatal() {
         val bad = validItem.replace("\"food\"", "\"nonsense\"").replace("coffee", "bad")
         val items = parseCatalog("[$bad,$validItem]")

@@ -29,6 +29,8 @@ data class Item(
     val name: LocalizedText,
     val icon: String,
     val estimate: Boolean,
+    /** Asset path of the photo (e.g. "images/coffee.webp"); null falls back to the emoji icon. */
+    val image: String? = null,
 )
 
 data class Person(

@@ -2,8 +2,10 @@ package com.michaeo04.spendlikeamillionaire.ui.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.michaeo04.spendlikeamillionaire.data.CatalogRepository
 import com.michaeo04.spendlikeamillionaire.data.FxRepository
 import com.michaeo04.spendlikeamillionaire.data.PeopleRepository
+import com.michaeo04.spendlikeamillionaire.domain.Item
 import com.michaeo04.spendlikeamillionaire.domain.Person
 import com.michaeo04.spendlikeamillionaire.domain.SUPPORTED_LANGUAGES
 import com.michaeo04.spendlikeamillionaire.domain.Settings
@@ -17,7 +19,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-const val ONBOARDING_LAST_STEP = 2
+/** Steps: 0 welcome, 1 language, 2 currency, 3 person. */
+const val ONBOARDING_LAST_STEP = 3
+
+/** Items shown on the welcome screen, in this order (those missing from the catalog are skipped). */
+private val FEATURED_IDS = listOf(
+    "burger", "earbuds", "electric_car", "private_jet", "mansion",
+    "superyacht", "rocket_launch", "old_trafford", "moon_flyby", "space_station",
+)
 
 data class OnboardingUiState(
     val loading: Boolean = true,
@@ -28,11 +37,15 @@ data class OnboardingUiState(
     val people: List<Person> = emptyList(),
     val currencies: List<String> = listOf("USD"),
     val rates: Map<String, Double> = mapOf("USD" to 1.0),
+    val featured: List<Item> = emptyList(),
+    /** Price of a Big Mac in USD cents, used for the "= N Big Macs" fun fact. */
+    val bigMacCents: Long? = null,
 ) {
     val canFinish: Boolean get() = !loading && personId != null && currency in currencies
 }
 
 class OnboardingViewModel(
+    private val catalog: CatalogRepository,
     private val people: PeopleRepository,
     private val fx: FxRepository,
     private val settingsStore: SettingsStore,
@@ -47,9 +60,12 @@ class OnboardingViewModel(
         viewModelScope.launch {
             val rates = fx.rates()
             val currencies = supportedCurrencies(rates)
+            val items = catalog.items().associateBy { it.id }
             _state.update {
                 it.copy(
                     loading = false,
+                    featured = FEATURED_IDS.mapNotNull(items::get),
+                    bigMacCents = items["burger"]?.priceCents,
                     people = people.people(),
                     currencies = currencies,
                     rates = rates,

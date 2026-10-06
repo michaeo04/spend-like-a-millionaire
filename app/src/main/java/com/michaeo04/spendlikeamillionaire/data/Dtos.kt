@@ -25,6 +25,7 @@ internal data class ItemDto(
     val name: NameDto,
     val icon: String,
     val estimate: Boolean = false,
+    val image: String? = null,
 )
 
 @Serializable
@@ -66,7 +67,10 @@ fun parseCatalog(text: String): List<Item> {
     decodeLenient<ItemDto>(text) { dto ->
         val category = Category.fromId(dto.category)
         if (category != null && dto.id.isNotBlank() && dto.priceCents > 0) {
-            out += Item(dto.id, category, dto.priceCents, dto.name.toDomain(), dto.icon, dto.estimate)
+            out += Item(
+                dto.id, category, dto.priceCents, dto.name.toDomain(), dto.icon, dto.estimate,
+                image = dto.image?.takeIf { it.isNotBlank() },
+            )
         }
     }
     return out
@@ -91,4 +95,25 @@ fun parseFx(text: String): Map<String, Double> {
         FxDto()
     }
     return dto.rates.filterValues { it > 0.0 && it.isFinite() } + ("USD" to 1.0)
+}
+
+/** Attribution for one item photo (shown in the in-app credits screen). */
+data class ImageCredit(val id: String, val title: String, val author: String, val license: String, val url: String)
+
+@Serializable
+internal data class ImageCreditDto(
+    val id: String,
+    val title: String,
+    val author: String,
+    val license: String,
+    val url: String,
+)
+
+/** Entries missing a field or an id are skipped; garbage input yields an empty list. */
+fun parseCredits(text: String): List<ImageCredit> {
+    val out = mutableListOf<ImageCredit>()
+    decodeLenient<ImageCreditDto>(text) { dto ->
+        if (dto.id.isNotBlank()) out += ImageCredit(dto.id, dto.title, dto.author, dto.license, dto.url)
+    }
+    return out
 }

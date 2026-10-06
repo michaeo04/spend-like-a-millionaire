@@ -26,6 +26,8 @@
 
     <!-- Item row -->
     <string name="item_buy_max">MAX</string>
+    <string name="action_ok">OK</string>
+    <string name="qty_max_hint">You can afford up to %1$s</string>
     <string name="item_estimate_hint">Estimated value</string>
     <string name="cd_decrease">Decrease quantity of %1$s</string>
     <string name="cd_increase">Increase quantity of %1$s</string>
@@ -51,6 +53,9 @@
     <string name="receipt_footer">Spend Like a Millionaire · parody, not affiliated</string>
 
     <!-- Onboarding -->
+    <string name="onb_welcome_subtitle">Pick a billionaire, take their entire fortune and see how far it really goes.</string>
+    <string name="onb_get_started">Get started</string>
+    <string name="onb_fun_fact">= %1$s Big Macs 🍔</string>
     <string name="onb_language_title">Choose your language</string>
     <string name="onb_currency_title">Pick your currency</string>
     <string name="onb_currency_hint">Prices are converted using approximate exchange rates.</string>
@@ -68,6 +73,10 @@
     <string name="settings_about">About</string>
     <string name="settings_disclaimer">Spend Like a Millionaire is a parody and entertainment app. It is not affiliated with, endorsed by, or sponsored by any person, company, team or band mentioned. Net worths and prices are rough public estimates.</string>
     <string name="settings_privacy">Privacy policy</string>
+    <string name="settings_credits">Image credits</string>
+    <string name="credits_title">Image credits</string>
+    <string name="credits_intro">Item photos come from Wikimedia Commons under their open licenses (CC0, public domain, CC BY, CC BY-SA). Brand and product names belong to their owners and are shown only to describe the item. Tap an entry to open its source page.</string>
+    <string name="credits_photo_by">Photo: %1$s · %2$s</string>
     <string name="settings_version">Version %1$s</string>
     <string name="switch_person_title">Switch fortune?</string>
     <string name="switch_person_body">Your cart (%1$s) is larger than %2$s\'s fortune, so it will be cleared.</string>

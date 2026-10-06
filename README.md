@@ -8,11 +8,14 @@ everything from a candy bar to a space station, to feel how big "billionaire mon
 ## Features
 
 - Pick whose fortune to spend (15 public billionaires), with the source and month of the net worth.
-- 300+ items from about $1.50 to $500B, sortable by price, filterable by category, searchable
-  (accent-insensitive, so "ca phe" finds "Cà phê").
-- Quantity stepper, typed quantity and **MAX**; cart with running total and **% of the fortune spent**.
+- 300+ items from about $1.80 (a Snickers bar) to $500B (a brand-new city), with real product names
+  (Big Mac, PlayStation 5, Tesla Model 3, Rolex Submariner ...) and open-licensed photos; sortable by
+  price, filterable by category, searchable (accent-insensitive, so "ca phe" finds "Cà phê").
+- Photo grid with a +/- stepper; tap the number to type a quantity or use **MAX**; cart with running
+  total and **% of the fortune spent**.
 - Shareable receipt image.
-- Short onboarding (language, currency, person); English and Vietnamese; 17 display currencies.
+- Animated onboarding (welcome, language, currency, person with a "= N Big Macs" fun fact);
+  English and Vietnamese; 17 display currencies.
 - Fully offline. Net worths can be refreshed through Firebase Remote Config without an app update.
 
 ## Disclaimer
@@ -39,6 +42,23 @@ End-to-end test (needs an emulator or device; **uninstall the app first** so it 
 adb uninstall com.michaeo04.spendlikeamillionaire
 ./gradlew connectedDebugAndroidTest
 ```
+
+## Photos and credits
+
+Item photos are downloaded from **Wikimedia Commons** and only if they are CC0, public domain, CC BY or
+CC BY-SA. Author, license and source page are stored in `tools/images-manifest.json` and shown in the
+app under Settings > Image credits (required by CC BY).
+
+```
+python -m pip install pillow
+python tools/fetch_images.py                # fetch photos for items that have none (resumable)
+python tools/fetch_images.py --only a,b     # refetch specific items
+python tools/contact_sheet.py               # labelled thumbnail sheets to review matches by eye
+python tools/build_catalog.py               # regenerate catalog.json + image_credits.json
+```
+
+Wrong photo? Add `{"item_id": {"query": "better words"}}` (or `{"file": "File:Exact name.jpg"}`, or
+`{"skip": true}` to keep the emoji) to `tools/image-overrides.json` and refetch that item.
 
 ## Editing the catalog
 

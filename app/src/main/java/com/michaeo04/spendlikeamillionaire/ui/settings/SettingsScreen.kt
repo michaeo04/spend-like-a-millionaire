@@ -55,7 +55,12 @@ const val PRIVACY_POLICY_URL = "https://michaeo04.github.io/spend-like-a-million
 private enum class Picker { LANGUAGE, CURRENCY, PERSON }
 
 @Composable
-fun SettingsRoute(container: AppContainer, onLanguageChosen: (String) -> Unit, onBack: () -> Unit) {
+fun SettingsRoute(
+    container: AppContainer,
+    onLanguageChosen: (String) -> Unit,
+    onOpenCredits: () -> Unit,
+    onBack: () -> Unit,
+) {
     val vm: SettingsViewModel = viewModel(
         factory = viewModelFactory {
             initializer {
@@ -70,6 +75,7 @@ fun SettingsRoute(container: AppContainer, onLanguageChosen: (String) -> Unit, o
     SettingsScreen(
         state = state,
         onBack = onBack,
+        onOpenCredits = onOpenCredits,
         onLanguage = { vm.setLanguage(it); onLanguageChosen(it) },
         onCurrency = vm::setCurrency,
         onPerson = vm::requestPersonChange,
@@ -83,6 +89,7 @@ fun SettingsRoute(container: AppContainer, onLanguageChosen: (String) -> Unit, o
 fun SettingsScreen(
     state: SettingsUiState,
     onBack: () -> Unit,
+    onOpenCredits: () -> Unit,
     onLanguage: (String) -> Unit,
     onCurrency: (String) -> Unit,
     onPerson: (String) -> Unit,
@@ -133,6 +140,7 @@ fun SettingsScreen(
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(horizontal = 16.dp),
             )
+            SettingRow(stringResource(R.string.settings_credits), null, onOpenCredits)
             SettingRow(stringResource(R.string.settings_privacy), null) {
                 try {
                     context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))

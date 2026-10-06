@@ -21,6 +21,18 @@ object Formatting {
         Unit(BigDecimal("1000000"), "M", " triệu"),
     )
 
+    private val COUNT_UNITS = UNITS + Unit(BigDecimal("1000"), "K", " nghìn")
+
+    /** Compact quantity, e.g. 654B / "654 tỷ"; values below 1,000 are shown in full. */
+    fun compactCount(value: Long, locale: Locale): String {
+        if (value <= 0) return "0"
+        val amount = BigDecimal.valueOf(value)
+        val unit = COUNT_UNITS.firstOrNull { amount >= it.size }
+            ?: return NumberFormat.getIntegerInstance(locale).format(value)
+        val number = compactNumber(amount.divide(unit.size, 2, RoundingMode.HALF_UP), locale)
+        return if (locale.language == "vi") "$number${unit.vi}" else "$number${unit.en}"
+    }
+
     fun percent(p: Double, locale: Locale): String {
         if (p.isNaN() || p <= 0.0) return "0%"
         if (p >= 100.0) return "100%"

@@ -1,9 +1,11 @@
 package com.michaeo04.spendlikeamillionaire.ui.onboarding
 
 import com.michaeo04.spendlikeamillionaire.domain.Settings
+import com.michaeo04.spendlikeamillionaire.testing.FakeCatalog
 import com.michaeo04.spendlikeamillionaire.testing.FakeFx
 import com.michaeo04.spendlikeamillionaire.testing.FakePeople
 import com.michaeo04.spendlikeamillionaire.testing.FakeSettingsStore
+import com.michaeo04.spendlikeamillionaire.testing.testItem
 import com.michaeo04.spendlikeamillionaire.testing.testPerson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,7 +29,10 @@ class OnboardingViewModelTest {
 
     private val store = FakeSettingsStore(Settings())
 
+    private val catalog = listOf(testItem("burger", 599), testItem("mansion", 4_500_000_000), testItem("other", 100))
+
     private fun vm(deviceLanguage: String = "en", settings: FakeSettingsStore = store) = OnboardingViewModel(
+        catalog = FakeCatalog(catalog),
         people = FakePeople(listOf(testPerson("p1"), testPerson("p2"))),
         fx = FakeFx(mapOf("USD" to 1.0, "VND" to 25_000.0, "EUR" to 0.9, "NOT-A-CODE" to 3.0)),
         settingsStore = settings,
@@ -64,10 +69,22 @@ class OnboardingViewModelTest {
     @Test
     fun stepsAreClampedToTheValidRange() = runTest {
         val vm = vm()
+        assertEquals(0, vm.state.value.step) // welcome screen first
         vm.back()
         assertEquals(0, vm.state.value.step)
         repeat(10) { vm.next() }
-        assertEquals(2, vm.state.value.step)
+        assertEquals(ONBOARDING_LAST_STEP, vm.state.value.step)
+        assertEquals(3, ONBOARDING_LAST_STEP) // welcome, language, currency, person
+    }
+
+    @Test
+    fun featuredItemsAreTheShowcaseItemsThatExistInTheCatalog() = runTest {
+        assertEquals(listOf("burger", "mansion"), vm().state.value.featured.map { it.id })
+    }
+
+    @Test
+    fun bigMacPriceComesFromTheCatalog() = runTest {
+        assertEquals(599L, vm().state.value.bigMacCents)
     }
 
     @Test
