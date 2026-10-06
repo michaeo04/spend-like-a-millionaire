@@ -39,6 +39,7 @@
     <string name="cart_percent">Trên tổng tài sản</string>
     <string name="cart_line">%1$s × %2$s</string>
     <string name="share_receipt">Chia sẻ hóa đơn</string>
+    <string name="share_failed">Không thể chia sẻ hóa đơn</string>
     <string name="clear_cart">Xóa giỏ hàng</string>
     <string name="clear_cart_title">Xóa giỏ hàng?</string>
     <string name="clear_cart_body">Mọi món bạn đã thêm sẽ bị xóa.</string>

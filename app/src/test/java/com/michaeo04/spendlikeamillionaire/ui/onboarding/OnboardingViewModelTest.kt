@@ -93,6 +93,16 @@ class OnboardingViewModelTest {
     }
 
     @Test
+    fun finishingTwiceOnlyNavigatesOnce() = runTest {
+        val vm = vm()
+        vm.setPerson("p1")
+        var done = 0
+        vm.finish { done++ }
+        vm.finish { done++ } // e.g. a double tap
+        assertEquals(1, done)
+    }
+
+    @Test
     fun unknownPersonIdCannotBeSelected() = runTest {
         val vm = vm()
         vm.setPerson("ghost")

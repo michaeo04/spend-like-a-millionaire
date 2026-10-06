@@ -5,19 +5,25 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class StartRouteTest {
+    private val known = setOf("p_musk", "p_bezos")
+
     @Test
     fun firstLaunchStartsOnboarding() {
-        assertEquals(Route.Onboarding, startRoute(Settings(onboarded = false)))
+        assertEquals(Route.Onboarding, startRoute(Settings(onboarded = false), known))
     }
 
     @Test
-    fun onboardedWithPersonStartsShop() {
-        assertEquals(Route.Shop, startRoute(Settings(onboarded = true, personId = "p_musk")))
+    fun onboardedWithKnownPersonStartsShop() {
+        assertEquals(Route.Shop, startRoute(Settings(onboarded = true, personId = "p_musk"), known))
     }
 
     @Test
     fun onboardedButPersonMissingRestartsOnboarding() {
-        // e.g. a person was removed from the catalog in an app update
-        assertEquals(Route.Onboarding, startRoute(Settings(onboarded = true, personId = null)))
+        assertEquals(Route.Onboarding, startRoute(Settings(onboarded = true, personId = null), known))
+    }
+
+    @Test
+    fun savedPersonRemovedFromTheAppAfterAnUpdateRestartsOnboarding() {
+        assertEquals(Route.Onboarding, startRoute(Settings(onboarded = true, personId = "p_gone"), known))
     }
 }

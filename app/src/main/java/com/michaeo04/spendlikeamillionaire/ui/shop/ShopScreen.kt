@@ -62,6 +62,7 @@ fun ShopRoute(container: AppContainer, onOpenCart: () -> Unit, onOpenSettings: (
         onCategory = vm::setCategory,
         onSort = vm::setSort,
         onQuantity = vm::setQuantity,
+        onDelta = vm::changeQuantity,
         onBuyMax = vm::buyMax,
         onOpenCart = onOpenCart,
         onOpenSettings = onOpenSettings,
@@ -75,6 +76,7 @@ fun ShopScreen(
     onCategory: (Category?) -> Unit,
     onSort: (SortOrder) -> Unit,
     onQuantity: (String, Long) -> Unit,
+    onDelta: (String, Long) -> Unit,
     onBuyMax: (String) -> Unit,
     onOpenCart: () -> Unit,
     onOpenSettings: () -> Unit,
@@ -144,6 +146,7 @@ fun ShopScreen(
                     ui = ui,
                     formatter = formatter,
                     onQuantity = { onQuantity(ui.item.id, it) },
+                    onDelta = { onDelta(ui.item.id, it) },
                     onBuyMax = { onBuyMax(ui.item.id) },
                 )
             }

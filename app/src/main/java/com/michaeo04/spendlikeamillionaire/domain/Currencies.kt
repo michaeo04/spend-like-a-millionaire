@@ -18,3 +18,9 @@ fun supportedCurrencies(rates: Map<String, Double>): List<String> {
 
 fun defaultCurrencyFor(language: String, available: List<String>): String =
     if (language == "vi" && "VND" in available) "VND" else "USD"
+
+/** Keeps [currency] if the FX table supports it, otherwise the default for [language]. */
+fun validCurrencyOrDefault(currency: String, language: String, rates: Map<String, Double>): String {
+    val available = supportedCurrencies(rates)
+    return if (currency in available) currency else defaultCurrencyFor(language, available)
+}

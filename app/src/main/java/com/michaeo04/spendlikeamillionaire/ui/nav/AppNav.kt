@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -27,20 +28,29 @@ sealed interface Route {
     @Serializable data object Settings : Route
 }
 
-/** Onboarding until the user finished it and has a person selected. */
-fun startRoute(settings: Settings): Route =
-    if (settings.onboarded && settings.personId != null) Route.Shop else Route.Onboarding
+/** Onboarding until the user finished it and still has a valid person (it may vanish in an update). */
+fun startRoute(settings: Settings, knownPersonIds: Set<String>): Route =
+    if (settings.onboarded && settings.personId != null && settings.personId in knownPersonIds) {
+        Route.Shop
+    } else {
+        Route.Onboarding
+    }
 
 @Composable
 fun AppNav(container: AppContainer) {
     val settings by container.settingsStore.settings.collectAsStateWithLifecycle(initialValue = null)
-    val loaded = settings ?: run {
+    val knownPersonIds by produceState<Set<String>?>(initialValue = null) {
+        value = container.people.people().map { it.id }.toSet()
+    }
+    val loaded = settings
+    val personIds = knownPersonIds
+    if (loaded == null || personIds == null) {
         Box(Modifier.fillMaxSize())
         return
     }
     val deviceLanguage = LocalConfiguration.current.locales[0].language
     val nav = rememberNavController()
-    NavHost(navController = nav, startDestination = startRoute(loaded)) {
+    NavHost(navController = nav, startDestination = startRoute(loaded, personIds)) {
         composable<Route.Onboarding> {
             OnboardingRoute(
                 container = container,

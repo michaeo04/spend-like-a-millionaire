@@ -4,28 +4,44 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class LocaleSyncTest {
+    private fun action(
+        saved: String,
+        app: String?,
+        onboarded: Boolean = true,
+        systemManages: Boolean = true,
+        device: String = "en",
+    ) = localeSyncAction(saved, app, onboarded, systemManages, device)
+
     @Test
     fun beforeOnboardingNothingIsSynced() {
-        assertEquals(LocaleAction.None, localeSyncAction("en", "vi", onboarded = false))
+        assertEquals(LocaleAction.None, action("en", "vi", onboarded = false))
     }
 
     @Test
     fun matchingLocalesNeedNoAction() {
-        assertEquals(LocaleAction.None, localeSyncAction("vi", "vi", onboarded = true))
+        assertEquals(LocaleAction.None, action("vi", "vi"))
     }
 
     @Test
-    fun noAppLocaleYetMeansApplyTheSavedLanguage() {
-        assertEquals(LocaleAction.ApplyToApp("vi"), localeSyncAction("vi", null, onboarded = true))
+    fun oldAndroidWithoutAppLocaleAppliesTheSavedLanguage() {
+        assertEquals(LocaleAction.ApplyToApp("vi"), action("vi", null, systemManages = false))
     }
 
     @Test
     fun systemPerAppLanguageChangeWinsAndIsAdopted() {
-        assertEquals(LocaleAction.AdoptFromApp("en"), localeSyncAction("vi", "en", onboarded = true))
+        assertEquals(LocaleAction.AdoptFromApp("en"), action("vi", "en"))
+    }
+
+    @Test
+    fun systemDefaultChoiceIsHonoredOnAndroid13Plus() {
+        // User picked "System default" in system settings: follow the device language.
+        assertEquals(LocaleAction.None, action("vi", null, device = "vi"))
+        assertEquals(LocaleAction.AdoptFromApp("vi"), action("en", null, device = "vi"))
+        assertEquals(LocaleAction.AdoptFromApp("en"), action("vi", null, device = "fr")) // unsupported -> English
     }
 
     @Test
     fun unsupportedAppLanguageIsIgnored() {
-        assertEquals(LocaleAction.None, localeSyncAction("en", "fr", onboarded = true))
+        assertEquals(LocaleAction.None, action("en", "fr"))
     }
 }

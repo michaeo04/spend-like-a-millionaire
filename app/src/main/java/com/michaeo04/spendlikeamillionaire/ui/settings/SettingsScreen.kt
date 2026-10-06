@@ -1,5 +1,6 @@
 package com.michaeo04.spendlikeamillionaire.ui.settings
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.clickable
@@ -133,7 +134,11 @@ fun SettingsScreen(
                 modifier = Modifier.padding(horizontal = 16.dp),
             )
             SettingRow(stringResource(R.string.settings_privacy), null) {
-                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
+                try {
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
+                } catch (e: ActivityNotFoundException) {
+                    // No browser installed: nothing to open.
+                }
             }
             Text(
                 stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
