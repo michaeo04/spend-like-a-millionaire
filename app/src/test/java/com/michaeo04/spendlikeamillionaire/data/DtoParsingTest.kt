@@ -1,6 +1,7 @@
 package com.michaeo04.spendlikeamillionaire.data
 
 import com.michaeo04.spendlikeamillionaire.domain.Category
+import com.michaeo04.spendlikeamillionaire.domain.PersonGroup
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -48,6 +49,17 @@ class DtoParsingTest {
     }
 
     @Test
+    fun licenseNamesMapToTheirCreativeCommonsDeed() {
+        assertEquals("https://creativecommons.org/licenses/by-sa/4.0/", licenseUrl("CC BY-SA 4.0"))
+        assertEquals("https://creativecommons.org/licenses/by/2.0/", licenseUrl("CC BY 2.0"))
+        assertEquals("https://creativecommons.org/licenses/by-sa/3.0/de/", licenseUrl("CC BY-SA 3.0 de"))
+        assertEquals("https://creativecommons.org/publicdomain/zero/1.0/", licenseUrl("CC0"))
+        assertEquals("https://creativecommons.org/publicdomain/zero/1.0/", licenseUrl("CC0 1.0"))
+        assertEquals(null, licenseUrl("Public domain"))
+        assertEquals(null, licenseUrl("something else"))
+    }
+
+    @Test
     fun unknownCategoryIsSkippedNotFatal() {
         val bad = validItem.replace("\"food\"", "\"nonsense\"").replace("coffee", "bad")
         val items = parseCatalog("[$bad,$validItem]")
@@ -83,6 +95,22 @@ class DtoParsingTest {
         assertEquals(listOf("a"), people.map { it.id })
         assertEquals("#5B8DEF", people.single().avatarColor)
         assertEquals(100L, people.single().netWorthUsd)
+    }
+
+    @Test
+    fun parsesPersonGroupAndPhoto() {
+        val json = """[
+            {"id":"a","group":"celebrity","name":{"en":"A"},"netWorthUsd":5,"source":"S","asOf":"2026-03","image":"images/people/a.webp"},
+            {"id":"b","name":{"en":"B"},"netWorthUsd":5,"source":"S","asOf":"2026-03"},
+            {"id":"c","group":"mystery","name":{"en":"C"},"netWorthUsd":5,"source":"S","asOf":"2026-03","image":" "}
+        ]"""
+        val people = parsePeople(json).associateBy { it.id }
+        assertEquals(PersonGroup.CELEBRITY, people.getValue("a").group)
+        assertEquals("images/people/a.webp", people.getValue("a").image)
+        assertEquals(PersonGroup.BILLIONAIRE, people.getValue("b").group) // default
+        assertEquals(null, people.getValue("b").image)
+        assertEquals(PersonGroup.BILLIONAIRE, people.getValue("c").group) // unknown group falls back
+        assertEquals(null, people.getValue("c").image)
     }
 
     @Test

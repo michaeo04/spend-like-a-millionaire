@@ -298,5 +298,29 @@
  },
  "transfer_record": {
   "skip": true
+ },
+ "p_ronaldo": {
+  "query": "Cristiano Ronaldo Portugal 2018 FIFA World Cup"
+ },
+ "p_messi": {
+  "file": "File:Lionel-Messi-Argentina-2022-FIFA-World-Cup (cropped-upscale).jpg"
+ },
+ "p_jayz": {
+  "file": "File:Jay-Z-02-mika.jpg"
+ },
+ "p_cameron": {
+  "query": "James Cameron filmmaker"
+ },
+ "p_schwarzenegger": {
+  "query": "Arnold Schwarzenegger 2016"
+ },
+ "p_ortega": {
+  "skip": true
+ },
+ "p_vuong": {
+  "file": "File:Phamnhatvuong2024.jpg"
+ },
+ "p_thao": {
+  "skip": true
  }
 }

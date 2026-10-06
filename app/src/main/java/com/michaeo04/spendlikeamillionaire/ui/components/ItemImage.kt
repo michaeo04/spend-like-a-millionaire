@@ -27,7 +27,7 @@ fun ItemImage(
     emojiSize: TextUnit = 56.sp,
 ) {
     val assets = LocalContext.current.assets
-    val bitmap by produceState<ImageBitmap?>(initialValue = null, key1 = image) {
+    val bitmap by produceState<ImageBitmap?>(initialValue = image?.let(ImageCache::peek), key1 = image) {
         value = image?.let { ImageCache.load(assets, it) }
     }
     Box(modifier.background(MaterialTheme.colorScheme.surfaceVariant), contentAlignment = Alignment.Center) {

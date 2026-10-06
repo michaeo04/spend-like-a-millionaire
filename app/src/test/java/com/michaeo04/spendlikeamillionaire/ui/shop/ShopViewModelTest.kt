@@ -122,13 +122,14 @@ class ShopViewModelTest {
     }
 
     @Test
-    fun buyMaxSpendsExactlyTheAffordableMaximum() = runTest {
+    fun theMaxQuantityShownToTheDialogIsExactlyWhatSetQuantityAccepts() = runTest {
         val store = FakeCartStore()
         val vm = vm(cartStore = store)
-        vm.buyMax("mid")
+        val max = vm.state.value.items.first { it.item.id == "mid" }.maxQuantity
+        vm.setQuantity("mid", max)
         assertEquals(mapOf("mid" to 3L), store.state.value.lines)
         assertEquals(90_000L, vm.state.value.spentCents)
-        assertEquals(10_000L, vm.state.value.balanceCents - vm.state.value.spentCents)
+        assertEquals(0L, vm.state.value.items.first { it.item.id == "mid" }.maxQuantity - 3L)
     }
 
     @Test

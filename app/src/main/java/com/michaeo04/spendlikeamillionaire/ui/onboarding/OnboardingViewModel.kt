@@ -7,6 +7,7 @@ import com.michaeo04.spendlikeamillionaire.data.FxRepository
 import com.michaeo04.spendlikeamillionaire.data.PeopleRepository
 import com.michaeo04.spendlikeamillionaire.domain.Item
 import com.michaeo04.spendlikeamillionaire.domain.Person
+import com.michaeo04.spendlikeamillionaire.domain.PersonGroup
 import com.michaeo04.spendlikeamillionaire.domain.SUPPORTED_LANGUAGES
 import com.michaeo04.spendlikeamillionaire.domain.Settings
 import com.michaeo04.spendlikeamillionaire.domain.SettingsStore
@@ -38,10 +39,13 @@ data class OnboardingUiState(
     val currencies: List<String> = listOf("USD"),
     val rates: Map<String, Double> = mapOf("USD" to 1.0),
     val featured: List<Item> = emptyList(),
+    /** null = show everyone; otherwise only this group is listed on the person step. */
+    val personGroup: PersonGroup? = null,
     /** Price of a Big Mac in USD cents, used for the "= N Big Macs" fun fact. */
     val bigMacCents: Long? = null,
 ) {
     val canFinish: Boolean get() = !loading && personId != null && currency in currencies
+    val visiblePeople: List<Person> get() = people.filter { personGroup == null || it.group == personGroup }
 }
 
 class OnboardingViewModel(
@@ -66,7 +70,8 @@ class OnboardingViewModel(
                     loading = false,
                     featured = FEATURED_IDS.mapNotNull(items::get),
                     bigMacCents = items["burger"]?.priceCents,
-                    people = people.people(),
+                    people = people.people()
+                        .sortedWith(compareBy<Person> { p -> p.group.ordinal }.thenByDescending { p -> p.netWorthUsd }),
                     currencies = currencies,
                     rates = rates,
                     currency = defaultCurrencyFor(it.language, currencies),
@@ -89,6 +94,13 @@ class OnboardingViewModel(
         if (code !in _state.value.currencies) return
         currencyTouched = true
         _state.update { it.copy(currency = code) }
+    }
+
+    /** Filters the person list; a selected person the new filter hides is deselected so no choice stays invisible. */
+    fun setPersonGroup(group: PersonGroup?) = _state.update { s ->
+        val selected = s.people.firstOrNull { it.id == s.personId }
+        val stillVisible = selected == null || group == null || selected.group == group
+        s.copy(personGroup = group, personId = if (stillVisible) s.personId else null)
     }
 
     fun setPerson(id: String) {

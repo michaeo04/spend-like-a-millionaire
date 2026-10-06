@@ -43,7 +43,7 @@ fun BalanceBar(
         Column(Modifier.statusBarsPadding().padding(horizontal = 16.dp, vertical = 12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 if (person != null) {
-                    Avatar(person.name.get(formatter.language), person.avatarColor, size = 36.dp)
+                    Avatar(person.name.get(formatter.language), person.avatarColor, size = 40.dp, image = person.image)
                     Column(Modifier.weight(1f).padding(start = 12.dp)) {
                         Text(
                             person.name.get(formatter.language),

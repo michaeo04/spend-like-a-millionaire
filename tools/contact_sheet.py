@@ -9,7 +9,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from catalog_source import ROOT, load_rows
+from catalog_source import ROOT, load_people_rows, load_rows
 
 TILE, LABEL, COLS, ROWS = 190, 34, 6, 5
 IMAGES = ROOT / "app" / "src" / "main" / "assets" / "images"
@@ -21,7 +21,10 @@ def main() -> int:
     for old in out_dir.glob("sheet_*.png"):
         old.unlink()
     rows, _ = load_rows()
-    ids = [r["id"] for r in rows if (IMAGES / f"{r['id']}.webp").exists()]
+    people, _ = load_people_rows()
+    paths = {r["id"]: IMAGES / f"{r['id']}.webp" for r in rows}
+    paths.update({p["id"]: IMAGES / "people" / f"{p['id']}.webp" for p in people})
+    ids = [i for i, path in paths.items() if path.exists()]
     if len(sys.argv) > 2:  # optional: only these ids (comma separated)
         wanted = set(sys.argv[2].split(","))
         ids = [i for i in ids if i in wanted]
@@ -33,7 +36,7 @@ def main() -> int:
         for position, item_id in enumerate(chunk):
             col, row = position % COLS, position // COLS
             x, y = col * TILE, row * (TILE + LABEL)
-            tile = Image.open(IMAGES / f"{item_id}.webp").convert("RGB").resize((TILE - 6, TILE - 6))
+            tile = Image.open(paths[item_id]).convert("RGB").resize((TILE - 6, TILE - 6))
             sheet.paste(tile, (x + 3, y + 3))
             draw.text((x + 4, y + TILE), item_id[:28], fill="black")
         path = out_dir / f"sheet_{sheet_index // per_sheet + 1:02d}.png"

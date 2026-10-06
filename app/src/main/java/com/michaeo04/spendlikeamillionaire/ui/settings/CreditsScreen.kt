@@ -32,9 +32,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.michaeo04.spendlikeamillionaire.AppContainer
 import com.michaeo04.spendlikeamillionaire.R
 import com.michaeo04.spendlikeamillionaire.data.ImageCredit
+import com.michaeo04.spendlikeamillionaire.data.licenseUrl
 import com.michaeo04.spendlikeamillionaire.domain.Item
+import com.michaeo04.spendlikeamillionaire.domain.Person
 
-private class CreditsData(val credits: List<ImageCredit>, val items: Map<String, Item>)
+private class CreditsData(
+    val credits: List<ImageCredit>,
+    val items: Map<String, Item>,
+    val people: Map<String, Person>,
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,7 +49,11 @@ fun CreditsRoute(container: AppContainer, onBack: () -> Unit) {
     val settings by container.settingsStore.settings.collectAsStateWithLifecycle(initialValue = null)
     val language = settings?.language ?: "en"
     val data by produceState<CreditsData?>(initialValue = null) {
-        value = CreditsData(container.credits.credits(), container.catalog.items().associateBy { it.id })
+        value = CreditsData(
+            container.credits.credits(),
+            container.catalog.items().associateBy { it.id },
+            container.people.people().associateBy { it.id },
+        )
     }
     Scaffold(
         topBar = {
@@ -66,7 +76,9 @@ fun CreditsRoute(container: AppContainer, onBack: () -> Unit) {
                 )
             }
             items(data?.credits.orEmpty(), key = { it.id }) { credit ->
-                val name = data?.items?.get(credit.id)?.name?.get(language) ?: credit.title
+                val name = data?.items?.get(credit.id)?.name?.get(language)
+                    ?: data?.people?.get(credit.id)?.name?.get(language)
+                    ?: credit.title
                 Column(
                     Modifier.fillMaxWidth().clickable {
                         try {
@@ -81,6 +93,9 @@ fun CreditsRoute(container: AppContainer, onBack: () -> Unit) {
                         stringResource(R.string.credits_photo_by, credit.author, credit.license),
                         style = MaterialTheme.typography.bodySmall,
                     )
+                    licenseUrl(credit.license)?.let { deed ->
+                        Text(deed, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                    }
                 }
                 HorizontalDivider()
             }

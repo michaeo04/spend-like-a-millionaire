@@ -2,15 +2,15 @@
 """Builds app/src/main/assets/catalog.json (and image_credits.json) from tools/catalog-source.tsv.
 
 Usage (from the repo root):  python tools/build_catalog.py
-Fails loudly on duplicate ids, unknown categories, bad prices, or estimate flags outside
-sports_music/mega, so the app's data validation test never sees broken content.
+Fails loudly on duplicate ids, unknown categories or bad prices, so the app's data validation
+test never sees broken content.
 Item photos come from tools/images-manifest.json (written by tools/fetch_images.py).
 """
 import json
 import sys
 from pathlib import Path
 
-from catalog_source import ROOT, load_rows
+from catalog_source import ROOT, load_people_rows, load_rows
 
 ASSETS = ROOT / "app" / "src" / "main" / "assets"
 MANIFEST = ROOT / "tools" / "images-manifest.json"
@@ -46,6 +46,21 @@ def main() -> int:
                 "url": info["page"],
             })
         items.append(entry)
+
+    people_rows, people_errors = load_people_rows()
+    if people_errors:
+        print("\n".join(people_errors), file=sys.stderr)
+        return 1
+    for row in people_rows:
+        info = manifest.get(row["id"])
+        if info and (ASSETS / "images" / "people" / f"{row['id']}.webp").exists():
+            credits.append({
+                "id": row["id"],
+                "title": info["title"],
+                "author": info["author"],
+                "license": info["license"],
+                "url": info["page"],
+            })
 
     (ASSETS / "catalog.json").write_text(
         "[\n  " + ",\n  ".join(json.dumps(e, ensure_ascii=False, separators=(",", ":")) for e in items) + "\n]\n",

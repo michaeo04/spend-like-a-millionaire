@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -27,16 +26,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.michaeo04.spendlikeamillionaire.R
@@ -44,7 +48,10 @@ import com.michaeo04.spendlikeamillionaire.domain.Formatting
 import com.michaeo04.spendlikeamillionaire.ui.shop.ItemUi
 import java.text.NumberFormat
 
-/** Shop grid cell: big photo, name, price and a compact +/- stepper (tap the number to type or use MAX). */
+/**
+ * Shop grid cell: big photo, name, price, a full-width quantity chip (tap to type a number or use MAX)
+ * and 48dp +/- buttons underneath, so even "545.45B" never gets clipped.
+ */
 @Composable
 fun ItemCard(
     ui: ItemUi,
@@ -56,6 +63,8 @@ fun ItemCard(
     val name = ui.item.name.get(formatter.language)
     val price = formatter.money(ui.item.priceCents)
     val estimateHint = stringResource(R.string.item_estimate_hint)
+    val quantityLabel = stringResource(R.string.cd_quantity, name)
+    val editHint = stringResource(R.string.cd_edit_quantity)
     Card(modifier.fillMaxWidth()) {
         Column {
             Box {
@@ -69,7 +78,8 @@ fun ItemCard(
                     Surface(
                         shape = RoundedCornerShape(topEnd = 10.dp, bottomEnd = 10.dp),
                         color = MaterialTheme.colorScheme.secondaryContainer,
-                        modifier = Modifier.padding(top = 8.dp).align(Alignment.TopStart),
+                        // The price below already says "estimate" to screen readers.
+                        modifier = Modifier.padding(top = 8.dp).align(Alignment.TopStart).clearAndSetSemantics {},
                     ) {
                         Text(
                             "≈",
@@ -92,44 +102,36 @@ fun ItemCard(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary,
                     maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.semantics {
                         if (ui.item.estimate) contentDescription = "$price, $estimateHint"
                     },
                 )
-                Row(
-                    Modifier.fillMaxWidth().padding(top = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    modifier = Modifier
+                        .padding(top = 6.dp)
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(10.dp))
+                        .clickable(onClickLabel = editHint, role = Role.Button, onClick = onEditQuantity)
+                        .semantics { contentDescription = "$quantityLabel: ${ui.quantity}" },
                 ) {
-                    IconButton(onClick = { onDelta(-1) }, enabled = ui.quantity > 0, modifier = Modifier.size(40.dp)) {
+                    Text(
+                        Formatting.compactCount(ui.quantity, formatter.locale),
+                        style = MaterialTheme.typography.titleMedium,
+                        textAlign = TextAlign.Center,
+                        maxLines = 1,
+                        softWrap = false,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 10.dp),
+                    )
+                }
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    IconButton(onClick = { onDelta(-1) }, enabled = ui.quantity > 0) {
                         Icon(Icons.Default.Remove, contentDescription = stringResource(R.string.cd_decrease, name))
                     }
-                    val quantityLabel = stringResource(R.string.cd_quantity, name)
-                    Surface(
-                        shape = RoundedCornerShape(10.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 4.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .clickable(onClick = onEditQuantity)
-                            .semantics {
-                                contentDescription = "$quantityLabel: ${ui.quantity}"
-                            },
-                    ) {
-                        Text(
-                            Formatting.compactCount(ui.quantity, formatter.locale),
-                            style = MaterialTheme.typography.titleMedium,
-                            textAlign = TextAlign.Center,
-                            maxLines = 1,
-                            modifier = Modifier.padding(vertical = 8.dp),
-                        )
-                    }
-                    IconButton(
-                        onClick = { onDelta(1) },
-                        enabled = ui.quantity < ui.maxQuantity,
-                        modifier = Modifier.size(40.dp),
-                    ) {
+                    IconButton(onClick = { onDelta(1) }, enabled = ui.quantity < ui.maxQuantity) {
                         Icon(Icons.Default.Add, contentDescription = stringResource(R.string.cd_increase, name))
                     }
                 }
@@ -146,7 +148,8 @@ fun QuantityDialog(
     onConfirm: (Long) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    var text by remember { mutableStateOf(if (ui.quantity == 0L) "" else ui.quantity.toString()) }
+    // rememberSaveable: rotating the phone or switching dark mode must not lose what was typed.
+    var text by rememberSaveable { mutableStateOf(if (ui.quantity == 0L) "" else ui.quantity.toString()) }
     val numbers = remember(formatter.locale) { NumberFormat.getIntegerInstance(formatter.locale) }
     AlertDialog(
         onDismissRequest = onDismiss,

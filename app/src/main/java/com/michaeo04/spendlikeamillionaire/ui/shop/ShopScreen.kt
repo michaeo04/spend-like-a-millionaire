@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,7 +70,6 @@ fun ShopRoute(container: AppContainer, onOpenCart: () -> Unit, onOpenSettings: (
         onSort = vm::setSort,
         onQuantity = vm::setQuantity,
         onDelta = vm::changeQuantity,
-        onBuyMax = vm::buyMax,
         onOpenCart = onOpenCart,
         onOpenSettings = onOpenSettings,
     )
@@ -83,14 +83,13 @@ fun ShopScreen(
     onSort: (SortOrder) -> Unit,
     onQuantity: (String, Long) -> Unit,
     onDelta: (String, Long) -> Unit,
-    onBuyMax: (String) -> Unit,
     onOpenCart: () -> Unit,
     onOpenSettings: () -> Unit,
 ) {
     val formatter = remember(state.currency, state.rate, state.language) {
         MoneyFormatter(state.currency, state.rate, state.language)
     }
-    var editingId by remember { mutableStateOf<String?>(null) }
+    var editingId by rememberSaveable { mutableStateOf<String?>(null) }
     Scaffold(
         modifier = Modifier.imePadding(),
         topBar = {

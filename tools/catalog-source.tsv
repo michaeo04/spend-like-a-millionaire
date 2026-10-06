@@ -1,5 +1,5 @@
 # id|category|price_usd|name_en|name_vi|icon|flag|image_query
-#   flag: e = named valuation / rough estimate (only sports_music and mega)
+#   flag: e = named valuation / rough estimate (shows the "≈" badge; allowed in any category)
 #   image_query: optional Wikimedia Commons search text (defaults to name_en without parentheses)
 # Prices are rounded public estimates in USD. Edit, then run: python tools/build_catalog.py
 # Brand names appear only as plain product names (nominative use); no logos are bundled.
@@ -107,7 +107,7 @@ router|tech|120|TP-Link Wi-Fi 6 router|Bộ phát Wi-Fi 6 TP-Link|📶||Wi-Fi ro
 earbuds|tech|249|Apple AirPods Pro|Tai nghe Apple AirPods Pro|🎧||AirPods Pro
 printer|tech|180|HP LaserJet printer|Máy in HP LaserJet|🖨️||HP LaserJet printer
 speaker|tech|250|Sonos Era 100 speaker|Loa Sonos Era 100|🔊||Sonos speaker
-headphones|tech|450|Sony WH-1000XM6 headphones|Tai nghe chống ồn Sony WH-1000XM6|🎧||Sony WH-1000XM5 headphones
+headphones|tech|400|Sony WH-1000XM5 headphones|Tai nghe chống ồn Sony WH-1000XM5|🎧||Sony WH-1000XM5 headphones
 monitor|tech|500|Dell UltraSharp 27" monitor|Màn hình Dell UltraSharp 27"|🖥️||Dell UltraSharp monitor
 smartwatch|tech|429|Apple Watch|Đồng hồ Apple Watch|⌚||Apple Watch
 console|tech|500|Sony PlayStation 5|Máy chơi game PlayStation 5|🎮||PlayStation 5 console
@@ -135,8 +135,8 @@ data_center_small|tech|50000000|Small data center|Trung tâm dữ liệu nhỏ|�
 satellite|tech|300000000|Communications satellite|Vệ tinh viễn thông|🛰️||communications satellite
 supercomputer|tech|600000000|Frontier exascale supercomputer|Siêu máy tính exascale Frontier|🖥️||Frontier supercomputer
 ai_data_center|tech|1000000000|Hyperscale AI data center|Trung tâm dữ liệu AI cỡ lớn|🏭||hyperscale data center
-satellite_constellation|tech|10000000000|Starlink-class satellite constellation|Chòm vệ tinh cỡ Starlink|🛰️||Starlink satellites
-chip_fab|tech|20000000000|TSMC-class chip factory|Nhà máy sản xuất chip cỡ TSMC|🏭||semiconductor fab cleanroom
+satellite_constellation|tech|10000000000|Starlink-class satellite constellation|Chòm vệ tinh cỡ Starlink|🛰️|e|Starlink satellites
+chip_fab|tech|20000000000|TSMC-class chip factory|Nhà máy sản xuất chip cỡ TSMC|🏭|e|semiconductor fab cleanroom
 memory_card|tech|20|SanDisk 128 GB memory card|Thẻ nhớ SanDisk 128 GB|💾||SanDisk memory card
 webcam|tech|70|Logitech C920 webcam|Webcam Logitech C920|📹||Logitech webcam
 # ---------------- transport ----------------
@@ -231,8 +231,8 @@ space_ticket|travel|450000|Virgin Galactic space flight|Chuyến bay vũ trụ V
 hotel_suite_year|travel|1000000|Presidential suite for a year|Phòng tổng thống một năm|🏨||presidential suite
 world_cruise|travel|80000|Around-the-world cruise|Du thuyền vòng quanh thế giới|🛳️||cruise ship ocean
 everest|travel|60000|Mount Everest expedition|Chuyến chinh phục Everest|🏔️||Mount Everest
-orbital_stay|travel|55000000|A week on the ISS (Axiom Space)|Một tuần trên trạm ISS (Axiom Space)|🛰️||International Space Station
-moon_flyby|travel|150000000|SpaceX trip around the Moon|Chuyến bay quanh Mặt Trăng của SpaceX|🌙||Moon
+orbital_stay|travel|55000000|A week on the ISS (Axiom Space)|Một tuần trên trạm ISS (Axiom Space)|🛰️|e|International Space Station
+moon_flyby|travel|150000000|SpaceX trip around the Moon|Chuyến bay quanh Mặt Trăng của SpaceX|🌙|e|Moon
 passport_fee|travel|130|Passport application fee|Phí làm hộ chiếu|🛂||passport
 # ---------------- fun ----------------
 comic|fun|6|Marvel comic book|Truyện tranh Marvel|📖||Marvel comic book
@@ -299,18 +299,18 @@ world_cup_host|sports_music|14000000000|Host a football World Cup|Đăng cai m�
 olympics_host|sports_music|12000000000|Host an Olympic Games|Đăng cai một kỳ Olympic|🏅|e|Olympic Stadium
 nfl_team|sports_music|13000000000|NFL franchise (Cowboys-level)|Một đội NFL (cỡ Cowboys)|🏈|e|AT&T Stadium Dallas
 # ---------------- mega ----------------
-clean_water|mega|30000000|Clean water for a million people|Nước sạch cho một triệu người|💧||water well village
+clean_water|mega|30000000|Clean water for a million people|Nước sạch cho một triệu người|💧|e|water well village
 giant_monument|mega|430000000|Statue of Unity-sized monument|Tượng đài cỡ Statue of Unity|🗿|e|Statue of Unity
-icebreaker|mega|800000000|Polar research icebreaker|Tàu nghiên cứu phá băng cực|🧊||icebreaker ship
-schools_1000|mega|500000000|Build 1,000 schools|Xây 1.000 trường học|🏫||school building children
+icebreaker|mega|800000000|Polar research icebreaker|Tàu nghiên cứu phá băng cực|🧊|e|icebreaker ship
+schools_1000|mega|500000000|Build 1,000 schools|Xây 1.000 trường học|🏫|e|school building children
 plant_trees|mega|1000000000|Plant a billion trees|Trồng một tỷ cây xanh|🌳|e|tree planting seedlings
-gold_mine|mega|1000000000|Gold mine|Mỏ vàng|⛏️||gold mine
+gold_mine|mega|1000000000|Gold mine|Mỏ vàng|⛏️|e|gold mine
 world_tallest_tower|mega|1500000000|Burj Khalifa-class tower|Tòa tháp cỡ Burj Khalifa|🗼|e|Burj Khalifa
 suspension_bridge|mega|1500000000|Golden Gate-class suspension bridge|Cầu treo cỡ Golden Gate|🌉|e|Golden Gate Bridge
 feed_a_city|mega|2000000000|Feed a city for a year|Nuôi sống một thành phố một năm|🍞|e|food distribution
 canal_expansion|mega|5000000000|Panama Canal expansion|Mở rộng kênh đào Panama|🚢|e|Panama Canal
 particle_collider|mega|9000000000|CERN Large Hadron Collider|Máy gia tốc hạt LHC của CERN|⚛️|e|Large Hadron Collider
-nuclear_plant|mega|10000000000|Nuclear power plant|Nhà máy điện hạt nhân|⚛️||nuclear power plant
+nuclear_plant|mega|10000000000|Nuclear power plant|Nhà máy điện hạt nhân|⚛️|e|nuclear power plant
 space_telescope|mega|10000000000|James Webb Space Telescope|Kính viễn vọng không gian James Webb|🔭|e|James Webb Space Telescope
 carmaker|mega|10000000000|Build a car company (Tesla-class)|Lập một hãng xe (cỡ Tesla)|🚗|e|car factory assembly line
 ai_lab_year|mega|10000000000|Frontier AI lab for a year|Phòng thí nghiệm AI hàng đầu một năm|🤖|e|supercomputer data center

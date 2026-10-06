@@ -13,11 +13,11 @@
 
 ## Full description (English, max 4000)
 
-How big is a billionaire fortune, really? Pick a famous billionaire, receive their entire net
+How big is a billionaire fortune, really? Pick a famous billionaire or celebrity, receive their entire net
 worth, and try to spend it.
 
-- Choose whose fortune to spend from a list of public billionaires.
-- 300+ things to buy, from a $1.50 candy bar to private jets, islands, football clubs and space stations.
+- Choose whose fortune to spend from a list of public billionaires and celebrities.
+- 300+ things to buy, from a $1.80 candy bar to private jets, islands, football clubs and space stations.
 - Sort by price, filter by category, search by name.
 - Watch your remaining balance and the percentage of the fortune you have spent.
 - Share a receipt of your shopping spree.
@@ -66,6 +66,8 @@ location, no ads in v1. Expect an "Everyone" rating. Re-answer the questionnaire
 
 ## Policy risk reminders
 
-- No person's name in the app title, no photos or logos of real people or brands.
+- No person's name or brand in the app title, short description or tags. In-app photos of people and
+  branded products are open-licensed (see release-checklist sections 3b and 3c for the risks); keep
+  them out of store graphics.
 - Keep the parody disclaimer in the description and in Settings.
 - Named valuations (clubs, stadiums, groups) are shown with "≈ estimate".

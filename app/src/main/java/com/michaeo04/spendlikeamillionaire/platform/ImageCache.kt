@@ -14,6 +14,9 @@ object ImageCache {
         override fun sizeOf(key: String, value: ImageBitmap): Int = value.width * value.height * 4
     }
 
+    /** Cached bitmap if present, no decoding; lets composables start with the photo instead of a flash of emoji. */
+    fun peek(path: String): ImageBitmap? = cache.get(path)
+
     /** Returns null when the asset is missing or cannot be decoded (the caller shows the emoji). */
     suspend fun load(assets: AssetManager, path: String): ImageBitmap? {
         cache.get(path)?.let { return it }

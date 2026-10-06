@@ -6,7 +6,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "tools" / "catalog-source.tsv"
 CATEGORIES = {"food", "shopping", "tech", "transport", "home", "travel", "fun", "sports_music", "mega"}
-ESTIMATE_CATEGORIES = {"sports_music", "mega"}
 
 
 def default_query(name_en: str) -> str:
@@ -41,10 +40,41 @@ def load_rows():
         if cents <= 0:
             errors.append(f"line {number}: price must be positive")
         estimate = flag == "e"
-        if estimate and category not in ESTIMATE_CATEGORIES:
-            errors.append(f"line {number}: estimate flag only allowed in {sorted(ESTIMATE_CATEGORIES)}")
         rows.append({
             "id": item_id, "category": category, "cents": cents, "name_en": name_en, "name_vi": name_vi,
             "icon": icon, "estimate": estimate, "query": query or default_query(name_en),
         })
+    return rows, errors
+
+
+PEOPLE_SOURCE = ROOT / "tools" / "people-source.tsv"
+GROUPS = {"billionaire", "celebrity"}
+
+
+def load_people_rows():
+    """Returns (rows, errors). Each row: id, group, name_en, name_vi, net_worth, source, as_of, color, query."""
+    rows, seen, errors = [], set(), []
+    for number, raw in enumerate(PEOPLE_SOURCE.read_text(encoding="utf-8").splitlines(), start=1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split("|")
+        if len(parts) != 9:
+            errors.append(f"people line {number}: expected 9 fields, got {len(parts)}")
+            continue
+        pid, group, name_en, name_vi, worth, source, as_of, color, query = [p.strip() for p in parts]
+        if not pid.startswith("p_") or pid in seen:
+            errors.append(f"people line {number}: bad or duplicate id {pid}")
+        seen.add(pid)
+        if group not in GROUPS:
+            errors.append(f"people line {number}: unknown group {group}")
+        if not worth.isdigit() or int(worth) <= 0:
+            errors.append(f"people line {number}: bad net worth {worth}")
+            continue
+        if not re.fullmatch(r"\d{4}-\d{2}", as_of):
+            errors.append(f"people line {number}: as_of must be YYYY-MM")
+        if not re.fullmatch(r"#[0-9A-Fa-f]{6}", color):
+            errors.append(f"people line {number}: bad color {color}")
+        rows.append({"id": pid, "group": group, "name_en": name_en, "name_vi": name_vi, "net_worth": int(worth),
+                     "source": source, "as_of": as_of, "color": color, "query": query or name_en})
     return rows, errors

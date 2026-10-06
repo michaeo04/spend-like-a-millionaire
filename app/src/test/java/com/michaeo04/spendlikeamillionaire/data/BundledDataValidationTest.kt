@@ -41,13 +41,8 @@ class BundledDataValidationTest {
             assertTrue("$id: missing en name", o.text("name", "en").isNotBlank())
             assertTrue("$id: missing vi name", o.text("name", "vi").isNotBlank())
             assertTrue("$id: missing icon", o.text("icon").isNotBlank())
-            val estimate = o["estimate"]?.jsonPrimitive?.boolean ?: false
-            if (estimate) {
-                assertTrue(
-                    "$id: estimate=true only for sports_music/mega",
-                    o.text("category") in setOf("sports_music", "mega"),
-                )
-            }
+            // estimate=true is allowed in any category (rough figures show the "≈" badge)
+            o["estimate"]?.jsonPrimitive?.boolean
         }
         assertEquals("some catalog items fail to parse", raw.size, parseCatalog(asset("catalog.json")).size)
     }
@@ -108,8 +103,31 @@ class BundledDataValidationTest {
             assertTrue("$id: en name", o.text("name", "en").isNotBlank())
             assertTrue("$id: vi name", o.text("name", "vi").isNotBlank())
             assertTrue("$id: avatar color", Regex("""#[0-9A-Fa-f]{6}""").matches(o.text("avatar", "color")))
+            assertTrue("$id: group", o.text("group") in setOf("billionaire", "celebrity"))
         }
         assertEquals(raw.size, parsePeople(asset("people.json")).size)
+    }
+
+    @Test
+    fun everyPersonPhotoExistsIsSmallAndHasALicensedCredit() {
+        val people = parsePeople(asset("people.json"))
+        val credits = parseCredits(asset("image_credits.json")).associateBy { it.id }
+        val withPhoto = people.filter { it.image != null }
+        assertTrue("most people should have a photo, have ${withPhoto.size}/${people.size}", withPhoto.size * 10 >= people.size * 7)
+        assertTrue("need both groups", people.map { it.group }.toSet().size == 2)
+        for (person in withPhoto) {
+            val file = File("src/main/assets/${person.image}")
+            assertTrue("${person.id}: missing ${person.image}", file.exists())
+            assertTrue("${person.id}: image too large (${file.length()} bytes)", file.length() < 80_000)
+            val credit = credits[person.id]
+            assertTrue("${person.id}: no credit entry", credit != null)
+            assertTrue("${person.id}: author missing", credit!!.author.isNotBlank())
+            assertTrue(
+                "${person.id}: license not allowed: ${credit.license}",
+                Regex("^(CC0|CC BY|CC-BY|Public domain|PD)", RegexOption.IGNORE_CASE).containsMatchIn(credit.license) &&
+                    !Regex("(NC|ND)", RegexOption.IGNORE_CASE).containsMatchIn(credit.license),
+            )
+        }
     }
 
     @Test

@@ -21,6 +21,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -49,6 +53,7 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -85,6 +90,7 @@ import com.michaeo04.spendlikeamillionaire.AppContainer
 import com.michaeo04.spendlikeamillionaire.R
 import com.michaeo04.spendlikeamillionaire.domain.Formatting
 import com.michaeo04.spendlikeamillionaire.domain.Money
+import com.michaeo04.spendlikeamillionaire.domain.PersonGroup
 import com.michaeo04.spendlikeamillionaire.ui.components.Avatar
 import com.michaeo04.spendlikeamillionaire.ui.components.ItemImage
 import com.michaeo04.spendlikeamillionaire.ui.components.MoneyFormatter
@@ -118,6 +124,7 @@ fun OnboardingRoute(
         onLanguage = { vm.setLanguage(it); onLanguageChosen(it) },
         onCurrency = vm::setCurrency,
         onPerson = vm::setPerson,
+        onGroup = vm::setPersonGroup,
         onNext = vm::next,
         onBack = vm::back,
         onFinish = { vm.finish(onDone) },
@@ -130,6 +137,7 @@ fun OnboardingScreen(
     onLanguage: (String) -> Unit,
     onCurrency: (String) -> Unit,
     onPerson: (String) -> Unit,
+    onGroup: (PersonGroup?) -> Unit,
     onNext: () -> Unit,
     onBack: () -> Unit,
     onFinish: () -> Unit,
@@ -149,7 +157,7 @@ fun OnboardingScreen(
             if (step == 0) {
                 WelcomeStep(state, onNext)
             } else {
-                SheetStep(state, step, onLanguage, onCurrency, onPerson, onNext, onBack, onFinish)
+                SheetStep(state, step, onLanguage, onCurrency, onPerson, onGroup, onNext, onBack, onFinish)
             }
         }
     }
@@ -180,11 +188,16 @@ private fun WelcomeStep(state: OnboardingUiState, onStart: () -> Unit) {
         animationSpec = infiniteRepeatable(tween(1600), RepeatMode.Reverse),
         label = "coin-scale",
     )
+    // Scrollable with a minimum height equal to the screen: tall screens spread the content out,
+    // short ones (landscape, big fonts) scroll so the button can never be pushed off-screen.
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+    val screenHeight = maxHeight
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
     Column(
-        Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding().padding(vertical = 16.dp),
+        Modifier.fillMaxWidth().heightIn(min = screenHeight).statusBarsPadding().navigationBarsPadding().padding(vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly,
     ) {
-        Spacer(Modifier.weight(1f))
         Image(
             painter = painterResource(R.drawable.ic_launcher_foreground),
             contentDescription = null,
@@ -205,9 +218,7 @@ private fun WelcomeStep(state: OnboardingUiState, onStart: () -> Unit) {
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
         )
-        Spacer(Modifier.weight(1f))
         Marquee(state)
-        Spacer(Modifier.weight(0.6f))
         Button(
             onClick = onStart,
             colors = ButtonDefaults.buttonColors(containerColor = Gold, contentColor = Color(0xFF12372A)),
@@ -215,6 +226,8 @@ private fun WelcomeStep(state: OnboardingUiState, onStart: () -> Unit) {
         ) {
             Text(stringResource(R.string.onb_get_started), fontSize = 18.sp, fontWeight = FontWeight.Bold)
         }
+    }
+    }
     }
 }
 
@@ -257,6 +270,7 @@ private fun SheetStep(
     onLanguage: (String) -> Unit,
     onCurrency: (String) -> Unit,
     onPerson: (String) -> Unit,
+    onGroup: (PersonGroup?) -> Unit,
     onNext: () -> Unit,
     onBack: () -> Unit,
     onFinish: () -> Unit,
@@ -299,7 +313,7 @@ private fun SheetStep(
                         when (step) {
                             1 -> LanguageStep(state.language, onLanguage)
                             2 -> CurrencyStep(state, onCurrency)
-                            else -> PersonStep(state, onPerson)
+                            else -> PersonStep(state, onPerson, onGroup)
                         }
                     }
                 }
@@ -446,16 +460,36 @@ private fun CurrencyStep(state: OnboardingUiState, onSelect: (String) -> Unit) {
 }
 
 @Composable
-private fun PersonStep(state: OnboardingUiState, onSelect: (String) -> Unit) {
+private fun PersonStep(
+    state: OnboardingUiState,
+    onSelect: (String) -> Unit,
+    onGroup: (PersonGroup?) -> Unit,
+) {
     val formatter = remember(state.currency, state.rates, state.language) {
         MoneyFormatter(state.currency, state.rates[state.currency], state.language)
+    }
+    Column {
+    LazyRow(Modifier.padding(bottom = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        items(
+            listOf(
+                null to R.string.onb_group_all,
+                PersonGroup.BILLIONAIRE to R.string.onb_group_billionaires,
+                PersonGroup.CELEBRITY to R.string.onb_group_celebrities,
+            ),
+        ) { (group, label) ->
+            FilterChip(
+                selected = state.personGroup == group,
+                onClick = { onGroup(group) },
+                label = { Text(stringResource(label)) },
+            )
+        }
     }
     LazyColumn(
         Modifier.selectableGroup(),
         contentPadding = PaddingValues(vertical = 8.dp, horizontal = 4.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        items(state.people, key = { it.id }) { person ->
+        items(state.visiblePeople, key = { it.id }) { person ->
             val cents = Money.usdToCents(person.netWorthUsd)
             ChoiceCard(
                 selected = person.id == state.personId,
@@ -463,7 +497,7 @@ private fun PersonStep(state: OnboardingUiState, onSelect: (String) -> Unit) {
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Avatar(person.name.get(state.language), person.avatarColor, size = 56.dp)
+                    Avatar(person.name.get(state.language), person.avatarColor, size = 64.dp, image = person.image)
                     Column(Modifier.weight(1f).padding(start = 14.dp, end = 12.dp)) {
                         Text(
                             person.name.get(state.language),
@@ -493,5 +527,6 @@ private fun PersonStep(state: OnboardingUiState, onSelect: (String) -> Unit) {
                 }
             }
         }
+    }
     }
 }

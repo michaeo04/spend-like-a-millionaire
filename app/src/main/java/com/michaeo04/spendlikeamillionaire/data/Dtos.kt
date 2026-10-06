@@ -4,6 +4,7 @@ import com.michaeo04.spendlikeamillionaire.domain.Category
 import com.michaeo04.spendlikeamillionaire.domain.Item
 import com.michaeo04.spendlikeamillionaire.domain.LocalizedText
 import com.michaeo04.spendlikeamillionaire.domain.Person
+import com.michaeo04.spendlikeamillionaire.domain.PersonGroup
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
@@ -39,6 +40,8 @@ internal data class PersonDto(
     val source: String,
     val asOf: String,
     val avatar: AvatarDto = AvatarDto(),
+    val group: String = "billionaire",
+    val image: String? = null,
 )
 
 @Serializable
@@ -81,7 +84,11 @@ fun parsePeople(text: String): List<Person> {
     val out = mutableListOf<Person>()
     decodeLenient<PersonDto>(text) { dto ->
         if (dto.id.isNotBlank() && dto.netWorthUsd > 0) {
-            out += Person(dto.id, dto.name.toDomain(), dto.netWorthUsd, dto.source, dto.asOf, dto.avatar.color)
+            out += Person(
+                dto.id, dto.name.toDomain(), dto.netWorthUsd, dto.source, dto.asOf, dto.avatar.color,
+                group = PersonGroup.fromId(dto.group) ?: PersonGroup.BILLIONAIRE,
+                image = dto.image?.takeIf { it.isNotBlank() },
+            )
         }
     }
     return out
@@ -116,4 +123,18 @@ fun parseCredits(text: String): List<ImageCredit> {
         if (dto.id.isNotBlank()) out += ImageCredit(dto.id, dto.title, dto.author, dto.license, dto.url)
     }
     return out
+}
+
+private val CC_BY = Regex("""^CC BY(-SA)? (\d\.\d)(?: ([a-z]{2,3}))?$""", RegexOption.IGNORE_CASE)
+
+/** Deed URL for a Wikimedia license short name ("CC BY-SA 4.0"); null when there is no standard deed. */
+fun licenseUrl(license: String): String? {
+    val name = license.trim()
+    if (name.equals("CC0", ignoreCase = true) || name.equals("CC0 1.0", ignoreCase = true)) {
+        return "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+    val match = CC_BY.matchEntire(name) ?: return null
+    val kind = if (match.groupValues[1].isEmpty()) "by" else "by-sa"
+    val port = match.groupValues[3].lowercase().let { if (it.isEmpty()) "" else "$it/" }
+    return "https://creativecommons.org/licenses/$kind/${match.groupValues[2]}/$port"
 }

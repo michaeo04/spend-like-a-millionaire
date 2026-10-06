@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
-"""Downloads openly licensed item photos from Wikimedia Commons.
+"""Downloads openly licensed photos (items and people) from Wikimedia Commons.
 
 Usage (repo root):
-  python tools/fetch_images.py                 # fetch every item that has no photo yet
-  python tools/fetch_images.py --only a,b,c    # (re)fetch just these ids
+  python tools/fetch_images.py                 # fetch everything that has no photo yet
+  python tools/fetch_images.py --only a,b,c    # (re)fetch just these ids (item ids or p_... person ids)
   python tools/fetch_images.py --refresh       # refetch everything
 
-Only images licensed CC0 / public domain / CC BY / CC BY-SA are accepted (never NC/ND or non-free),
-and images flagged as showing identifiable people ("personality" restriction) are rejected.
-Each photo is centre-cropped to a square, resized to 360x360 and stored as WebP in
-app/src/main/assets/images/. Author, license and page URL go to tools/images-manifest.json, from which
-build_catalog.py generates the in-app credits list.
+Only images licensed CC0 / public domain / CC BY / CC BY-SA are accepted (never NC/ND or non-free).
+Items: images flagged as showing identifiable people ("personality" restriction) are rejected.
+People: portraits are expected to show a person, so that flag is accepted but recorded in the manifest
+("personality": true); the file title must contain the person's name and group shots are skipped.
+Each photo is cropped to a square (people: biased towards the top so faces stay in frame), resized to
+360x360 and stored as WebP in app/src/main/assets/images/ (people in images/people/). Author, license and
+page URL go to tools/images-manifest.json, from which build_catalog.py generates the in-app credits list.
 
 Per-item overrides live in tools/image-overrides.json:
-  {"item_id": {"query": "better search text"}}   # search again with other words
-  {"item_id": {"file": "File:Exact name.jpg"}}   # force one specific Commons file
-  {"item_id": {"skip": true}}                    # keep the emoji, no photo
+  {"id": {"query": "better search text"}}   # search again with other words
+  {"id": {"file": "File:Exact name.jpg"}}    # force one specific Commons file
+  {"id": {"skip": true}}                     # keep the emoji / initial, no photo
 """
 import argparse
 import html
@@ -24,25 +26,34 @@ import json
 import re
 import sys
 import time
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
 
 from PIL import Image
 
-from catalog_source import ROOT, load_rows
+from catalog_source import ROOT, load_people_rows, load_rows
 
 API = "https://commons.wikimedia.org/w/api.php"
 UA = "SpendLikeAMillionaire/0.1 (https://github.com/michaeo04/spend-like-a-millionaire; open-source app)"
 OUT_DIR = ROOT / "app" / "src" / "main" / "assets" / "images"
+PEOPLE_DIR = OUT_DIR / "people"
 MANIFEST = ROOT / "tools" / "images-manifest.json"
 OVERRIDES = ROOT / "tools" / "image-overrides.json"
 SIZE = 360
 SKIP_WORDS = ("logo", "icon", "diagram", "flag of", "coat of arms", "screenshot", "poster", "stamp", "sketch", "drawing")
+GROUP_WORDS = (" and ", " with ", " meets ", " & ", " vs ", " family", " wax", "statue", "caricature", "cartoon")
 ALLOWED_LICENSE = re.compile(r"^(CC0|CC BY(-SA)? \d|CC-BY|Public domain|PD)", re.I)
 REJECTED_LICENSE = re.compile(r"(NC|ND|non-?free|fair use)", re.I)
 META = "LicenseShortName|Artist|Credit|Restrictions|NonFree"
 last_call = 0.0
+
+
+def fold(text: str) -> str:
+    """Lowercase and strip accents/punctuation so 'Vượng' matches 'Vuong'."""
+    stripped = "".join(c for c in unicodedata.normalize("NFD", text.lower().replace("đ", "d")) if unicodedata.category(c) != "Mn")
+    return re.sub(r"[^a-z0-9 ]+", " ", stripped)
 
 
 def get(url: str) -> bytes:
@@ -70,109 +81,136 @@ def api(params: dict) -> dict:
 
 
 def meta_value(info: dict, key: str) -> str:
-    return (info.get("extmetadata", {}).get(key) or {}).get("value", "") or ""
+    return (info.get("extmetadata", {}).get(key) or {}).get(key if False else "value", "") or ""
 
 
-def acceptable(page: dict):
+def acceptable(page: dict, person_token=None):
     info = (page.get("imageinfo") or [None])[0]
     if not info or info.get("mime") not in ("image/jpeg", "image/png"):
         return None
-    if info.get("width", 0) < 640 or info.get("height", 0) < 400 or not info.get("thumburl"):
+    width, height = info.get("width", 0), info.get("height", 0)
+    min_width = 400 if person_token is not None else 640  # portraits are shown at 360 px
+    if width < min_width or height < 400 or not info.get("thumburl"):
         return None
-    title = page.get("title", "").lower()
-    if any(word in title for word in SKIP_WORDS):
+    title = page.get("title", "")
+    lowered = title.lower()
+    if any(word in lowered for word in SKIP_WORDS):
         return None
     license_name = meta_value(info, "LicenseShortName")
     if not ALLOWED_LICENSE.search(license_name) or REJECTED_LICENSE.search(license_name):
         return None
     if meta_value(info, "NonFree").lower() in ("true", "1", "yes"):
         return None
-    if "personality" in meta_value(info, "Restrictions").lower():
+    personality = "personality" in meta_value(info, "Restrictions").lower()
+    if person_token is not None:
+        if person_token not in fold(title):
+            return None
+        if any(word in f" {lowered} " for word in GROUP_WORDS):
+            return None
+        if not 0.6 <= width / height <= 1.45:
+            return None
+    elif personality:
         return None
     author = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", meta_value(info, "Artist")))).strip()
     if not author:
         author = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", meta_value(info, "Credit")))).strip()
-    return {
-        "title": page["title"].removeprefix("File:"),
+    result = {
+        "title": title.removeprefix("File:"),
         "page": info.get("descriptionurl", ""),
         "author": author[:120] or "Unknown",
         "license": license_name,
         "thumb": info["thumburl"],
     }
+    if person_token is not None and personality:
+        result["personality"] = True
+    return result
 
 
 IMAGEINFO = {"prop": "imageinfo", "iiprop": "url|size|mime|extmetadata", "iiurlwidth": 640, "iiextmetadatafilter": META}
 
 
-def search(query: str):
+def search(query: str, person_token=None):
     data = api({"action": "query", "format": "json", "generator": "search", "gsrnamespace": 6,
-                "gsrsearch": f"{query} filetype:bitmap", "gsrlimit": 20, **IMAGEINFO})
+                "gsrsearch": f"{query} filetype:bitmap", "gsrlimit": 30, **IMAGEINFO})
     pages = sorted((data.get("query") or {}).get("pages", {}).values(), key=lambda p: p.get("index", 0))
-    for page in pages:
-        candidate = acceptable(page)
-        if candidate:
-            return candidate
-    return None
+    candidates = [c for c in (acceptable(page, person_token) for page in pages) if c]
+    if person_token is not None:  # prefer images without a personality-rights note
+        candidates.sort(key=lambda c: bool(c.get("personality")))
+    return candidates[0] if candidates else None
 
 
-def by_title(title: str):
+def by_title(title: str, person_token=None):
     data = api({"action": "query", "format": "json", "titles": title, **IMAGEINFO})
     for page in (data.get("query") or {}).get("pages", {}).values():
-        return acceptable(page)
+        return acceptable(page, person_token)
     return None
 
 
-def save_square(raw: bytes, path):
+def save_square(raw: bytes, path, top_bias: float = 0.5):
     image = Image.open(io.BytesIO(raw)).convert("RGB")
     side = min(image.size)
-    left, top = (image.width - side) // 2, (image.height - side) // 2
+    left = (image.width - side) // 2
+    top = int((image.height - side) * top_bias)
     image = image.crop((left, top, left + side, top + side)).resize((SIZE, SIZE), Image.LANCZOS)
+    path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path, "WEBP", quality=72, method=6)
+
+
+def targets():
+    """Items and people as uniform dicts: id, query, name, token (people only), path, top_bias."""
+    rows, errors = load_rows()
+    people, people_errors = load_people_rows()
+    if errors or people_errors:
+        print("\n".join(errors + people_errors), file=sys.stderr)
+        raise SystemExit(1)
+    out = [{"id": r["id"], "query": r["query"], "name": r["name_en"], "token": None,
+            "path": OUT_DIR / f"{r['id']}.webp", "top_bias": 0.5} for r in rows]
+    for p in people:
+        last = fold(p["query"]).split()[-1]
+        out.append({"id": p["id"], "query": p["query"], "name": p["name_en"], "token": last,
+                    "path": PEOPLE_DIR / f"{p['id']}.webp", "top_bias": 0.15})
+    return out
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--only", help="comma separated item ids")
-    parser.add_argument("--refresh", action="store_true", help="refetch even items that already have a photo")
+    parser.add_argument("--only", help="comma separated ids")
+    parser.add_argument("--refresh", action="store_true", help="refetch even targets that already have a photo")
     args = parser.parse_args()
 
-    rows, errors = load_rows()
-    if errors:
-        print("\n".join(errors), file=sys.stderr)
-        return 1
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {}
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8-sig")) if MANIFEST.exists() else {}
     overrides = json.loads(OVERRIDES.read_text(encoding="utf-8-sig")) if OVERRIDES.exists() else {}
     only = set(args.only.split(",")) if args.only else None
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     missing = []
-    for row in rows:
-        item_id = row["id"]
+    for target in targets():
+        item_id, path = target["id"], target["path"]
         if only is not None and item_id not in only:
             continue
-        if only is None and not args.refresh and item_id in manifest and (OUT_DIR / f"{item_id}.webp").exists():
+        if only is None and not args.refresh and item_id in manifest and path.exists():
             continue
         override = overrides.get(item_id, {})
         if override.get("skip"):
             manifest.pop(item_id, None)
-            (OUT_DIR / f"{item_id}.webp").unlink(missing_ok=True)
+            path.unlink(missing_ok=True)
             print(f"skip   {item_id}")
             continue
         try:
             if "file" in override:
-                found = by_title(override["file"])
+                found = by_title(override["file"], target["token"])
             else:
-                found = search(override.get("query", row["query"]))
-                if not found and "query" not in override:
-                    found = search(row["name_en"])
+                found = search(override.get("query", target["query"]), target["token"])
+                if not found and "query" not in override and target["token"] is None:
+                    found = search(target["name"])
             if not found:
                 missing.append(item_id)
-                print(f"MISSING {item_id}  ({row['query']})")
+                print(f"MISSING {item_id}  ({target['query']})")
                 continue
-            save_square(get(found.pop("thumb")), OUT_DIR / f"{item_id}.webp")
+            save_square(get(found.pop("thumb")), path, target["top_bias"])
             manifest[item_id] = found
-            print(f"ok     {item_id}  <- {found['title']} [{found['license']}]")
-        except Exception as e:  # keep going; the item simply stays without a photo
+            flag = " [personality-rights note]" if found.get("personality") else ""
+            print(f"ok     {item_id}  <- {found['title']} [{found['license']}]{flag}")
+        except Exception as e:  # keep going; the target simply stays without a photo
             missing.append(item_id)
             print(f"ERROR  {item_id}: {e}")
         MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")

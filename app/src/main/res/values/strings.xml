@@ -32,6 +32,7 @@
     <string name="cd_decrease">Decrease quantity of %1$s</string>
     <string name="cd_increase">Increase quantity of %1$s</string>
     <string name="cd_quantity">Quantity of %1$s</string>
+    <string name="cd_edit_quantity">Set quantity</string>
 
     <!-- Cart / receipt -->
     <string name="cart_title">Your receipt</string>
@@ -53,13 +54,16 @@
     <string name="receipt_footer">Spend Like a Millionaire · parody, not affiliated</string>
 
     <!-- Onboarding -->
-    <string name="onb_welcome_subtitle">Pick a billionaire, take their entire fortune and see how far it really goes.</string>
+    <string name="onb_welcome_subtitle">Pick a billionaire or a celebrity, take their entire fortune and see how far it really goes.</string>
     <string name="onb_get_started">Get started</string>
     <string name="onb_fun_fact">= %1$s Big Macs 🍔</string>
     <string name="onb_language_title">Choose your language</string>
     <string name="onb_currency_title">Pick your currency</string>
     <string name="onb_currency_hint">Prices are converted using approximate exchange rates.</string>
     <string name="onb_person_title">Whose fortune will you spend?</string>
+    <string name="onb_group_all">Everyone</string>
+    <string name="onb_group_billionaires">Billionaires</string>
+    <string name="onb_group_celebrities">Celebrities</string>
     <string name="onb_next">Next</string>
     <string name="onb_back">Back</string>
     <string name="onb_finish">Start spending</string>
@@ -75,7 +79,7 @@
     <string name="settings_privacy">Privacy policy</string>
     <string name="settings_credits">Image credits</string>
     <string name="credits_title">Image credits</string>
-    <string name="credits_intro">Item photos come from Wikimedia Commons under their open licenses (CC0, public domain, CC BY, CC BY-SA). Brand and product names belong to their owners and are shown only to describe the item. Tap an entry to open its source page.</string>
+    <string name="credits_intro">Photos of items and people come from Wikimedia Commons under their open licenses (CC0, public domain, CC BY, CC BY-SA). Names, brands and portraits belong to their owners and are shown only for identification in this parody. Images were cropped to a square and resized; they keep their original license (CC BY-SA images stay CC BY-SA). Tap an entry to open its source page.</string>
     <string name="credits_photo_by">Photo: %1$s · %2$s</string>
     <string name="settings_version">Version %1$s</string>
     <string name="switch_person_title">Switch fortune?</string>

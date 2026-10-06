@@ -50,6 +50,16 @@ secrets) and run `./gradlew bundleRelease`. Enable Play App Signing in the Play 
       showcasing third-party logos. If a reviewer objects, switch an item with `{"skip": true}`
       in `tools/image-overrides.json` or rename it in `tools/catalog-source.tsv`.
 
+## 3c. Photos of real people (right of publicity)
+
+- [ ] The app shows Commons portraits of 30 real people (billionaires and celebrities). The licenses
+      cover copyright, NOT personality/publicity rights, and some files carry a "personality rights"
+      note on Commons (`"personality": true` in `tools/images-manifest.json`). Using a person's photo in a
+      monetized app can still need permission in some countries.
+- [ ] Safer fallback for release: set `{"skip": true}` for any person in `tools/image-overrides.json`
+      (they keep the colored initial avatar), or remove all portraits and rebuild with
+      `python tools/build_people.py`. Do not use people's names or photos in store graphics.
+
 ## 4. Store listing
 
 - [ ] Fill in `docs/store-listing.md` content, upload icon, feature graphic and screenshots.
